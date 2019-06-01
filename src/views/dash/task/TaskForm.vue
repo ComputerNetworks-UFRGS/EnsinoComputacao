@@ -1,130 +1,114 @@
 <template>
   <div>
     <br>
-    <h3 v-if="taskId">Editar: {{ form.title }}</h3>
-    <h3 v-else>Nova atividade</h3>
+    <router-link to="/dash/atividades/" class="button is-white is-pulled-right">Cancelar</router-link>
+    <h4 class="title is-4" v-if="taskId">Editar: {{ form.title }}</h4>
+    <h4 class="title is-4" v-else>Nova atividade</h4>
 
-    <router-link to="/dash" class="btn btn-secondary">Cancelar</router-link>
-    <div class="pull-right">
-      <button
-        v-auth="'task.delete'"
-        @click="remove(form)"
-        class="btn btn-sm btn-danger"
-      >Excluir atividade</button>
-    </div>
-    <br>
-    <br>
-    <div class="row">
-      <div class="col col-lg-8">
-        <div class="box">
-          <form role="form">
-            <input v-model="form.title" alternative class="mb-3" placeholder="Título">
-
-            <b-notification
-              @close="errors.title = []"
-              :visible="errors.title.length > 0"
-            >
-              <span class="alert-inner--text">
-                <div v-for="error in errors.title" :key="error">{{ error }}</div>
-              </span>
-
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </b-notification>
-
-            <vue-editor v-model="form.description" placeholder="Descrição da atividade"></vue-editor>
-
-            <b-notification
-              @close="errors.description = []"
-              :visible="errors.description.length > 0"
-            >
-              <span class="alert-inner--text">
-                <div v-for="error in errors.description" :key="error">{{ error }}</div>
-              </span>
-
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </b-notification>
-            <br>
-            <div v-auth="'task.edit'" v-if="form.status != 2">
-              <button v-if="taskId" type="primary" class="my-4" @click="create">Atualizar atividade</button>
-              <button v-else type="primary" class="my-4" @click="create">Criar atividade</button>
-            </div>
-            <button v-else disabled>Publicação negada</button>
-          </form>
+    <button
+      v-if="taskId"
+      v-auth="'task.delete'"
+      @click="remove(form)"
+      class="button is-small is-light"
+    >Excluir esta atividade</button>
+    <hr>
+    <div>
+      <div class="field">
+        <label class="label">Título</label>
+        <div class="control">
+          <input v-model="form.title" class="input" placeholder="Título">
+        </div>
+        <div class="help is-danger" v-if="errors.title.length > 0">
+          <div v-for="error in errors.title" :key="error">{{ error }}</div>
         </div>
       </div>
-      <div class="col col-lg-4">
-        <div class="box">
-          <label for>
-            <input type="checkbox" class="mb-3" v-model="form.is_plugged">
-            Requer uso de computador
-          </label>
 
-          <hr>
-          <b>Habilidade(s) trabalhada(s)</b>
+      <div class="field">
+        <label class="label">Descrição da atividade</label>
+        <div class="control">
+          <vue-editor v-model="form.description" placeholder="Descrição da atividade"></vue-editor>
+        </div>
+        <div class="help is-danger" v-if="errors.description.length > 0">
+          <div v-for="error in errors.description" :key="error">{{ error }}</div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="field">
+          <label class="label">Essa atividade requer o uso de computadores?</label>
+          <div class="control">
+            <b-radio v-model="form.is_plugged" native-value=1>Sim</b-radio>
+            <b-radio v-model="form.is_plugged" native-value=0>Não</b-radio>
+          </div>
+          <div class="help is-danger" v-if="errors.is_plugged.length > 0">
+            <div v-for="error in errors.is_plugged" :key="error">{{ error }}</div>
+          </div>
+        </div>
+
+        <b>Habilidade(s) trabalhada(s)</b>
+        <br>
+        <small v-if="!form.skills || form.skills.length <= 0">
+          Selecione quais habilidades são exercitadas com essa atividade.
           <br>
+        </small>
 
-          <span v-if="form.skills && form.skills.length > 0">
-            <div v-for="(skill, index) of form.skills" :key="skill.id">
-              <div class="box2">
-                <div class="pull-right cursor" @click="removeSkill(index)">remover</div>
-                <!-- <div class="box2">
-                                    <div class="pull-left">&darr;</div>
-                                    {{ form.skill.eixo_nome }}
-                                </div>                       
-                                <div class="box2">
-                                    <div class="pull-left">&darr;</div>
-                                    {{ form.skill.objeto_nome }}
-                </div>-->
-                <badge type="primary">{{ skill.habilidade_codigo }}</badge>
-                <small>
-                  <br>
-                  <!-- <div class="pull-left">&rarr;</div> -->
-                  {{ skill.habilidade_nome }}
-                  <br>
-                  <b>Etapa recomendada:</b>
-                  {{ skill.age_group.name }}
-                </small>
-              </div>
-            </div>
-          </span>
-          <span v-else>Nenhuma habilidade selecionada</span>
-          <button class="btn btn-success" @click="openSkillSelector = true">
-            <span v-if="form.skill">Alterar habilidade</span>
-            <span v-else>Selecionar habilidade</span>
-          </button>
-        </div>
+        <span v-if="form.skills && form.skills.length > 0">
+          <br>
+          <div v-for="(skill, index) of form.skills" :key="skill.id">
+            <span class="tag is-rounded is-info">{{ skill.habilidade_codigo }}</span>
+            <button class="button is-small is-light" @click="removeSkill(index)">remover</button>
+            <small>
+              <br>
+              {{ skill.habilidade_nome }}
+              <br>
+              <b>Etapa recomendada:</b>
+              {{ skill.age_group.name }}
+            </small>
+            <br>
+            <br>
+          </div>
+        </span>
+
+        <button class="button is-white is-small" @click="openSkillSelector = true">
+          <span v-if="form.skill">Alterar habilidade</span>
+          <span v-else>Selecionar habilidades</span>
+        </button>
       </div>
+
+      <br>
+      <div v-auth="'task.edit'" v-if="form.status != 2">
+        <button
+          v-if="taskId"
+          class="button is-primary is-success"
+          @click="create"
+        >Atualizar atividade</button>
+        <button v-else class="button is-primary is-success" @click="create">Criar atividade</button>
+      </div>
+      <button v-else disabled>Publicação negada</button>
     </div>
 
     <review-list :reviews="form.reviews"></review-list>
 
-    <modal
-      :show="openSkillSelector !== false"
-      @close="openSkillSelector = false"
-      :modalClasses="'modal-lg'"
-    >
-      <h6
-        slot="header"
-        class="modal-title"
-      >Selecione a habilidade trabalhada trabalhada nesta atividade</h6>
-
-      <skill-list :years="years" @click="setSkill"></skill-list>
-
-      <template slot="footer">
-        <button type="link" class="ml-auto" @click="openSkillSelector = false">Fechar</button>
-      </template>
-    </modal>
+    <b-modal :active="openSkillSelector !== false" @close="openSkillSelector = false">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Selecione as habilidades trabalhadas com essa atividade</p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <skill-list :years="years" @click="setSkill"></skill-list>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a href="#!" class="card-footer-item" @click="openSkillSelector = false">Fechar</a>
+        </footer>
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import UserTasks from "@/services/user-task";
 import Skills from "@/services/skill";
-import Modal from "@/components/Modal";
 import SkillList from "@/components/SkillList";
 import { VueEditor } from "vue2-editor";
 import _ from "lodash";
@@ -132,7 +116,6 @@ import ReviewList from "@/components/ReviewList";
 
 export default {
   components: {
-    Modal,
     SkillList,
     VueEditor,
     ReviewList
@@ -192,7 +175,7 @@ export default {
 
       request.then(res => {
         if (res.status == 200) {
-          this.$router.push("/dash");
+          this.$router.push("/dash/atividades/");
         } else {
           for (let k in res.data) {
             this.errors[k] = res.data[k];
@@ -211,7 +194,7 @@ export default {
     },
     remove(task) {
       UserTasks.remove(task.id).finally(() => {
-        this.$router.push("/dash");
+        this.$router.push("/dash/atividades/");
       });
     }
   }
@@ -223,17 +206,6 @@ export default {
   background: #eeeeee;
   padding: 30px;
   border-radius: 8px;
-}
-.box2 {
-  padding: 6px;
-  color: #666666;
-  border: 1px solid #cccccc;
-  margin: 3px 0px;
-  font-size: 12px;
-  line-height: 14px;
-}
-.box2 .pull-left {
-  width: 14px;
 }
 .cursor {
   cursor: pointer;

@@ -32,7 +32,7 @@ import ReviewEdit from "./views/dash/review/ReviewEdit"
 Vue.use(Router);
 
 let router = new Router({
-  linkExactActiveClass: "active",
+  linkActiveClass: "is-active",
   routes: [
     {
       path: "/",
@@ -98,7 +98,7 @@ let router = new Router({
       }
     },
     {
-      path: "/atividade/:id",
+      path: "/atividades/:id",
       name: "task",
       components: {
         header: AppHeader,
@@ -146,15 +146,15 @@ let router = new Router({
       meta: { requiresAuth: true, },
       children: [
         {
-          path: '',
+          path: 'atividades',
           component: DashTasks,
         },
         {
-          path: 'atividade/criar',
+          path: 'atividades/criar',
           component: TaskForm,
         },
         {
-          path: 'atividade/editar/:id',
+          path: 'atividades/editar/:id',
           component: TaskForm,
           props: true
         },

@@ -6,7 +6,7 @@
           <p class="menu-label" v-auth="'task.list'">Criação</p>
           <ul class="menu-list">
             <li v-auth="'task.list'">
-              <router-link to="/dash">Suas atividades</router-link>
+              <router-link to="/dash/atividades">Suas atividades</router-link>
             </li>
           </ul>
 

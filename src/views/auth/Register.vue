@@ -100,11 +100,9 @@
   </section>
 </template>
 <script>
-import Modal from "@/components/Modal";
 import AuthService from "@/services/auth";
 
 export default {
-  components: { Modal },
   data() {
     return {
       policyOpen: false,
@@ -140,7 +138,7 @@ export default {
           if (res.status == 200) {
             localStorage.setItem("token", res.data.token);
             this.$store.commit("set_user", res.data);
-            this.$router.push("/dash");
+            this.$router.push("/dash/atividades");
           } else {
             for (let k in res.data) {
               this.errors[k] = res.data[k];

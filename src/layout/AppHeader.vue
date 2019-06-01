@@ -30,7 +30,7 @@
         <div class="navbar-end" v-if="isAuth">
           <div class="navbar-item">
             <div class="buttons">
-              <router-link to="/dash" class="button is-primary">{{ $store.state.user.name }}</router-link>
+              <router-link to="/dash/atividades/" class="button is-primary">{{ $store.state.user.name }}</router-link>
             </div>
           </div>
         </div>
