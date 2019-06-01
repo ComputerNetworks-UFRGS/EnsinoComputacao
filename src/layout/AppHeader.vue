@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
       <div class="navbar-brand">
         <router-link class="navbar-item" to="/">
           <img src="img/brand/color.png" alt="EduSBC">
@@ -45,8 +45,8 @@
           </div>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 <script>
 import AuthService from "@/services/auth";
