@@ -35,7 +35,7 @@
             type="is-danger"
             v-if="errorMessage"
             @close="errorMessage=false"
-            aria-close-label="Close message"
+            aria-close-label="Fechar"
           >{{ errorMessage }}</b-message>
 
           <div class="field">
