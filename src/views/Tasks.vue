@@ -1,107 +1,61 @@
 <template>
-  <div>
-    <div class="position-relative">
-      <!-- shape Hero -->
-      <section class="section-shaped my-0">
-        <div class="shape shape-style-1 shape-default">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="container shape-container d-flex"></div>
-      </section>
-      <!-- 1st Hero Variation -->
-    </div>
-    <br>
-    <section class="section section-lg pt-lg-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-lg-8">
-                <ul class="nav nav-pills nav-fill nav-justified">
-                  <li class="nav-item active" @click="setAgeGroup('todos')">
-                    <div
-                      class="nav-link cursor"
-                      :class="{
-                                            'active': this.filters.age == 'todos',
-                                        }"
-                    >Todos os anos</div>
-                  </li>
-                  <li class="nav-item" @click="setAgeGroup('iniciais')">
-                    <div
-                      class="nav-link cursor"
-                      :class="{
-                                            'active': this.filters.age == 'iniciais',
-                                        }"
-                    >Anos iniciais</div>
-                  </li>
-                  <li class="nav-item" @click="setAgeGroup('finais')">
-                    <div
-                      class="nav-link cursor"
-                      :class="{
-                                            'active': this.filters.age == 'finais',
-                                        }"
-                    >Anos finais</div>
-                  </li>
-                  <li class="nav-item" @click="setAgeGroup('medio')">
-                    <div
-                      class="nav-link cursor"
-                      :class="{
-                                            'active': this.filters.age == 'medio',
-                                        }"
-                    >Ensino médio</div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <hr>
+  <section class="atividades">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-4">
+          <div class="field">
+            <label class="label">Ano recomendado</label>
           </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-4">
-            <h5>Tipo de atividade</h5>
-            <label for>
-              <input type="checkbox" class="mb-2" v-model="filters.plugged.yes">
-              Plugada
-            </label>
-            <label for>
-              <input type="checkbox" class="mb-2" v-model="filters.plugged.no">
-              Desplugada
-            </label>
+          <div class="field">
+            <b-radio v-model="filters.age" native-value="todos">Todos os anos</b-radio>
+          </div>
+          <div class="field">
+            <b-radio v-model="filters.age" native-value="iniciais">Anos iniciais</b-radio>
+          </div>
+          <div class="field">
+            <b-radio v-model="filters.age" native-value="finais">Anos finais</b-radio>
+          </div>
+          <div class="field">
+            <b-radio v-model="filters.age" native-value="medio">Ensino médio</b-radio>
+          </div>
+          <br>
+          <div class="field">
+            <label class="label">Tipo de atividade</label>
+          </div>
+          <div class="field">
+            <b-checkbox v-model="filters.plugged.yes">Plugada</b-checkbox>
+          </div>
+          <div class="field">
+            <b-checkbox v-model="filters.plugged.no">Desplugada</b-checkbox>
+          </div>
 
-            <br>
-            <h5>Objeto de conhecimento</h5>
-            <ul class="list-group">
-              <div v-for="eixo of tree" :key="eixo.id">
-                <div @click="eixo.active = !eixo.active" class="cursor">
-                  <small>
-                    <i class="ni" :class="eixo.active ? 'ni-bold-down' : 'ni-bold-right'"></i>
-                    <b>{{ eixo.title }}</b>
-                  </small>
-                </div>
-                <div v-for="objeto of eixo.items" :key="objeto.id" v-show="eixo.active">
-                  <label for>
-                    <input type="checkbox" class v-model="objeto.active">
-                    <small>{{ objeto.title }}</small>
-                  </label>
-                </div>
-              </div>
-            </ul>
+          <br>
+          <div class="field">
+            <label class="label">Objeto de conhecimento</label>
           </div>
-          <div class="col-lg-8">
-            <div class="row row-grid">
-              <div class="col-lg-12">
-                <task-list :tasks="tasks"></task-list>
+          <ul class="list-group">
+            <div v-for="eixo of tree" :key="eixo.id">
+              <div @click="eixo.active = !eixo.active" class="cursor">
+                <small>
+                  <i class="ni" :class="eixo.active ? 'ni-bold-down' : 'ni-bold-right'"></i>
+                  <b>{{ eixo.title }}</b>
+                </small>
+              </div>
+              <div v-for="objeto of eixo.items" :key="objeto.id" v-show="eixo.active">
+                <label for>
+                  <input type="checkbox" class v-model="objeto.active">
+                  <small>{{ objeto.title }}</small>
+                </label>
               </div>
             </div>
-          </div>
+          </ul>
+        </div>
+        <div class="column">
+          <task-list :tasks="tasks"></task-list>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -173,9 +127,9 @@ export default {
         .then(res => res.data)
         .then(tasks => (this.tasks = tasks));
     },
-    setAgeGroup(group) {
-      this.filters.age = group;
-    },
+    // setAgeGroup(group) {
+    //   this.filters.age = group;
+    // },
     toggleObject(object) {
       object.active = !object.active;
       this.fetchTasks();
