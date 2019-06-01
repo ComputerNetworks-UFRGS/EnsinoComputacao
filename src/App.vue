@@ -30,5 +30,6 @@ export default {
 }
 #app main {
   flex-grow: 1;
+  margin: 30px 0px;
 }
 </style>

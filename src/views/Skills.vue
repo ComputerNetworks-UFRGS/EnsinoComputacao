@@ -1,27 +1,24 @@
 <template>
   <section class="habilidades">
-    <br>
-    <section class="section section-lg pt-lg-0">
-      <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title">{{ selectedSkill.habilidade_nome }}</p>
-          </header>
-          <div class="card-content">
-            <div class="content">
-              <task-list :tasks="tasks"></task-list>
-            </div>
+    <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">{{ selectedSkill.habilidade_nome }}</p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <task-list :tasks="tasks"></task-list>
           </div>
-          <footer class="card-footer">
-            <a href="#!" class="card-footer-item" @click="closeListTasks">Ok, fechar</a>
-          </footer>
         </div>
-      </b-modal>
-
-      <div class="container">
-        <skill-List :years="years" @click="listTasks"></skill-List>
+        <footer class="card-footer">
+          <a href="#!" class="card-footer-item" @click="closeListTasks">Ok, fechar</a>
+        </footer>
       </div>
-    </section>
+    </b-modal>
+
+    <div class="container">
+      <skill-List :years="years" @click="listTasks"></skill-List>
+    </div>
   </section>
 </template>
 

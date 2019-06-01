@@ -1,14 +1,38 @@
 <template>
-  <nav type="default" effect="dark" expand>
-    <router-link class="navbar-brand" to="/">EduSBC</router-link>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <router-link class="navbar-item" to="/">
+          <img src="img/brand/color.png" alt="EduSBC">
+        </router-link>
 
-    <ul class="navbar-nav ml-lg-auto is-hidden-touch">
-      <div tag="li" :title="($store.state.user ? $store.state.user.name : 'Seu nome')">
-        <router-link class="dropdown-item" to="/">voltar para o site</router-link>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#/" @click="logout">Sair</a>
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          @click="isMenuOpen = !isMenuOpen"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-    </ul>
+
+      <div class="navbar-menu" :class="{'is-active': isMenuOpen}" @click="isMenuOpen = false">
+        <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">{{ ($store.state.user ? $store.state.user.name : 'Meus dados') }}</a>
+
+            <div class="navbar-dropdown is-right ">
+              <router-link class="navbar-item" to="/">voltar para o site</router-link>
+              <hr class="navbar-divider">
+              <a class="navbar-item" href="#/" @click="logout">Sair</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </nav>
 </template>
 
@@ -16,11 +40,16 @@
 import AuthService from "@/services/auth";
 
 export default {
+  data() {
+    return {
+      isMenuOpen: false
+    };
+  },
   methods: {
     logout() {
       AuthService.logout();
       this.$store.commit("set_user", false);
-      this.$route.push("/");
+      this.$router.push("/");
     }
   }
 };

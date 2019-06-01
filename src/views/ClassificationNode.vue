@@ -34,8 +34,8 @@
     <div class="media-right">
       <b-tag v-if="node && node.items && showSkillCount">
         {{ node.items.length }}
-        <span v-if="node.items.length > 1">habilidades</span>
-        <span v-else>habilidade</span>
+        <!-- <span v-if="node.items.length > 1">habilidades</span>
+        <span v-else>habilidade</span> -->
       </b-tag>
     </div>
   </div>
