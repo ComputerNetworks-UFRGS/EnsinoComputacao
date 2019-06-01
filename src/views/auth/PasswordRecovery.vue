@@ -1,55 +1,41 @@
 <template>
-  <section class="section section-shaped section-lg my-0">
-    <div class="shape shape-style-1 bg-gradient-default">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div class="container pt-lg-md">
-      <div class="row justify-content-center">
-        <div class="col-lg-5">
-          <div
-            type="secondary"
-            shadow
-            header-classes="bg-white pb-5"
-            body-classes="px-lg-5 py-lg-5"
-            class="border-0"
-          >
-            <template>
-              <div class="text-center text-muted mb-4">
-                <small>Recuperar senha</small>
-              </div>
-              <form role="form">
-                <input
-                  alternative
-                  class="mb-3"
-                  placeholder="E-mail cadastrado"
-                  addon-left-icon="ni ni-email-83"
-                >
+  <section class="recuperar-senha">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5">
+          <div class="field">
+            <label class="label">Recuperar senha</label>
+            <div class="control">
+              <input
+                alternative
+                class="input"
+                placeholder="E-mail cadastrado"
+                addon-left-icon="ni ni-email-83"
+              >
+            </div>
+          </div>
 
-                <div class="text-center">
-                  <button type="primary" class="my-4">Recuperar senha</button>
-                </div>
-              </form>
-            </template>
-          </div>
-          <div class="row mt-3">
-            <div class="col-6">
-              <router-link to="/login" class="text-light">
-                <small>Entrar</small>
-              </router-link>
-            </div>
-            <div class="col-6 text-right">
-              <router-link to="/cadastro" class="text-light">
-                <small>Criar conta</small>
-              </router-link>
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary">Recuperar senha</button>
             </div>
           </div>
+
+          <hr>
+
+          <div class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <router-link to="/login">Entrar</router-link>
+              </div>
+            </div>
+            <div class="level-right">
+              <div class="level-item">
+                <router-link to="/cadastro">Primeiro acesso</router-link>
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </div>
     </div>

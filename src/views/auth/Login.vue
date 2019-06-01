@@ -33,11 +33,10 @@
           <b-message
             title="Ops!"
             type="is-danger"
-            v-if="errorMessage" @close="errorMessage=false"
+            v-if="errorMessage"
+            @close="errorMessage=false"
             aria-close-label="Close message"
-          >
-            {{ errorMessage }}
-          </b-message>
+          >{{ errorMessage }}</b-message>
 
           <div class="field">
             <div class="control">
@@ -50,16 +49,12 @@
           <div class="level">
             <div class="level-left">
               <div class="level-item">
-                <router-link to="/recuperar-senha" class="text-light">
-                  <small>Esqueceu a senha?</small>
-                </router-link>
+                <router-link to="/recuperar-senha">Esqueceu a senha?</router-link>
               </div>
             </div>
             <div class="level-right">
               <div class="level-item">
-                <router-link to="/cadastro" class="text-light">
-                  <small>Primeiro acesso</small>
-                </router-link>
+                <router-link to="/cadastro">Primeiro acesso</router-link>
               </div>
             </div>
           </div>
