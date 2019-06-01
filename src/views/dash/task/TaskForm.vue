@@ -20,9 +20,7 @@
           <form role="form">
             <input v-model="form.title" alternative class="mb-3" placeholder="Título">
 
-            <base-alert
-              type="danger"
-              dismissible
+            <b-notification
               @close="errors.title = []"
               :visible="errors.title.length > 0"
             >
@@ -33,13 +31,11 @@
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </base-alert>
+            </b-notification>
 
             <vue-editor v-model="form.description" placeholder="Descrição da atividade"></vue-editor>
 
-            <base-alert
-              type="danger"
-              dismissible
+            <b-notification
               @close="errors.description = []"
               :visible="errors.description.length > 0"
             >
@@ -50,7 +46,7 @@
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </base-alert>
+            </b-notification>
             <br>
             <div v-auth="'task.edit'" v-if="form.status != 2">
               <button v-if="taskId" type="primary" class="my-4" @click="create">Atualizar atividade</button>

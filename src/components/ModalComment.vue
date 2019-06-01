@@ -4,7 +4,7 @@
             {{ title }}
         </template>            
         
-        <base-input class="mb-4">
+        <div class="mb-4">
             <textarea 
                 v-model="comment"
                 class="form-control form-control-alternative" 
@@ -12,12 +12,12 @@
                 rows="12"
                 cols="80"
                 placeholder="..."></textarea>
-        </base-input>
-        <base-button 
+        </div>
+        <button 
             @click="makeComment"
             type="default" round block size="lg">
             Comentar
-        </base-button>
+        </button>
 
     </Modal>
 </template>
