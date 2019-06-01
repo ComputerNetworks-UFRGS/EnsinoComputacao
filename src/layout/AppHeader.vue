@@ -11,7 +11,7 @@
           class="navbar-burger burger"
           aria-label="menu"
           aria-expanded="false"
-          data-target="navbarBasicExample"
+          @click="isMenuOpen = !isMenuOpen"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -19,7 +19,7 @@
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-menu" :class="{'is-active': isMenuOpen}" @click="isMenuOpen = false">
         <div class="navbar-start">
           <router-link to="/atividades" class="navbar-item">Atividades</router-link>
           <router-link to="/habilidades" class="navbar-item">Habilidades</router-link>
@@ -54,7 +54,8 @@ import AuthService from "@/services/auth";
 export default {
   data() {
     return {
-      isAuth: false
+      isAuth: false,
+      isMenuOpen: false,
     };
   },
   created() {
