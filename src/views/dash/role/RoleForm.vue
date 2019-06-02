@@ -1,27 +1,28 @@
 <template>
   <div>
-    <h3>Novo perfil de usuário</h3>
-
-    <router-link to="/dash/papeis" class="btn btn-secondary">Cancelar</router-link>
     <br>
-    <br>
-    <div class="row">
-      <div class="col col-lg-8">
-        <div class="box">
-          <form role="form">
-            <input v-model="form.title" alternative class="mb-3" placeholder="Nome">
+    <router-link to="/dash/papeis" class="button is-white is-pulled-right">Cancelar</router-link>
+    <h4 class="title is-4">Novo perfil de usuário</h4>
+    <div class="card">
+      <div class="card-content">
+        <div class="field">
+          <label class="label">Nome do perfil de acesso</label>
+          <div class="control">
+            <input v-model="form.title" class="input" placeholder="Nome">
+          </div>
+        </div>
 
-            <input
-              v-model="form.description"
-              alternative
-              class="mb-3"
-              placeholder="Descrição curta"
-            >
+        <div class="field">
+          <label class="label">Descrição curta das permissões do perfil</label>
+          <div class="control">
+            <input v-model="form.description" class="input" placeholder="Descrição curta">
+          </div>
+        </div>
 
-            <div class>
-              <button type="primary" class="my-4" @click="create">Criar</button>
-            </div>
-          </form>
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary" @click="create">Criar perfil</button>
+          </div>
         </div>
       </div>
     </div>
