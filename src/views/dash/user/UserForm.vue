@@ -1,23 +1,27 @@
 <template>
   <div>
-    <h3>Editar perfil de usuário</h3>
-
-    <router-link to="/dash/usuarios" class="btn btn-secondary">Cancelar</router-link>
-
     <br>
-    <br>
-    <div class="row">
-      <div class="col col-lg-8">
-        <div class="box">
-          <form role="form">
-            <select name="role_id" v-model="form.role_id">
-              <option value="null">Comum</option>
-              <option v-for="role of roles" :key="role.id" :value="role.id">{{ role.title }}</option>
-            </select>
-            <div class>
-              <button type="primary" class="my-4" @click="create">Atualizar</button>
+    <router-link to="/dash/usuarios" class="button is-white is-pulled-right">Cancelar</router-link>
+    <h4 class="title is-4">Editar perfil de usuário</h4>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="field">
+          <div class="label">Perfil de acesso</div>
+          <div class="control">
+            <div class="select">
+              <select name="role_id" v-model="form.role_id">
+                <option value="null">Cadastrado</option>
+                <option v-for="role of roles" :key="role.id" :value="role.id">{{ role.title }}</option>
+              </select>
             </div>
-          </form>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button class="button is-success" @click="create">Atualizar</button>
+          </div>
         </div>
       </div>
     </div>
