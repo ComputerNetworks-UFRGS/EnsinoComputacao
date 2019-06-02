@@ -193,8 +193,13 @@ export default {
       this.form.skills.splice(index, 1);
     },
     remove(task) {
-      UserTasks.remove(task.id).finally(() => {
-        this.$router.push("/dash/atividades/");
+      this.$dialog.confirm({
+        message: "Confirma exclusão de atividade?",
+        onConfirm: () => {
+          UserTasks.remove(task.id).finally(() => {
+            this.$router.push("/dash/atividades/");
+          });
+        }
       });
     }
   }

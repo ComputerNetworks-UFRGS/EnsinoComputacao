@@ -53,8 +53,13 @@ export default {
   },
   methods: {
     removeRole(role_id) {
-      Roles.remove(role_id).then(res => {
-        this.fetchRoles();
+      this.$dialog.confirm({
+        message: "Confirma exclusão de perfil?",
+        onConfirm: () => {
+          Roles.remove(role_id).then(res => {
+            this.fetchRoles();
+          });
+        }
       });
     },
     fetchRoles() {
