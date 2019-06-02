@@ -46,6 +46,14 @@
                   class="button is-small"
                 >Editar</router-link>
               </p>
+              <p class="control">
+                <router-link
+                  v-auth="'task.detail'"
+                  :to="'/dash/atividades/anexos/' + task.id"
+                  class="button is-small"
+                >Anexos
+                </router-link>
+              </p>
             </div>
             <div class="btn-group"></div>
           </div>

@@ -1,26 +1,27 @@
-import Vue from "vue";
-import Router from "vue-router";
-import AppHeader from "./layout/AppHeader";
-import AppFooter from "./layout/AppFooter";
+import Vue from "vue"
+import Router from "vue-router"
+import AppHeader from "./layout/AppHeader"
+import AppFooter from "./layout/AppFooter"
 
-import Home from "./views/Home.vue";
-import Tasks from "./views/Tasks.vue";
-import Task from "./views/Task.vue";
-import Skills from "./views/Skills.vue";
-import ClassificationTree from "./views/ClassificationTree.vue";
-import GraphView from "./views/GraphView.vue";
-import About from "./views/About.vue";
-import Contact from "./views/Contact.vue";
-import Login from "./views/auth/Login.vue";
-import Register from "./views/auth/Register.vue";
-import PasswordRecovery from "./views/auth/PasswordRecovery.vue";
+import Home from "./views/Home.vue"
+import Tasks from "./views/Tasks.vue"
+import Task from "./views/Task.vue"
+import Skills from "./views/Skills.vue"
+import ClassificationTree from "./views/ClassificationTree.vue"
+import GraphView from "./views/GraphView.vue"
+import About from "./views/About.vue"
+import Contact from "./views/Contact.vue"
+import Login from "./views/auth/Login.vue"
+import Register from "./views/auth/Register.vue"
+import PasswordRecovery from "./views/auth/PasswordRecovery.vue"
 
 import AuthService from '@/services/auth'
 
-import DashHeader from "./layout/dash/DashHeader";
+import DashHeader from "./layout/dash/DashHeader"
 import DashBase from "./views/dash/DashBase"
 import DashTasks from "./views/dash/task/TaskHome"
 import TaskForm from "./views/dash/task/TaskForm"
+import TaskAttachment from './views/dash/task/TaskAttachment'
 import RoleList from "./views/dash/role/RoleList"
 import RoleEdit from "./views/dash/role/RoleEdit"
 import RoleForm from "./views/dash/role/RoleForm"
@@ -159,6 +160,10 @@ let router = new Router({
           props: true
         },
         {
+          path: 'atividades/anexos/:id',
+          component: TaskAttachment
+        },
+        {
           path: 'papeis',
           component: RoleList,
         },
@@ -185,7 +190,7 @@ let router = new Router({
         {
           path: 'revisao/:id',
           component: ReviewEdit,
-        },        
+        },
       ]
     },
   ],

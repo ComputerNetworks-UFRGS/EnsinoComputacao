@@ -21,6 +21,19 @@
                 <input class="input" v-model="attachment.description" placeholder="Descrição curta">
               </div>
             </div>
+
+            <b-field class="file">
+              <b-upload v-model="file">
+                <a class="button is-primary">
+                  <span class="icon">
+                    <i class="fa fa-upload"></i>
+                  </span>
+                  <span v-if="file && file.name">Alterar arquivo</span>
+                  <span v-else>Clique para adicionar</span>
+                </a>
+              </b-upload>
+              <span class="file-name" v-if="file">{{ file.name }}</span>
+            </b-field>
           </div>
         </div>
       </div>
@@ -48,10 +61,10 @@ export default {
   },
   data() {
     return {
+      file: null,
       attachment: {
         title: "",
         description: "",
-        file: ""
       }
     };
   },
@@ -62,7 +75,19 @@ export default {
   },
   methods: {
     add() {
-      this.$emit("add", this.attachment);
+      let formData = new FormData();
+      formData.append('title', this.attachment.title);
+      formData.append('description', this.attachment.description);
+      formData.append('file', this.file);
+      this.reset()
+      this.$emit("add", formData);
+    },
+    reset() {
+      this.description = {
+        title: '',
+        description: '',
+      }
+      this.file = null
     }
   }
 };

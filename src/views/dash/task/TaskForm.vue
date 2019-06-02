@@ -72,30 +72,6 @@
           <span v-if="form.skill">Alterar habilidade</span>
           <span v-else>Selecionar habilidades</span>
         </button>
-
-        <br>
-        <br>
-        <b>Anexos</b>
-        <br>
-        <button
-          class="button is-white is-small"
-          @click="isOpenAttachmentModal = true"
-        >Adicionar anexo</button>
-        <div v-if="form.attachments && form.attachments.length > 0">
-          <br>
-          <table class="table is-striped is-hoverable is-fullwidth">
-            <tbody>
-              <tr v-for="attachment of form.attachments" :key="attachment.id">
-                <td>{{ attachment.title }}</td>
-                <td>{{ attachment.description }}</td>
-                <td>
-                  <button class="button is-small is-text" @click="removeAttachment(attachment.id)">Remover</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div v-else>Nenhum anexo.</div>
       </div>
 
       <br>
@@ -127,12 +103,6 @@
         </footer>
       </div>
     </b-modal>
-
-    <modal-attachment
-      :show.sync="isOpenAttachmentModal"
-      @close="isOpenAttachmentModal = false"
-      @add="addAttachment"
-    ></modal-attachment>
   </div>
 </template>
 
@@ -143,22 +113,18 @@ import SkillList from "@/components/SkillList";
 import { VueEditor } from "vue2-editor";
 import _ from "lodash";
 import ReviewList from "@/components/ReviewList";
-import ModalAttachment from "@/components/ModalAttachment";
-import AttachmentService from "@/services/attachment";
 
 export default {
   components: {
     SkillList,
     VueEditor,
-    ReviewList,
-    ModalAttachment
+    ReviewList
   },
   data() {
     return {
       taskId: false,
       years: {},
       openSkillSelector: false,
-      isOpenAttachmentModal: true,
       form: {
         title: "",
         description: "",
@@ -179,7 +145,6 @@ export default {
       UserTasks.detail(this.$route.params.id)
         .then(res => res.data)
         .then(task => {
-          task.is_plugged = task.is_plugged;
           this.form = task;
         });
     }
@@ -234,17 +199,6 @@ export default {
             this.$router.push("/dash/atividades/");
           });
         }
-      });
-    },
-    addAttachment(attachment) {
-      AttachmentService.create(this.taskId, attachment).then(res => {
-        console.log("...", res);
-      });
-      // console.log('attachment', attachment)
-    },
-    removeAttachment(attachment_id) {
-      AttachmentService.remove(this.taskId, attachment_id).then(res => {
-        console.log("...", res);
       });
     }
   }
