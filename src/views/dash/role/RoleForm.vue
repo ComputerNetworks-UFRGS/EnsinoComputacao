@@ -21,7 +21,7 @@
 
         <div class="field">
           <div class="control">
-            <button class="button is-primary" @click="create">Criar perfil</button>
+            <button class="button is-success" @click="create">Criar perfil</button>
           </div>
         </div>
       </div>
