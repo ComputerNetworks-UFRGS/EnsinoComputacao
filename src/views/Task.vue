@@ -40,9 +40,8 @@
                 <br>Não requer uso de computadores.
               </div>
 
-              <hr>
-
               <div v-if="task.skills">
+                <hr>
                 <b>Habilidade(s) trabalhada(s)</b>
                 <ul>
                   <li v-for="skill of task.skills" :key="skill.id">
@@ -54,6 +53,16 @@
                     </b-tooltip>
                   </li>
                 </ul>
+              </div>
+
+              <div v-if="task.attachments">
+                <hr>
+                <b>Material de apoio</b>
+                <div v-for="attachment of task.attachments" :key="attachment.id" class="attachment">
+                  <div>{{ attachment.title }}</div>
+                  <div v-if="attachment.description">{{ attachment.description }}</div>
+                  <a :href="getPublicUrl(attachment)">Baixar arquivo</a>
+                </div>
               </div>
             </div>
           </div>
@@ -79,18 +88,28 @@ export default {
   methods: {
     print: function() {
       window.print();
+    },
+    getPublicUrl(attachment) {
+      return "http://localhost:8000/" + attachment.path;
     }
   }
 };
 </script>
 <style lang="scss">
-.task {
-  img {
-    width: 100%;
-    max-width: 100%;
+.task-page {
+  .task {
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
   }
-}
-.cursor {
-  cursor: pointer;
+  .cursor {
+    cursor: pointer;
+  }
+  .attachment {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #dddddd;
+  }
 }
 </style>
