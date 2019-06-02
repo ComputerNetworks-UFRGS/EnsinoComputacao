@@ -62,10 +62,11 @@
 </template>
 
 <script>
-import UserTasks from "@/services/user-task";
-import Reviews from "@/services/review";
-import _ from "lodash";
-import ModalComment from "@/components/ModalComment";
+import UserTasks from "@/services/user-task"
+import Reviews from "@/services/review"
+import UseService from "@/services/user"
+import _ from "lodash"
+import ModalComment from "@/components/ModalComment"
 
 export default {
   components: {
@@ -94,7 +95,15 @@ export default {
     },
     publish(task) {
       this.selectedTask = task;
-      this.isOpenCommentModal = true;
+
+      let permissions = this.$store.state.user.permissions;
+      if (UseService.hasPermission(permissions, "task.no_review")) {
+        UserTasks.publish(this.selectedTask.id).then(res => {
+          this.fetch();
+        });
+      } else {
+        this.isOpenCommentModal = true;
+      }
     },
     getStatusLabel(task_status) {
       return UserTasks.getStatusLabel(task_status);
