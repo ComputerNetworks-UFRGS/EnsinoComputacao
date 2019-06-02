@@ -22,7 +22,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
 #app {
   display: flex;
   flex-direction: column;
@@ -30,6 +30,9 @@ export default {
 }
 #app main {
   flex-grow: 1;
-  margin: 30px 0px;
+  padding-bottom: 30px;
+  .pt {
+    padding-top: 20px;
+  }
 }
 </style>

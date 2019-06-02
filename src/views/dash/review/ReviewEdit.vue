@@ -39,7 +39,7 @@
         <b>Descrição da atividade:</b>
         <div class="card">
           <div class="card-content">
-            <div v-html="task.description"></div>
+            <div class="content ql-editor" v-html="task.description"></div>
           </div>
         </div>
 

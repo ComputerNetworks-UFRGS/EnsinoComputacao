@@ -2,7 +2,15 @@
   <div class="media" v-on:click.stop.prevent="isOpen = !isOpen">
     <div class="media-left" v-if="node && node.items">
       <button class="button is-small is-light">
-        <i class="fas" :class="isOpen ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+        <span class="icon">
+          <i
+            class="fas"
+            :class="{
+          'fa-angle-down': isOpen,
+          'fa-angle-right': !isOpen,
+        }"
+          ></i>
+        </span>
       </button>
     </div>
     <div class="media-content">
@@ -35,7 +43,7 @@
       <b-tag v-if="node && node.items && showSkillCount">
         {{ node.items.length }}
         <!-- <span v-if="node.items.length > 1">habilidades</span>
-        <span v-else>habilidade</span> -->
+        <span v-else>habilidade</span>-->
       </b-tag>
     </div>
   </div>

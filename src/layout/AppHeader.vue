@@ -64,4 +64,8 @@ export default {
 };
 </script>
 <style>
+.navbar .navbar-start .router-link-exact-active {
+  background: #7957d5!important;
+  color: white!important; 
+}
 </style>

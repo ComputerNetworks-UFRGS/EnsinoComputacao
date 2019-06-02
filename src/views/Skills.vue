@@ -1,5 +1,5 @@
 <template>
-  <section class="habilidades">
+  <section class="habilidades pt">
     <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
       <div class="card">
         <header class="card-header">

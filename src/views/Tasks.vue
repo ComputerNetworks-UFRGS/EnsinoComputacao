@@ -1,5 +1,5 @@
 <template>
-  <section class="atividades">
+  <section class="atividades pt">
     <div class="container">
       <div class="columns">
         <div class="column is-4">

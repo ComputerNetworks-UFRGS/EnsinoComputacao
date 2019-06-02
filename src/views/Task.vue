@@ -1,93 +1,96 @@
 <template>
-    <div class="profile-page">
-        <section class="section-profile-cover section-shaped my-0">
-            <div class="shape shape-style-1 shape-primary shape-skew alpha-4">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+  <section class="task-page">
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title cursor" @click="$router.push('/atividades')">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            {{ task.title }}
+          </h1>
+          <h2 class="subtitle" v-if="task.user">Criado por: {{ task.user.name }}</h2>
+        </div>
+      </div>
+    </section>
+    <br>
+    <div class="container">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">{{ task.title }}</p>
+          <a href="#!" @click="print" class="card-header-icon" aria-label="more options">
+            <span class="icon">
+              <i class="fas fa-print" aria-hidden="true"></i>
+            </span>
+            Imprimir
+          </a>
+        </header>
+        <div class="card-content">
+          <div class="columns">
+            <div class="column is-8">
+              <div class="content ql-editor">
+                <span v-html="task.description"></span>
+              </div>
             </div>
-        </section>
-        <section class="section section-skew">
-            <div class="container">
-                <div shadow class="card-profile mt--300" no-body>
-                    <div class="px-4">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-3 order-lg-2">
-                            </div>
-                            <div class="col-lg-4 order-lg-3">
-                                <div class="card-profile-actions py-4 mt-0">
-                                    <!-- <button type="info" size="sm" class="mr-4">Comentar</button> -->
-                                    <button type="default" @click="print" class="float-right">Imprimir</button>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 order-lg-1">
-                                <div class="card-profile-stats d-flex justify-content-center">
-                                    <div v-if="task.skill">
-                                        <span class="heading">
-                                            {{ task.skill.idade_nome }}
-                                        </span>
-                                        <span class="description">Recomendado</span>
-                                    </div>
-                                    <div>
-                                        <span class="heading">-- <small>min</small></span>
-                                        <span class="description">Duração</span>
-                                    </div>
-                                    <div>
-                                        <span class="heading">--</span>
-                                        <span class="description">Comentários</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-2 border-top">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-12">
-                                    <h3>{{ task.title }}</h3>
-                                    <div class="h6 font-weight-300" v-if="task.user">
-                                        Criado por: {{ task.user.name }}
-                                    </div>
-                                    <br>
-                                    <div class="task">
-                                        <span v-html="task.description"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="column">
+              <div v-if="task.is_plugged">
+                <b>Atividade plugada</b>
+                <br>Requer uso de computadores.
+              </div>
+              <div v-else>
+                <b>Atividade desplugada</b>
+                <br>Não requer uso de computadores.
+              </div>
+
+              <hr>
+
+              <div v-if="task.skills">
+                <b>Habilidade(s) trabalhada(s)</b>
+                <ul>
+                  <li v-for="skill of task.skills" :key="skill.id">
+                    <br>
+                    <span class="tag">{{ skill.habilidade_codigo }}</span>
+                    {{ skill.habilidade_nome }}
+                    <b-tooltip label="Etapa de ensino recomendada" position="is-bottom">
+                      <small>[{{ skill.age_group.name }}]</small>
+                    </b-tooltip>
+                  </li>
+                </ul>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 </template>
 <script>
-import Tasks from '@/services/task'
+import Tasks from "@/services/task";
 
 export default {
-    data() {
-        return {
-            task: []
-        }
-    },
-    created() {
-        Tasks.detail(this.$route.params.id).then(res => res.data)
-            .then(task => this.task = task)
-    },
-    methods: {
-        print: function() {
-            window.print()
-        }
+  data() {
+    return {
+      task: []
+    };
+  },
+  created() {
+    Tasks.detail(this.$route.params.id)
+      .then(res => res.data)
+      .then(task => (this.task = task));
+  },
+  methods: {
+    print: function() {
+      window.print();
     }
+  }
 };
 </script>
 <style lang="scss">
-    .task {
-        img {
-            width: 100%;
-            max-width: 100%;
-        }
-    }
+.task {
+  img {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+.cursor {
+  cursor: pointer;
+}
 </style>
