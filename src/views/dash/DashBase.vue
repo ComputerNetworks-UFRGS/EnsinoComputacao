@@ -17,7 +17,6 @@
             </li>
           </ul>
 
-
           <p class="menu-label" v-auth="'role.list|users.list'">Administração</p>
           <ul class="menu-list">
             <li v-auth="'role.list'">
@@ -30,7 +29,9 @@
         </aside>
       </div>
       <div class="column">
-        <router-view></router-view>
+        <div class="container">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>

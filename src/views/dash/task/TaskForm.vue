@@ -83,7 +83,7 @@
         >Atualizar atividade</button>
         <button v-else class="button is-primary is-success" @click="create">Criar atividade</button>
       </div>
-      <button v-else disabled>Publicação negada</button>
+      <button v-else  class="button is-primary is-success" disabled>Publicação negada</button>
     </div>
 
     <review-list :reviews="form.reviews"></review-list>

@@ -46,12 +46,12 @@ export default {
   },
   getColorLabel(status_id) {
       let labels = {
-          'CREATED': 'badge-white',
-          'REVIEWED': 'badge-white',
-          'FOR_REVIEW': 'badge-light',
-          'DENIED_NEED_FIX': 'badge-info',
-          'PUBLISHED': 'badge-success',
-          'DENIED': 'badge-danger',
+          'CREATED': 'is-light',
+          'REVIEWED': 'is-light',
+          'FOR_REVIEW': 'is-light',
+          'DENIED_NEED_FIX': 'is-light',
+          'PUBLISHED': 'is-light',
+          'DENIED': 'is-light',
       }
       for(let status in TASK_STATUS) {
           if(TASK_STATUS[status] == status_id) {

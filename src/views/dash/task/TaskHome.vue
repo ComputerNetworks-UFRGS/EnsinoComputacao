@@ -10,11 +10,12 @@
 
     <div class="card">
       <div class="card-content">
-        <div class="columns" v-for="task of orderedTasks" :key="task.id">
+        <div class="columns task-list" v-for="task of orderedTasks" :key="task.id">
           <div class="column is-8 nowrap-text">
             <b>{{ task.title }}</b>&nbsp;
+            <br>
             <span
-              class="badge"
+              class="tag is-small"
               :class="getColorLabel(task.status)"
             >{{ getStatusLabel(task.status) }}</span>
           </div>
@@ -122,10 +123,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .nowrap-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.task-list .column {
+  padding: 0.2rem;
 }
 </style>
