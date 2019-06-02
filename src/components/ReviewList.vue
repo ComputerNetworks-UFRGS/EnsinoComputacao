@@ -5,7 +5,7 @@
       <b>{{ title }}</b>
       <div v-for="review of reviews" :key="review.id">
         <b>{{ review.user.name }}</b>
-        <small>em {{ review.created_at | dateFormat }}:</small>
+        <small> em {{ review.created_at | dateFormat }}:</small>
         {{ review.comment }}
       </div>
     </div>

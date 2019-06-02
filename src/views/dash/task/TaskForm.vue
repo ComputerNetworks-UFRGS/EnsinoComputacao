@@ -36,8 +36,8 @@
         <div class="field">
           <label class="label">Essa atividade requer o uso de computadores?</label>
           <div class="control">
-            <b-radio v-model="form.is_plugged" native-value=1>Sim</b-radio>
-            <b-radio v-model="form.is_plugged" native-value=0>Não</b-radio>
+            <b-radio v-model="form.is_plugged" native-value="1">Sim</b-radio>
+            <b-radio v-model="form.is_plugged" native-value="0">Não</b-radio>
           </div>
           <div class="help is-danger" v-if="errors.is_plugged.length > 0">
             <div v-for="error in errors.is_plugged" :key="error">{{ error }}</div>
@@ -83,7 +83,7 @@
         >Atualizar atividade</button>
         <button v-else class="button is-primary is-success" @click="create">Criar atividade</button>
       </div>
-      <button v-else  class="button is-primary is-success" disabled>Publicação negada</button>
+      <button v-else class="button is-primary is-success" disabled>Publicação negada</button>
     </div>
 
     <review-list :reviews="form.reviews"></review-list>
@@ -145,7 +145,7 @@ export default {
       UserTasks.detail(this.$route.params.id)
         .then(res => res.data)
         .then(task => {
-          task.is_plugged = task.is_plugged == 1;
+          task.is_plugged = task.is_plugged;
           this.form = task;
         });
     }

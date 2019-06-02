@@ -30,12 +30,12 @@ export default {
   },
   getStatusLabel(status_id) {
     let labels = {
-        'CREATED': '',
+        'CREATED': 'A publicar',
         'FOR_REVIEW': 'Aguardando revisão',
         'DENIED': 'Publicação negada',
         'DENIED_NEED_FIX': 'Aguardando ajustes',
         'PUBLISHED': 'Publicada',
-        'REVIEWED': ''
+        'REVIEWED': 'Revisada'
     }
     for(let status in TASK_STATUS) {
         if(TASK_STATUS[status] == status_id) {
