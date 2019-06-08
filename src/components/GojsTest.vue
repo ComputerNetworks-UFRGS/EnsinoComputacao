@@ -1,14 +1,20 @@
 <template>
   <div>
-    <div class="col-md-6">
-      <ul class="nav nav-pills nav-fill nav-justified">
-        <li class="nav-item active">
-          <div class="btn btn-primary btn-lg btn-block" @click="setYearsModeFalse()">Tudo</div>
-        </li>
-        <li class="nav-item active">
-          <div class="btn btn-primary btn-lg btn-block" @click="setYearsModeTrue()">Anos</div>
-        </li>
-      </ul>
+    <br>
+    <div class="columns">
+      <div class="column is-6">
+        <div class="columns">
+          <div class="column is-6">
+            <button
+              class="button is-primary is-large is-fullwidth"
+              @click="setYearsModeFalse()"
+            >Tudo</button>
+          </div>
+          <div class="column is-6">
+            <button class="button is-primary is-large is-fullwidth" @click="setYearsModeTrue()">Anos</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       id="grafoTeste"

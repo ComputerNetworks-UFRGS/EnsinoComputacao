@@ -40,27 +40,47 @@
                 <br>Não requer uso de computadores.
               </div>
 
-              <div v-if="task.skills">
-                <hr>
+              <div v-if="task.skills && task.skills.length > 0">
+                <br>
                 <b>Habilidade(s) trabalhada(s)</b>
-                <ul>
-                  <li v-for="skill of task.skills" :key="skill.id">
-                    <br>
-                    <span class="tag">{{ skill.habilidade_codigo }}</span>
-                    {{ skill.habilidade_nome }}
-                    <b-tooltip label="Etapa de ensino recomendada" position="is-bottom">
-                      <small>[{{ skill.age_group.name }}]</small>
-                    </b-tooltip>
-                  </li>
-                </ul>
+                <span v-for="skill of task.skills" :key="skill.id">
+                  <span
+                    class="tag cursor"
+                    @click="skill.showDescription = !skill.showDescription"
+                  >
+                    <span class="icon">
+                      <i
+                        class="fas"
+                        :class="{
+                            'fa-angle-down': skill.showDescription,
+                            'fa-angle-right': !skill.showDescription,
+                          }"
+                      ></i>
+                    </span>
+                    {{ skill.habilidade_codigo }}
+                  </span>
+                  <div v-show="skill.showDescription">
+                    <small>
+                      {{ skill.habilidade_nome }}
+                      <b-tooltip label="Etapa de ensino recomendada" position="is-bottom">
+                        <small>[{{ skill.age_group.name }}]</small>
+                      </b-tooltip>
+                    </small>
+                  </div>
+                </span>
+                <hr>
               </div>
 
               <div v-if="task.attachments">
-                <hr>
+                <br>
                 <b>Material de apoio</b>
                 <div v-for="attachment of task.attachments" :key="attachment.id" class="attachment">
-                  <div>{{ attachment.title }}</div>
-                  <div v-if="attachment.description">{{ attachment.description }}</div>
+                  <b style="font-size: 0.9rem">{{ attachment.title }}</b>
+                  <br>
+                  <small v-if="attachment.description">
+                    {{ attachment.description }}
+                    <br>
+                  </small>
                   <a :href="getPublicUrl(attachment)">Baixar arquivo</a>
                 </div>
               </div>
@@ -83,7 +103,14 @@ export default {
   created() {
     Tasks.detail(this.$route.params.id)
       .then(res => res.data)
-      .then(task => (this.task = task));
+      .then(task => {
+        if (task.skills && task.skills.length > 0) {
+          for (let skill of task.skills) {
+            skill.showDescription = false;
+          }
+        }
+        this.task = task;
+      });
   },
   methods: {
     print: function() {
@@ -110,6 +137,12 @@ export default {
     margin-top: 6px;
     padding-top: 6px;
     border-top: 1px solid #dddddd;
+  }
+  .ql-editor {
+    p,
+    blockquote {
+      margin-bottom: 0px !important;
+    }
   }
 }
 </style>
