@@ -7,11 +7,12 @@
       "id": "23",
       "content": {
         "text": "Segurança digital",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 3,
       "point": {
         "x": 250,
         "y": 150
@@ -21,11 +22,12 @@
       "id": "27",
       "content": {
         "text": "Fundamentos de Sistemas distribuídos",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 3,
       "point": {
         "x": 575,
         "y": 200
@@ -35,11 +37,12 @@
       "id": "32",
       "content": {
         "text": "Armazenamento de dados",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 3,
       "point": {
         "x": 425,
         "y": 350
@@ -49,11 +52,12 @@
       "id": "33",
       "content": {
         "text": "Internet",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 2,
       "point": {
         "x": 400,
         "y": 50
@@ -63,11 +67,12 @@
       "id": "38",
       "content": {
         "text": "Proteção de dados",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 1,
       "point": {
         "x": 125,
         "y": 200
@@ -77,11 +82,12 @@
       "id": "39",
       "content": {
         "text": "Fundamentos de transmissão de dados",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 1,
       "point": {
         "x": 235,
         "y": 500
@@ -91,11 +97,12 @@
       "id": "44",
       "content": {
         "text": "Sistema operacional",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 2,
       "point": {
         "x": 700,
         "y": 350
@@ -105,11 +112,12 @@
       "id": "48",
       "content": {
         "text": "Codificação em formato digital",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 3,
       "point": {
         "x": 75,
         "y": 350
@@ -120,11 +128,12 @@
       "id": "45",
       "content": {
         "text": "Arquitetura básica de computadores",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 2,
       "point": {
         "x": 875,
         "y": 500
@@ -135,11 +144,12 @@
       "id": "51",
       "content": {
         "text": "Interface",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 2,
       "point": {
         "x": 950,
         "y": 70
@@ -149,11 +159,12 @@
       "id": "52",
       "content": {
         "text": "Dados",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 2,
       "point": {
         "x": 100,
         "y": 50
@@ -163,11 +174,12 @@
       "id": "56",
       "content": {
         "text": "Hardware e Software",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 2,
       "point": {
         "x": 650,
         "y": 70
@@ -177,11 +189,12 @@
       "id": "57",
       "content": {
         "text": "Noção de Instrução de Máquina",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 2,
       "point": {
         "x": 650,
         "y": 70
@@ -191,11 +204,12 @@
       "id": "61",
       "content": {
         "text": "Proteção de Informação",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 1,
       "point": {
         "x": 650,
         "y": 70
@@ -205,11 +219,12 @@
       "id": "62",
       "content": {
         "text": "Códigos",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 1,
       "point": {
         "x": 650,
         "y": 70
@@ -219,11 +234,12 @@
       "id": "63",
       "content": {
         "text": "Informação",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 1,
       "point": {
         "x": 650,
         "y": 70
@@ -233,11 +249,12 @@
       "id": "64",
       "content": {
         "text": "Máquina: Terminologia & uso de dispositinvos computacionais",
-        "color": "#C0FF91"
+        "color": "#94FACC"
       },
       "width": 150,
       "height": 60,
       "shape": "rectangle",
+      "year": 1,
       "point": {
         "x": 650,
         "y": 70
