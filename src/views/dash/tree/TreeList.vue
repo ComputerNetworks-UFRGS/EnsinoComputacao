@@ -11,7 +11,12 @@
 
     <div class="card">
       <div class="card-content">
-        <tree-item class="item" :item="topics" @add-item="addItem" @attach-skill="attachSkill"></tree-item>
+        <tree-item
+          class="item"
+          :item="topics"
+          @add-item="openTopicFormModal"
+          @attach-skill="attachSkill"
+        ></tree-item>
 
         <hr>
         <!-- <pre>
@@ -19,21 +24,27 @@
         </pre>-->
       </div>
     </div>
+
+    <modal-topic-form :show.sync="isOpenTopicFormModal" @submit="addItem($event)"></modal-topic-form>
   </div>
 </template>
 
 <script>
 import Topics from "@/services/topic";
 import TreeItem from "@/components/TreeItem";
+import ModalTopicForm from "@/components/ModalTopicForm";
 
 export default {
   components: {
-    TreeItem
+    TreeItem,
+    ModalTopicForm
   },
   data() {
     return {
       learningStage: 4,
-      topics: []
+      topics: [],
+      isOpenTopicFormModal: false,
+      openTopic: false
     };
   },
   created() {
@@ -48,16 +59,34 @@ export default {
           this.topics = topics;
         });
     },
-    // makeFolder: function(item) {
-    //   this.$set(item, "items", []);
-    //   this.addItem(item);
-    // },
+    openTopicFormModal(parent) {
+      console.log('parent', parent)
+      this.isOpenTopicFormModal = true;
+      this.openTopic = parent;
+    },
     addItem: function(item) {
-      console.log("addItem", item);
-      item.items.push({
-        title: "new stuff",
-        items: []
-      });
+
+      let items = this.openTopic.items
+      let type_id = items[0] ? items[0].type : null
+
+      let topic = {
+        type_id: type_id,
+        parent_id: this.openTopic.id,
+        name: item.name
+      };
+
+      console.log('topic', topic)
+
+      Topics.create(topic)
+        .then(res => {
+          this.openTopic.items.push({
+            title: item.name,
+            items: []
+          });
+        })
+        .finally(() => {
+          this.isOpenTopicFormModal = false;
+        });
     },
     attachSkill: function(item) {
       console.log("attachSkill", item);
