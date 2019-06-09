@@ -26,6 +26,13 @@
               <router-link to="/dash/usuarios">Usuários</router-link>
             </li>
           </ul>
+
+          <p class="menu-label">Organização</p>
+          <ul class="menu-list">
+            <li>
+              <router-link to="/dash/arvore">Árvore</router-link>
+            </li>
+          </ul>
         </aside>
       </div>
       <div class="column">
