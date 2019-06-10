@@ -64,7 +64,7 @@ export default {
       file: null,
       attachment: {
         title: "",
-        description: "",
+        description: ""
       }
     };
   },
@@ -76,18 +76,18 @@ export default {
   methods: {
     add() {
       let formData = new FormData();
-      formData.append('title', this.attachment.title);
-      formData.append('description', this.attachment.description);
-      formData.append('file', this.file);
-      this.reset()
+      formData.append("title", this.attachment.title);
+      formData.append("description", this.attachment.description);
+      formData.append("file", this.file);
+      this.reset();
       this.$emit("add", formData);
     },
     reset() {
       this.description = {
-        title: '',
-        description: '',
-      }
-      this.file = null
+        title: "",
+        description: ""
+      };
+      this.file = null;
     }
   }
 };

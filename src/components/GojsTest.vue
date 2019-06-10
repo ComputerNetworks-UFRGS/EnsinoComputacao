@@ -66,12 +66,12 @@ export default {
             groups.push(tempNode.group);
           }
         } else {
-          var tempNode = {
+          var tempNodeYears = {
             key: node.id,
             text: node.content.text,
             color: node.content.color
           };
-          nodeDataArray.push(tempNode);
+          nodeDataArray.push(tempNodeYears);
         }
       });
 
@@ -199,8 +199,8 @@ export default {
     },
     nodeClicked(e, obj) {
       var node = obj.part;
-      console.log(node.data.key);
-      this.$router.push({ name: "tasks" });
+      //console.log(node.data.key);
+      this.$emit("nodeClicked", node.data.key);
     }
   },
   mounted() {
