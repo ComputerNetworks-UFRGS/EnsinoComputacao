@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "modal-attachment",
+  name: "modal-tasks",
   props: {
     show: {
       type: Boolean,

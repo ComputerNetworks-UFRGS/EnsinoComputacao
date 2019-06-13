@@ -13,6 +13,9 @@
           <div class="column is-6">
             <button class="button is-primary is-large is-fullwidth" @click="setYearsModeTrue()">Anos</button>
           </div>
+          <div class="column is-6">
+            <YearsDropdown></YearsDropdown>
+          </div>
         </div>
       </div>
     </div>
@@ -26,7 +29,11 @@
 <script id="sample">
 import go, { Transaction } from "../../node_modules/gojs/release/go-debug.js";
 import json from "@/assets/data.json";
+import YearsDropdown from "@/components/YearsDropdown.vue";
 export default {
+  components: {
+    YearsDropdown
+  },
   props: {},
   data() {
     return {
@@ -54,6 +61,7 @@ export default {
             key: node.id,
             text: node.content.text,
             color: node.content.color,
+            year: node.year,
             group: node.year
           };
           nodeDataArray.push(tempNode);
@@ -69,7 +77,8 @@ export default {
           var tempNodeYears = {
             key: node.id,
             text: node.content.text,
-            color: node.content.color
+            color: node.content.color,
+            year: node.year
           };
           nodeDataArray.push(tempNodeYears);
         }
@@ -170,7 +179,12 @@ export default {
             name: "TEXT"
           },
           new go.Binding("text", "text")
-        )
+        ),
+        $(go.TextBlock, "Ano", new go.Binding("text", "year"), {
+          alignment: new go.Spot(1, 1),
+          font: "Normal normal normal 10pt Kreon, serif",
+          margin: 2
+        })
       );
     },
     mouseEnter(e, obj) {
