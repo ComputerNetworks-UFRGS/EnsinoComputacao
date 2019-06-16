@@ -26,6 +26,13 @@
               <router-link to="/dash/usuarios">Usuários</router-link>
             </li>
           </ul>
+
+          <p class="menu-label" v-auth="'topics.list'">Organização</p>
+          <ul class="menu-list">
+            <li v-auth="'topics.list'">
+              <router-link to="/dash/arvore">Objetos de ensino</router-link>
+            </li>
+          </ul>
         </aside>
       </div>
       <div class="column">

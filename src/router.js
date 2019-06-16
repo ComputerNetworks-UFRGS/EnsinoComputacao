@@ -29,6 +29,7 @@ import UserList from "./views/dash/user/UserList"
 import UserForm from "./views/dash/user/UserForm"
 import ReviewList from "./views/dash/review/ReviewList"
 import ReviewEdit from "./views/dash/review/ReviewEdit"
+import TreeList from "./views/dash/tree/TreeList"
 
 Vue.use(Router);
 
@@ -190,6 +191,10 @@ let router = new Router({
         {
           path: 'revisao/:id',
           component: ReviewEdit,
+        },
+        {
+          path: 'arvore',
+          component: TreeList,
         },
       ]
     },
