@@ -17,6 +17,7 @@ export default {
   // },
   created() {
     UserService.detail().then(res => {
+      console.log('set_user: App.vue')
       this.$store.commit("set_user", res.data);
     });
   }

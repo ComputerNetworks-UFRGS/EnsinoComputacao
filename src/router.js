@@ -19,6 +19,7 @@ import AuthService from '@/services/auth'
 
 import DashHeader from "./layout/dash/DashHeader"
 import DashBase from "./views/dash/DashBase"
+import DashWelcome from "./views/dash/DashWelcome"
 import DashTasks from "./views/dash/task/TaskHome"
 import TaskForm from "./views/dash/task/TaskForm"
 import TaskAttachment from './views/dash/task/TaskAttachment'
@@ -149,6 +150,10 @@ let router = new Router({
       },
       meta: { requiresAuth: true, },
       children: [
+        {
+          path: 'welcome',
+          component: DashWelcome,
+        },
         {
           path: 'atividades',
           component: DashTasks,

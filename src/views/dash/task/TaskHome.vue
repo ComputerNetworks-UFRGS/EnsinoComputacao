@@ -10,6 +10,7 @@
 
     <div class="card">
       <div class="card-content">
+        <div v-if="orderedTasks.length > 0" >
         <div class="columns task-list" v-for="task of orderedTasks" :key="task.id">
           <div class="column is-8 nowrap-text">
             <b>{{ task.title }}</b>&nbsp;
@@ -57,6 +58,10 @@
             </div>
             <div class="btn-group"></div>
           </div>
+        </div>
+        </div>
+        <div v-else>
+          Nenhuma atividade criada.
         </div>
       </div>
     </div>

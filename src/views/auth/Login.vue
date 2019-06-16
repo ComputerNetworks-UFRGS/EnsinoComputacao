@@ -66,6 +66,7 @@
 </template>
 <script>
 import AuthService from "@/services/auth";
+import UserService from "@/services/user";
 
 export default {
   data() {
@@ -82,17 +83,18 @@ export default {
         password: this.password
       })
         .then(res => {
-          console.log("res", res);
           if (res.status == 200) {
             localStorage.setItem("token", res.data.token);
-            this.$store.commit("set_user", res.data);
-            this.$router.push("/dash/atividades");
+            UserService.detail(res.data.token).then(res => {
+              this.$store.commit("set_user", res.data);
+              this.$router.push("/dash/atividades");
+            });
           } else {
             this.errorMessage = res.data.message;
           }
         })
         .catch(err => {
-          console.log('err', err)
+          console.log("err", err);
           // this.errorMessage = err.response.data.message;
         });
     }

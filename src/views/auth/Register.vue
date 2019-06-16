@@ -101,6 +101,7 @@
 </template>
 <script>
 import AuthService from "@/services/auth";
+import UserService from "@/services/user";
 
 export default {
   data() {
@@ -137,8 +138,10 @@ export default {
         .then(res => {
           if (res.status == 200) {
             localStorage.setItem("token", res.data.token);
-            this.$store.commit("set_user", res.data);
-            this.$router.push("/dash/atividades");
+            UserService.detail(res.data.token).then(res => {
+              this.$store.commit("set_user", res.data);
+              this.$router.push("/dash/welcome");
+            });
           } else {
             for (let k in res.data) {
               this.errors[k] = res.data[k];

@@ -7,8 +7,8 @@ export default {
   update(user_id, user) {
     return API.put('users/' + user_id, user).catch(err => err.response)
   },
-  // Mais informações do usuário logado
-  detail() {
+  detail(token = false) {
+    API.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     return API.get('user').catch(err => err.response)
   },
   hasPermission(permissions, required_permissions) {
