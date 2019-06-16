@@ -30,6 +30,8 @@ import UserForm from "./views/dash/user/UserForm"
 import ReviewList from "./views/dash/review/ReviewList"
 import ReviewEdit from "./views/dash/review/ReviewEdit"
 import TreeList from "./views/dash/tree/TreeList"
+import SkillList from "./views/dash/skill/SkillList"
+import SkillForm from "./views/dash/skill/SkillForm"
 
 Vue.use(Router);
 
@@ -195,6 +197,19 @@ let router = new Router({
         {
           path: 'arvore',
           component: TreeList,
+        },
+        {
+          path: 'habilidades',
+          component: SkillList,
+        },
+        {
+          path: 'habilidades/criar',
+          component: SkillForm,
+        },
+        {
+          path: 'habilidades/editar/:id',
+          component: SkillForm,
+          props: true
         },
       ]
     },

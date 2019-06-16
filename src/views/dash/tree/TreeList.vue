@@ -1,11 +1,6 @@
 <template>
   <div>
     <br>
-    <!-- <router-link
-      v-auth="'role.create'"
-      to="/dash/papeis/criar"
-      class="button is-success is-pulled-right"
-    >Fases de ensino</router-link>-->
 
     <h4 class="title is-4">Organização de tópicos de ensino</h4>
 
@@ -17,11 +12,6 @@
           @add-item="openTopicFormModal"
           @delete-item="deleteItem"
         ></tree-item>
-
-        <hr>
-        <!-- <pre>
-          {{ topics }}
-        </pre>-->
       </div>
     </div>
 
@@ -30,9 +20,9 @@
 </template>
 
 <script>
-import Topics from "@/services/topic";
-import TreeItem from "@/components/TreeItem";
-import ModalTopicForm from "@/components/ModalTopicForm";
+import Topics from "@/services/topic"
+import TreeItem from "@/components/TreeItem"
+import ModalTopicForm from "@/components/ModalTopicForm"
 
 export default {
   components: {
@@ -54,7 +44,7 @@ export default {
   },
   methods: {
     fetchTopics() {
-      Topics.list()
+      Topics.tree()
         .then(res => res.data)
         .then(data => {
           this.structure = data.structure

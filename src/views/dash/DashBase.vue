@@ -32,6 +32,9 @@
             <li v-auth="'topics.list'">
               <router-link to="/dash/arvore">Objetos de ensino</router-link>
             </li>
+            <li>
+              <router-link to="/dash/habilidades">Habilidades</router-link>
+            </li>
           </ul>
         </aside>
       </div>
