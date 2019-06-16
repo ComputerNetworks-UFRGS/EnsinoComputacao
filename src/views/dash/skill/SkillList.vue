@@ -2,7 +2,7 @@
   <div>
     <br>
     <router-link
-      v-auth="'task.create'"
+      v-auth="'skill.create'"
       to="/dash/habilidades/criar"
       class="button is-success is-pulled-right"
     >Criar nova habilidade</router-link>
@@ -19,6 +19,7 @@
             <div class="field has-addons is-pulled-right">
               <p class="control">
                 <router-link
+                  v-auth="'skill.detail'"
                   :to="'/dash/habilidades/editar/' + skill.id"
                   class="button is-small"
                 >Editar</router-link>
@@ -60,14 +61,14 @@ export default {
 
 <style scoped>
 /* .nowrap-text { */
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
+/* white-space: nowrap; */
+/* overflow: hidden; */
+/* text-overflow: ellipsis; */
 /* } */
 .skill-list .column {
   padding: 0.5rem 0.2rem;
 }
 .skill-list:hover {
-    background: rgba(0,0,0,0.06);
+  background: rgba(0, 0, 0, 0.06);
 }
 </style>

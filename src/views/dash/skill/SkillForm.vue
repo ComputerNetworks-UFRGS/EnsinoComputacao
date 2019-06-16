@@ -5,11 +5,12 @@
     <h4 class="title is-4" v-if="skillId">Editar: {{ form.name }}</h4>
     <h4 class="title is-4" v-else>Nova habilidade</h4>
 
-    <!-- <button
+    <button
+      v-auth="'skill.delete'"
       v-if="skillId"
-      @click="remove(form)"
+      @click="remove"
       class="button is-small is-light"
-    >Excluir esta habilidade</button>-->
+    >Excluir esta habilidade</button>
     <hr>
 
     <div>
@@ -41,7 +42,7 @@
         <div class="help is-danger" v-if="errors.sequential_number.length > 0">
           <div v-for="error in errors.sequential_number" :key="error">{{ error }}</div>
         </div>
-      </div> -->
+      </div>-->
 
       <div class="field">
         <label class="label">Etapa de aprendizado</label>
@@ -92,11 +93,18 @@
           <div v-for="error in errors.topic_id" :key="error">{{ error }}</div>
         </div>
       </div>
-
-      <button class="button is-primary is-success" @click="create">
-        <span v-if="skillId">Atualizar habilidade</span>
-        <span v-else>Criar habilidade</span>
-      </button>
+      <button
+        v-if="skillId"
+        v-auth="'skill.edit'"
+        class="button is-primary is-success"
+        @click="create"
+      >Atualizar habilidade</button>
+      <button
+        v-else
+        v-auth="'skill.create'"
+        class="button is-primary is-success"
+        @click="create"
+      >Criar habilidade</button>
     </div>
   </div>
 </template>
@@ -142,7 +150,7 @@ export default {
           this.form = skill;
         });
     } else {
-        this.form.sequential_number = 1
+      this.form.sequential_number = 1;
     }
 
     Topics.list()
@@ -164,36 +172,45 @@ export default {
   },
   methods: {
     create() {
-      
-        for (let k in this.errors) {
-          this.errors[k] = [];
-        }
+      for (let k in this.errors) {
+        this.errors[k] = [];
+      }
 
-        let data = {
-          code: this.form.code,
-          name: this.form.name,
-          sequential_number: this.form.sequential_number,
-          learning_stage_id: this.form.learning_stage_id,
-          age_group_id: this.form.age_group_id,
-          topic_id: this.form.topic_id,
-        };
+      let data = {
+        code: this.form.code,
+        name: this.form.name,
+        sequential_number: this.form.sequential_number,
+        learning_stage_id: this.form.learning_stage_id,
+        age_group_id: this.form.age_group_id,
+        topic_id: this.form.topic_id
+      };
 
-        let request = "";
-        if (this.skillId) {
-          request = Skills.update(this.skillId, data);
+      let request = "";
+      if (this.skillId) {
+        request = Skills.update(this.skillId, data);
+      } else {
+        request = Skills.create(data);
+      }
+
+      request.then(res => {
+        if (res.status == 200) {
+          this.$router.push("/dash/habilidades/");
         } else {
-          request = Skills.create(data);
-        }
-
-        request.then(res => {
-          if (res.status == 200) {
-            this.$router.push("/dash/habilidades/");
-          } else {
-            for (let k in res.data) {
-              this.errors[k] = res.data[k];
-            }
+          for (let k in res.data) {
+            this.errors[k] = res.data[k];
           }
-        });
+        }
+      });
+    },
+    remove() {
+      this.$dialog.confirm({
+        message: "Confirma exclusão de habilidade?",
+        onConfirm: () => {
+          Skills.remove(this.skillId).finally(() => {
+            this.$router.push("/dash/habilidades/");
+          });
+        }
+      });
     }
   }
 };
