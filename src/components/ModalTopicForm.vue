@@ -15,7 +15,7 @@
         </div>
       </div>
       <footer class="card-footer">
-        <a href="#!" onclick="return false" class="card-footer-item" @click="submit">Comentar</a>
+        <a href="#!" class="card-footer-item" @click.prevent="submit">Comentar</a>
       </footer>
     </div>
   </b-modal>
@@ -39,7 +39,10 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit("submit", this.topic);
+      this.$emit("submit", this.topic)
+      this.topic = {
+        name: ''
+      }
     }
   }
 };

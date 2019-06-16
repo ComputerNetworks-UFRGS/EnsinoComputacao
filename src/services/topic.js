@@ -7,4 +7,7 @@ export default {
   create(topic) {
     return API.post('topics', topic).catch(err => err.response)
   },
+  delete(id) {
+    return API.delete('topics/' + id).catch(err => err.response)
+  },
 }

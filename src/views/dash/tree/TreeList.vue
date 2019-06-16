@@ -15,7 +15,7 @@
           class="item"
           :item="topics"
           @add-item="openTopicFormModal"
-          @attach-skill="attachSkill"
+          @delete-item="deleteItem"
         ></tree-item>
 
         <hr>
@@ -43,8 +43,10 @@ export default {
     return {
       learningStage: 4,
       topics: [],
+      structure: [],
       isOpenTopicFormModal: false,
-      openTopic: false
+      openTopic: false,
+      openTopicDepth: 0,
     };
   },
   created() {
@@ -54,20 +56,21 @@ export default {
     fetchTopics() {
       Topics.list()
         .then(res => res.data)
-        .then(topics => {
-          console.log("...", topics);
-          this.topics = topics;
+        .then(data => {
+          this.structure = data.structure
+          this.topics = data.tree;
         });
     },
-    openTopicFormModal(parent) {
-      console.log('parent', parent)
+    openTopicFormModal(data) {
       this.isOpenTopicFormModal = true;
-      this.openTopic = parent;
+      this.openTopic = data.item;
+      this.openTopicDepth = data.depth
     },
     addItem: function(item) {
 
       let items = this.openTopic.items
-      let type_id = items[0] ? items[0].type : null
+      let type_id = this.structure[this.openTopicDepth]
+      let is_leaf = type_id == this.structure[this.structure.length - 1]
 
       let topic = {
         type_id: type_id,
@@ -75,12 +78,14 @@ export default {
         name: item.name
       };
 
-      console.log('topic', topic)
-
       Topics.create(topic)
         .then(res => {
+          if(this.openTopic.items[0].title == null) {
+            this.openTopic.items = []
+          }
           this.openTopic.items.push({
             title: item.name,
+            is_leaf: is_leaf,
             items: []
           });
         })
@@ -88,9 +93,16 @@ export default {
           this.isOpenTopicFormModal = false;
         });
     },
-    attachSkill: function(item) {
-      console.log("attachSkill", item);
-    }
+    deleteItem(item) {
+      this.$dialog.confirm({
+        message: "Confirma exclusão do tópico e de todos os seus subtópicos?",
+        onConfirm: () => {
+          Topics.delete(item.id).then(() => {
+            this.fetchTopics();
+          })
+        }
+      });
+    },
   }
 };
 </script>

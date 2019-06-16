@@ -88,12 +88,12 @@ export default {
             this.$store.commit("set_user", res.data);
             this.$router.push("/dash/atividades");
           } else {
-            console.log("????", res.data.message);
             this.errorMessage = res.data.message;
           }
         })
         .catch(err => {
-          this.errorMessage = err.response.data.message;
+          console.log('err', err)
+          // this.errorMessage = err.response.data.message;
         });
     }
   }

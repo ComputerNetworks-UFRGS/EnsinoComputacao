@@ -19,23 +19,38 @@
         </span>
         <small>{{ item.title }}</small>
       </span>
-    </div>
-    <div v-show="isOpen" v-if="isFolder">
-      <tree-item
-        class="item"
-        v-for="(child, index) in item.items"
-        :key="index"
-        :item="child"
-        @add-item="$emit('add-item', $event)"
-        @attach-skill="$emit('attach-skill', $event)"
-      ></tree-item>
 
-      <div class="add item" @click="$emit(item.is_leaf ? 'attach-skill' : 'add-item', item)">
-        <button class="button is-small is-light">
-            <span v-if="item.is_leaf">Anexar habilidade</span>
-            <span v-else>Novo tópico</span>
-        </button>
+      <div class="add">
+        <button
+          v-if="!item.is_leaf"
+          class="button is-white is-small"
+          @click.stop="$emit('add-item', {
+        item: item,
+        depth: depth,
+      })"
+        >Novo filho</button>
+        <button
+          class="button is-white is-small"
+          @click.stop="$emit('delete-item', item)"
+        >Remover</button>
       </div>
+    </div>
+
+    <div class="list-items" v-show="isOpen" v-if="isFolder">
+      <span v-if="hasChildren(item)">
+        <tree-item
+          class="item"
+          v-for="(child, index) in item.items"
+          :key="index"
+          :item="child"
+          @add-item="$emit('add-item', $event)"
+          @delete-item="$emit('delete-item', $event)"
+          :depth="depth + 1"
+        ></tree-item>
+      </span>
+      <!-- <span> -->
+      <!-- <small>Nenhum tópico filho.</small> -->
+      <!-- </span> -->
     </div>
   </div>
 </template>
@@ -44,7 +59,11 @@
 export default {
   name: "tree-item",
   props: {
-    item: Object
+    item: Object,
+    depth: {
+      type: Number,
+      default: 0
+    }
   },
   data: function() {
     return {
@@ -52,32 +71,31 @@ export default {
     };
   },
   created() {
-      this.isOpen = !this.item.is_leaf
-  },
-  computed: {
-    isFolder: function() {
-      return this.item.items && this.item.items.length
-    }
+    this.isOpen = !this.item.is_leaf;
   },
   methods: {
     toggle: function() {
       if (this.isFolder) {
-        this.isOpen = !this.isOpen
+        this.isOpen = !this.isOpen;
       }
+    },
+    hasChildren(item) {
+      // return true
+      return item.items && item.items.length > 0 && item.items[0].id !== null;
     }
-    // makeFolder: function() {
-    //   if (!this.isFolder) {
-    //     this.$emit("make-folder", this.item);
-    //     this.isOpen = true;
-    //   }
-    // }
+  },
+  computed: {
+    isFolder: function() {
+      return this.item.items && this.item.items.length;
+    }
   }
 };
 </script>
 
 <style scoped lang="scss">
 .item {
-  cursor: pointer;
+  // cursor: pointer;
+  min-height: 27px;
   .item {
     padding-left: 1em;
   }
@@ -86,6 +104,12 @@ export default {
   font-weight: bold;
 }
 .add {
-    margin-bottom: 20px;
+  // float: right;
+  display: inline-block;
+  // vertical-align: top;
+  // margin-bottom: 20px;
+}
+.list-items {
+  min-height: 10px;
 }
 </style>
