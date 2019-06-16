@@ -27,10 +27,10 @@
             </li>
           </ul>
 
-          <p class="menu-label">Organização</p>
+          <p class="menu-label" v-auth="'topics.list'">Organização</p>
           <ul class="menu-list">
-            <li>
-              <router-link to="/dash/arvore">Árvore</router-link>
+            <li v-auth="'topics.list'">
+              <router-link to="/dash/arvore">Objetos de ensino</router-link>
             </li>
           </ul>
         </aside>

@@ -20,8 +20,9 @@
         <small>{{ item.title }}</small>
       </span>
 
-      <div class="add">
+      <div class="add" v-auth="'topics.add|topics.delete'">
         <button
+          v-auth="'topics.add'"
           v-if="!item.is_leaf"
           class="button is-white is-small"
           @click.stop="$emit('add-item', {
@@ -30,6 +31,7 @@
       })"
         >Novo filho</button>
         <button
+          v-auth="'topics.delete'"
           class="button is-white is-small"
           @click.stop="$emit('delete-item', item)"
         >Remover</button>
