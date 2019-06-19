@@ -72,6 +72,9 @@ export default {
       };
       this.file = null;
     }
+  },
+  mounted() {
+    console.log("oi ", this.$props.show);
   }
 };
 </script>
