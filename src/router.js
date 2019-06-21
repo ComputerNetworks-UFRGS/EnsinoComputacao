@@ -33,6 +33,8 @@ import ReviewEdit from "./views/dash/review/ReviewEdit"
 import TreeList from "./views/dash/tree/TreeList"
 import SkillList from "./views/dash/skill/SkillList"
 import SkillForm from "./views/dash/skill/SkillForm"
+import GraphList from "./views/dash/graph/GraphList"
+import GraphForm from "./views/dash/graph/GraphForm"
 
 Vue.use(Router);
 
@@ -214,6 +216,15 @@ let router = new Router({
         {
           path: 'habilidades/editar/:id',
           component: SkillForm,
+          props: true
+        },
+        {
+          path: 'curriculos',
+          component: GraphList,
+        },
+        {
+          path: 'curriculos/editar/:id',
+          component: GraphForm,
           props: true
         },
       ]

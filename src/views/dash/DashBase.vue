@@ -35,6 +35,9 @@
             <li v-auth="'skill.list'">
               <router-link to="/dash/habilidades">Habilidades</router-link>
             </li>
+            <li>
+              <router-link to="/dash/curriculos">Currículos</router-link>
+            </li>
           </ul>
         </aside>
       </div>

@@ -95,7 +95,7 @@ export default {
         })
         .catch(err => {
           console.log("err", err);
-          // this.errorMessage = err.response.data.message;
+          this.errorMessage = err.response.data.message;
         });
     }
   }
