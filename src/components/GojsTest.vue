@@ -13,9 +13,6 @@
           <div class="column is-6">
             <button class="button is-primary is-large is-fullwidth" @click="setYearsModeTrue()">Anos</button>
           </div>
-          <div class="column is-6">
-            <YearsDropdown></YearsDropdown>
-          </div>
         </div>
       </div>
     </div>
@@ -213,8 +210,13 @@ export default {
     },
     nodeClicked(e, obj) {
       var node = obj.part;
-      //console.log(node.data.key);
+      //console.log("sal");
       this.$emit("nodeClicked", node.data.key);
+    },
+    selectYear(year) {
+      if (year == 0) {
+        this.setYearsModeTrue();
+      }
     }
   },
   mounted() {
