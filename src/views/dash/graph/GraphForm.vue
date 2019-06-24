@@ -1,37 +1,30 @@
 <template>
   <div>
     <br>
-    <router-link to="/dash/curriculos/" class="button is-white is-pulled-right">Cancelar</router-link>
-    <h4 class="title is-4">Editar: {{ graph.title }}</h4>
+    <router-link to="/dash/papeis" class="button is-white is-pulled-right">Cancelar</router-link>
+    <h4 class="title is-4">Novo currículo</h4>
+    <div class="card">
+      <div class="card-content">
+        <div class="field">
+          <label class="label">Nome</label>
+          <div class="control">
+            <input v-model="form.title" class="input" placeholder="Nome">
+          </div>
+        </div>
 
-    <!-- <button v-if="graphId" @click="remove" class="button is-small is-light">Excluir esta curriculo</button> -->
-    <hr>
+        <div class="field">
+          <label class="label">Descrição</label>
+          <div class="control">
+            <input v-model="form.description" class="input" placeholder="Descrição curta">
+          </div>
+        </div>
 
-    <div>
-      <table class="table is-fullwidth">
-        <tr>
-          <th>Item</th>
-          <th>Dependências</th>
-        </tr>
-        <tr v-for="node of graph.nodes" :key="node.id">
-          <td>{{ node.title}}</td>
-          <td>
-            <table class="table is-fullwidth">
-              <tr v-for="dependency of node.dependencies" :key="dependency.id">
-                <td>{{ dependency.title }}</td>
-                <td>
-                    <button class="button is-small is-light">
-                        Remover
-                    </button>
-                </td>
-              </tr>
-              <tr>
-                <button class="button is-small is-light">Adicionar dependência</button>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
+        <div class="field">
+          <div class="control">
+            <button class="button is-success" @click="create">Criar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,31 +35,40 @@ import Graphs from "@/services/graph";
 export default {
   data() {
     return {
-      graph: false
+      form: {
+        title: "",
+        description: ""
+      },
+      errors: {
+        title: [],
+        description: []
+      }
     };
   },
-  created() {
-    let graphId = this.$route.params.id;
+  methods: {
+    create() {
+      for (let k in this.errors) {
+        this.errors[k] = [];
+      }
 
-    if (graphId) {
-      Graphs.detail(graphId)
-        .then(res => res.data)
-        .then(graph => {
-          this.graph = graph;
-        });
+      let data = {
+        title: this.form.title,
+        description: this.form.description
+      };
+
+      Graphs.create(data).then(res => {
+        if (res.status == 200) {
+          this.$router.push("/dash/curriculos");
+        } else {
+          for (let k in res.data) {
+            this.errors[k] = res.data[k];
+          }
+        }
+      });
     }
-  },
-  methods: {}
+  }
 };
 </script>
 
-<style scoped>
-.box {
-  background: #eeeeee;
-  padding: 30px;
-  border-radius: 8px;
-}
-.cursor {
-  cursor: pointer;
-}
+<style>
 </style>

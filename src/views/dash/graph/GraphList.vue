@@ -50,7 +50,6 @@ export default {
         .then(res => res.data)
         .then(graphs => {
           this.graphs = graphs;
-          console.log('g', graphs)
         });
     }
   },
