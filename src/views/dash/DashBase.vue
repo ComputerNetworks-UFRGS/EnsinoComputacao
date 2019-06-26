@@ -27,7 +27,7 @@
             </li>
           </ul>
 
-          <p class="menu-label" v-auth="'topics.list|skill.list'">Organização</p>
+          <p class="menu-label" v-auth="'topics.list|skill.list|curri.list'">Organização</p>
           <ul class="menu-list">
             <li v-auth="'topics.list'">
               <router-link to="/dash/arvore">Objetos de ensino</router-link>
@@ -35,7 +35,7 @@
             <li v-auth="'skill.list'">
               <router-link to="/dash/habilidades">Habilidades</router-link>
             </li>
-            <li>
+            <li v-auth="'curri.list'">
               <router-link to="/dash/curriculos">Currículos</router-link>
             </li>
           </ul>

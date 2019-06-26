@@ -4,7 +4,9 @@
     <router-link
       to="/dash/curriculos/criar"
       class="button is-success is-pulled-right"
+      v-auth="'curri.create'"
     >Criar novo currículo</router-link>
+
     <h4 class="title is-4">Currículos</h4>
 
     <div class="card">
@@ -18,6 +20,7 @@
             <div class="field has-addons is-pulled-right">
               <p class="control">
                 <router-link
+                  v-auth="'curri.detail'"
                   :to="'/dash/curriculos/editar/' + graph.id"
                   class="button is-small"
                 >Editar</router-link>

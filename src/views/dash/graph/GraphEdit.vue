@@ -8,12 +8,17 @@
       v-if="graph && graph.id"
       @click="remove"
       class="button is-small is-light"
+      v-auth="'curri.delete'"
     >Excluir este currículo</button>
-    <hr>
+    <hr v-auth="'curri.edit'">
 
     <div>
       <div class="table is-fullwidth">
-        <button class="button is-info" @click="openModalAddNode">Adicionar novo tópico</button>
+        <button
+          class="button is-info"
+          @click="openModalAddNode"
+          v-auth="'curri.edit'"
+        >Adicionar novo tópico</button>
 
         <hr>
         <span v-if="graph.nodes && graph.nodes.length > 0">
@@ -22,10 +27,15 @@
             <b>{{ node.title}}</b>
             <div class="field has-addons is-pulled-right">
               <p class="control">
-                <button class="button is-small is-light" @click="removeNode(node.id)">Remover tópico</button>
+                <button
+                  class="button is-small is-light"
+                  @click="removeNode(node.id)"
+                  v-auth="'curri.edit'"
+                >Remover tópico</button>
                 <button
                   class="button is-small is-info"
                   @click="openModalAddEdge(node)"
+                  v-auth="'curri.edit'"
                 >Adicionar pré-requisito</button>
               </p>
             </div>
@@ -42,6 +52,7 @@
                     <button
                       class="button is-small is-white"
                       @click="removeEdge(dependency.id, node.id)"
+                      v-auth="'curri.edit'"
                     >Remover</button>
                   </td>
                 </tr>
