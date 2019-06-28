@@ -13,6 +13,9 @@
           <div class="column is-6">
             <button class="button is-primary is-large is-fullwidth" @click="setYearsModeTrue()">Anos</button>
           </div>
+          <div class="column is-6">
+            <years-dropdown/>
+          </div>
         </div>
       </div>
     </div>
