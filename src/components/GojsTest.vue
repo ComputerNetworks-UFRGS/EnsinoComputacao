@@ -4,17 +4,12 @@
     <div class="columns">
       <div class="column is-6">
         <div class="columns">
-          <div class="column is-6">
-            <button
-              class="button is-primary is-large is-fullwidth"
-              @click="setYearsModeFalse()"
-            >Tudo</button>
+          <div class="column is-1"></div>
+          <div class="column is-2">
+            <button class="button is-primary is-large" @click="setYearsModeFalse()">Tudo</button>
           </div>
           <div class="column is-6">
-            <button class="button is-primary is-large is-fullwidth" @click="setYearsModeTrue()">Anos</button>
-          </div>
-          <div class="column is-6">
-            <years-dropdown/>
+            <years-dropdown @selectYear="selectYear"/>
           </div>
         </div>
       </div>
@@ -41,7 +36,7 @@ export default {
       graph: null,
       nodes: json.nodes,
       edges: json.links,
-      yearsMode: false
+      selectedYear: -1
     };
   },
   methods: {
@@ -54,6 +49,8 @@ export default {
       var linkDataArray = [];
 
       var groups = [];
+
+      console.log(this.yearsMode);
 
       this.nodes.forEach(node => {
         if (this.yearsMode) {
@@ -80,7 +77,11 @@ export default {
             color: node.content.color,
             year: node.year
           };
-          nodeDataArray.push(tempNodeYears);
+          if (this.selectedYear === -1) {
+            nodeDataArray.push(tempNodeYears);
+          } else if (this.selectedYear === tempNodeYears.year) {
+            nodeDataArray.push(tempNodeYears);
+          }
         }
       });
 
@@ -204,11 +205,7 @@ export default {
       text.stroke = "black";
     },
     setYearsModeFalse() {
-      this.yearsMode = false;
-      this.buildGraph();
-    },
-    setYearsModeTrue() {
-      this.yearsMode = true;
+      this.selectedYear = -1;
       this.buildGraph();
     },
     nodeClicked(e, obj) {
@@ -217,8 +214,16 @@ export default {
       this.$emit("nodeClicked", node.data.key);
     },
     selectYear(year) {
-      if (year == 0) {
-        this.setYearsModeTrue();
+      this.selectedYear = year;
+      this.buildGraph();
+    }
+  },
+  computed: {
+    yearsMode() {
+      if (this.selectedYear === 0) {
+        return true;
+      } else {
+        return false;
       }
     }
   },
