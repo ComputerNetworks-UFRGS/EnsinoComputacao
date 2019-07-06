@@ -18,7 +18,7 @@
           <div class="field">
             <b-radio v-model="filters.age" native-value="medio">Ensino médio</b-radio>
           </div>
-          <br>
+          <br />
           <div class="field">
             <label class="label">Tipo de atividade</label>
           </div>
@@ -29,23 +29,22 @@
             <b-checkbox v-model="filters.plugged.no">Desplugada</b-checkbox>
           </div>
 
-          <br>
+          <br />
           <div class="field">
             <label class="label">Objeto de conhecimento</label>
           </div>
           <ul class="list-group">
-            <div v-for="eixo of tree" :key="eixo.id">
-              <div @click="eixo.active = !eixo.active" class="cursor">
+            <div v-for="axis of tree" :key="axis.id">
+              <div @click="axis.active = !axis.active" class="cursor">
                 <small>
-                  <i class="ni" :class="eixo.active ? 'ni-bold-down' : 'ni-bold-right'"></i>
-                  <b>{{ eixo.title }}</b>
+                  <i class="ni" :class="axis.active ? 'ni-bold-down' : 'ni-bold-right'"></i>
+                  <b>{{ axis.name }}</b>
                 </small>
               </div>
-              <div v-for="objeto of eixo.items" :key="objeto.id" v-show="eixo.active">
-                <label for>
-                  <input type="checkbox" class v-model="objeto.active">
-                  <small>{{ objeto.title }}</small>
-                </label>
+              <div v-for="object of axis.objects" :key="object.id" v-show="axis.active">
+                <b-checkbox v-model="object.active">
+                  <small>{{ object.name }}</small>
+                </b-checkbox>
               </div>
             </div>
           </ul>
@@ -90,14 +89,14 @@ export default {
     this.fetchTasks();
     Skills.tree()
       .then(res => res.data)
-      .then(tree => {
-        for (let eixo of tree) {
-          this.$set(eixo, "active", false);
-          for (let objeto of eixo.items) {
-            this.$set(objeto, "active", false);
+      .then(stage => {
+        for (let axis of stage.axis) {
+          this.$set(axis, "active", false);
+          for (let object of axis.objects) {
+            this.$set(object, "active", false);
           }
         }
-        this.tree = tree;
+        this.tree = stage.axis;
       });
   },
   methods: {
@@ -112,24 +111,22 @@ export default {
         }
       }
       let objects = [];
-      for (let eixo in this.tree) {
-        for (let objeto of this.tree[eixo].items) {
-          if (objeto.active) {
-            objects.push(objeto.id);
+      for (let axis in this.tree) {
+        for (let object of this.tree[axis].objects) {
+          if (object.active) {
+            objects.push(object.id);
           }
         }
       }
       if (objects.length > 0) {
         params["objects"] = objects;
       }
+      console.log("objects", objects);
 
       Tasks.list(params)
         .then(res => res.data)
         .then(tasks => (this.tasks = tasks));
     },
-    // setAgeGroup(group) {
-    //   this.filters.age = group;
-    // },
     toggleObject(object) {
       object.active = !object.active;
       this.fetchTasks();

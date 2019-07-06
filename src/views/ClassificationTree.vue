@@ -1,6 +1,10 @@
 <template>
   <section class="classificacao pt">
     <div class="container">
+
+      
+
+
       <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
         <div class="card">
           <header class="card-header">
