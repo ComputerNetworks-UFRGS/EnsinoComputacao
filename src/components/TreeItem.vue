@@ -11,13 +11,13 @@
         }"
           ></i>
         </span>
-        {{ item.title }}
+        {{ item.name }}
       </span>
       <span v-else>
         <span class="icon" style="font-size: 8px">
           <i class="fas fa-circle"></i>
         </span>
-        <small>{{ item.title }}</small>
+        <small>{{ item.name }}</small>
       </span>
 
       <div class="add" v-auth="'topics.add|topics.delete'">

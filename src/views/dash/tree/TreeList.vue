@@ -70,7 +70,7 @@ export default {
 
       Topics.create(topic)
         .then(res => {
-          if(this.openTopic.items[0].title == null) {
+          if(this.openTopic.items[0].name == null) {
             this.openTopic.items = []
           }
           this.openTopic.items.push({

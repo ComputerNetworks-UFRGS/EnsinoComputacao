@@ -55,7 +55,7 @@ export default {
   mounted() {
     Skills.tree()
       .then(res => res.data)
-      .then(tree => (this.tree = tree));
+      .then(stage => (this.tree = stage.axis));
   },
   methods: {
     listTasks(skill) {

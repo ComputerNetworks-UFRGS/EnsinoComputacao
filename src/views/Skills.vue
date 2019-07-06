@@ -43,7 +43,9 @@ export default {
   mounted() {
     Skills.years()
       .then(res => res.data)
-      .then(years => (this.years = years));
+      .then(years => {
+        this.years = years
+      });
   },
   methods: {
     listTasks(skill) {
