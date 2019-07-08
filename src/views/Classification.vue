@@ -1,10 +1,6 @@
 <template>
   <section class="classificacao pt">
     <div class="container">
-
-      
-
-
       <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
         <div class="card">
           <header class="card-header">
@@ -22,13 +18,22 @@
       </b-modal>
 
       <ul>
-        <classification-node
-          @openTaskList="listTasks"
-          v-for="node of tree"
-          :key="node.id"
-          :node="node"
-          :open="false"
-        ></classification-node>
+        <li v-for="axis of tree" :key="axis.id">
+          <b>Eixo:</b>
+          {{ axis.name }}
+          <ul style="padding-left: 20px;">
+            <li v-for="object of axis.objects" :key="object.id">
+              <b>Objeto:</b>
+              {{ object.name }}
+              <ul style="padding-left: 20px;">
+                <li v-for="skill of object.skills" :key="skill.id" @click="listTasks(skill)">
+                  <b>Habilidade:</b>
+                  {{ skill.name }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </section>
@@ -37,12 +42,10 @@
 <script>
 import Skills from "@/services/skill";
 import Tasks from "@/services/task";
-import ClassificationNode from "./ClassificationNode";
 import TaskList from "@/components/TaskList";
 
 export default {
   components: {
-    ClassificationNode,
     TaskList
   },
   data() {

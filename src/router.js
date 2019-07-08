@@ -7,7 +7,7 @@ import Home from "./views/Home.vue"
 import Tasks from "./views/Tasks.vue"
 import Task from "./views/Task.vue"
 import Skills from "./views/Skills.vue"
-import ClassificationTree from "./views/ClassificationTree.vue"
+import Classification from "./views/Classification.vue"
 import GraphView from "./views/GraphView.vue"
 import About from "./views/About.vue"
 import Contact from "./views/Contact.vue"
@@ -93,7 +93,7 @@ let router = new Router({
       name: "classification",
       components: {
         header: AppHeader,
-        default: ClassificationTree,
+        default: Classification,
         footer: AppFooter
       }
     },
