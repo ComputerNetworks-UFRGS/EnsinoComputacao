@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <router-link to="/dash/papeis" class="button is-white is-pulled-right">Cancelar</router-link>
+    <router-link to="/dash/curriculos" class="button is-white is-pulled-right">Cancelar</router-link>
     <h4 class="title is-4">Novo currículo</h4>
     <div class="card">
       <div class="card-content">
