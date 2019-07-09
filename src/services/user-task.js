@@ -11,22 +11,22 @@ const TASK_STATUS = {
 
 export default {
   list() {
-    return API.get('user/tasks').catch(err => err.response)
+    return API.get('user/tasks')
   },
   detail(task_id) {
-    return API.get('user/tasks/' + task_id).catch(err => err.response)
+    return API.get('user/tasks/' + task_id)
   },
   create(task) {
-    return API.post('user/tasks', task).catch(err => err.response)
+    return API.post('user/tasks', task)
   },
   update(task_id, task) {
-    return API.put('user/tasks/' + task_id, task).catch(err => err.response)
+    return API.put('user/tasks/' + task_id, task)
   },
   remove(task_id) {
-    return API.delete('user/tasks/' + task_id).catch(err => err.response)
+    return API.delete('user/tasks/' + task_id)
   },
   publish(task_id) {
-    return API.get('user/tasks/' + task_id + '/publish').catch(err => err.response)
+    return API.get('user/tasks/' + task_id + '/publish')
   },
   getStatusLabel(status_id) {
     let labels = {

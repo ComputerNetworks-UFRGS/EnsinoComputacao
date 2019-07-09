@@ -45,24 +45,6 @@
       </div>-->
 
       <div class="field">
-        <label class="label">Etapa de aprendizado</label>
-        <div class="control">
-          <div class="select">
-            <select v-model="form.learning_stage_id">
-              <option
-                :value="learning_stage.id"
-                v-for="learning_stage of learning_stages"
-                :key="learning_stage.id"
-              >{{ learning_stage.name }}</option>
-            </select>
-          </div>
-        </div>
-        <div class="help is-danger" v-if="errors.learning_stage_id.length > 0">
-          <div v-for="error in errors.learning_stage_id" :key="error">{{ error }}</div>
-        </div>
-      </div>
-
-      <div class="field">
         <label class="label">Idade recomendada</label>
         <div class="control">
           <div class="select">
@@ -84,13 +66,13 @@
         <label class="label">Objeto de aprendizagem</label>
         <div class="control">
           <div class="select">
-            <select v-model="form.topic_id">
-              <option :value="topic.id" v-for="topic of topics" :key="topic.id">{{ topic.name }}</option>
+            <select v-model="form.learning_object_id">
+              <option :value="object.id" v-for="object of objects" :key="object.id">{{ object.name }}</option>
             </select>
           </div>
         </div>
-        <div class="help is-danger" v-if="errors.topic_id.length > 0">
-          <div v-for="error in errors.topic_id" :key="error">{{ error }}</div>
+        <div class="help is-danger" v-if="errors.learning_object_id.length > 0">
+          <div v-for="error in errors.learning_object_id" :key="error">{{ error }}</div>
         </div>
       </div>
       <button
@@ -111,9 +93,8 @@
 
 <script>
 import Skills from "@/services/skill";
-import Topics from "@/services/topic";
+import Objects from "@/services/object";
 import AgeGroups from "@/services/age-group";
-import LearningStages from "@/services/learning-stage";
 
 export default {
   data() {
@@ -123,21 +104,18 @@ export default {
         code: "",
         name: "",
         sequential_number: "",
-        learning_stage_id: "",
         age_group_id: "",
-        topic_id: ""
+        learning_object_id: ""
       },
       errors: {
         code: [],
         name: [],
         sequential_number: [],
-        learning_stage_id: [],
         age_group_id: [],
-        topic_id: []
+        learning_object_id: []
       },
-      topics: [],
+      objects: [],
       age_groups: [],
-      learning_stages: []
     };
   },
   created() {
@@ -153,21 +131,16 @@ export default {
       this.form.sequential_number = 1;
     }
 
-    Topics.list()
+    Objects.list()
       .then(res => res.data)
-      .then(topics => {
-        this.topics = topics;
+      .then(objects => {
+        this.objects = objects;
       });
 
     AgeGroups.list()
       .then(res => res.data)
       .then(age_groups => {
         this.age_groups = age_groups;
-      });
-    LearningStages.list()
-      .then(res => res.data)
-      .then(learning_stages => {
-        this.learning_stages = learning_stages;
       });
   },
   methods: {
@@ -180,9 +153,8 @@ export default {
         code: this.form.code,
         name: this.form.name,
         sequential_number: this.form.sequential_number,
-        learning_stage_id: this.form.learning_stage_id,
         age_group_id: this.form.age_group_id,
-        topic_id: this.form.topic_id
+        learning_object_id: this.form.learning_object_id
       };
 
       let request = "";

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import Topics from "@/services/topic";
+import Objects from "@/services/object";
 import _ from "lodash";
 
 export default {
@@ -58,7 +58,7 @@ export default {
     };
   },
   created() {
-    Topics.list()
+    Objects.list()
       .then(res => res.data)
       .then(topics => {
         this.topics = topics;
