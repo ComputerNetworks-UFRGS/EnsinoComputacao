@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 let API = axios.create({
-  baseURL: 'http://localhost:8000/api/v1/',
+  baseURL: process.env.VUE_APP_API,
 })
 
 API.interceptors.request.use(function (config) {

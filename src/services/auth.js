@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const HTTP = axios.create({
-  baseURL: 'http://localhost:8000/api/v1/',
+  baseURL: process.env.VUE_APP_API,
 })
 
 // TODO: 401 redirect to login or refresh token

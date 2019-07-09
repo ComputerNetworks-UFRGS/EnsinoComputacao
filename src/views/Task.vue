@@ -117,7 +117,7 @@ export default {
       window.print();
     },
     getPublicUrl(attachment) {
-      return "http://localhost:8000/" + attachment.path;
+      return process.env.VUE_APP_FILE_URL + attachment.path;
     }
   }
 };
