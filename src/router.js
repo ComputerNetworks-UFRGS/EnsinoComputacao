@@ -7,7 +7,7 @@ import Home from "./views/Home.vue"
 import Tasks from "./views/Tasks.vue"
 import Task from "./views/Task.vue"
 import Skills from "./views/Skills.vue"
-import ClassificationTree from "./views/ClassificationTree.vue"
+import Classification from "./views/Classification.vue"
 import GraphView from "./views/GraphView.vue"
 import About from "./views/About.vue"
 import Contact from "./views/Contact.vue"
@@ -30,7 +30,8 @@ import UserList from "./views/dash/user/UserList"
 import UserForm from "./views/dash/user/UserForm"
 import ReviewList from "./views/dash/review/ReviewList"
 import ReviewEdit from "./views/dash/review/ReviewEdit"
-import TreeList from "./views/dash/tree/TreeList"
+import ObjectList from "./views/dash/object/ObjectList"
+import ObjectForm from "./views/dash/object/ObjectForm"
 import SkillList from "./views/dash/skill/SkillList"
 import SkillForm from "./views/dash/skill/SkillForm"
 import GraphList from "./views/dash/graph/GraphList"
@@ -93,7 +94,7 @@ let router = new Router({
       name: "classification",
       components: {
         header: AppHeader,
-        default: ClassificationTree,
+        default: Classification,
         footer: AppFooter
       }
     },
@@ -204,8 +205,16 @@ let router = new Router({
           component: ReviewEdit,
         },
         {
-          path: 'arvore',
-          component: TreeList,
+          path: 'objetos',
+          component: ObjectList,
+        },
+        {
+          path: 'objetos/criar',
+          component: ObjectForm,
+        },
+        {
+          path: 'objetos/editar/:id',
+          component: ObjectForm,
         },
         {
           path: 'habilidades',

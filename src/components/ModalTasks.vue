@@ -74,7 +74,7 @@ export default {
     }
   },
   mounted() {
-    console.log("oi ", this.$props.show);
+    // console.log("oi ", this.$props.show);
   }
 };
 </script>

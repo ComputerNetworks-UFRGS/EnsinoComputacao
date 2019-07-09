@@ -39,11 +39,11 @@
 </template>
 
 <script>
-import Topics from "@/services/topic";
+import Objects from "@/services/object";
 import _ from "lodash";
 
 export default {
-  name: "modal-select-topic",
+  name: "modal-select-object",
   props: {
     show: {
       type: Boolean,
@@ -58,10 +58,10 @@ export default {
     };
   },
   created() {
-    Topics.list()
+    Objects.list()
       .then(res => res.data)
-      .then(topics => {
-        this.topics = topics;
+      .then(objects => {
+        this.topics = objects;
       });
   },
   computed: {
@@ -83,6 +83,7 @@ export default {
     selectTopic() {
       this.$emit("selected", this.selected);
       this.selected = undefined;
+      this.filter = ""
     }
   }
 };

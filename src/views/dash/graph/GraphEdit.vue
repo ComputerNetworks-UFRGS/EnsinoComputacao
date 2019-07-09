@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <router-link to="/dash/curriculos/" class="button is-white is-pulled-right">Cancelar</router-link>
     <h4 class="title is-4">Editar: {{ graph.title }}</h4>
 
@@ -10,7 +10,7 @@
       class="button is-small is-light"
       v-auth="'curri.delete'"
     >Excluir este currículo</button>
-    <hr v-auth="'curri.edit'">
+    <hr v-auth="'curri.edit'" />
 
     <div>
       <div class="table is-fullwidth">
@@ -18,12 +18,12 @@
           class="button is-info"
           @click="openModalAddNode"
           v-auth="'curri.edit'"
-        >Adicionar novo tópico</button>
+        >Adicionar objeto</button>
 
-        <hr>
+        <hr />
         <span v-if="graph.nodes && graph.nodes.length > 0">
           <div v-for="node of graph.nodes" :key="node.id">
-            <br>
+            <br />
             <b>{{ node.title}}</b>
             <div class="field has-addons is-pulled-right">
               <p class="control">
@@ -66,7 +66,7 @@
         <span v-else>Nenhum tópico adicionado.</span>
       </div>
     </div>
-    <modal-select-topic :show.sync="isOpenModalAddNode" @selected="addNode($event)"></modal-select-topic>
+    <modal-select-object :show.sync="isOpenModalAddNode" @selected="addNode($event)"></modal-select-object>
     <b-modal :active="isOpenModalAddEdge" @close="isOpenModalAddEdge = false">
       <div class="card modal-select-node">
         <div class="card-content">
@@ -74,18 +74,23 @@
             <label>
               <b>Selecione qual o pré-requisito</b>
             </label>
-            <br>
-            <div class="select">
-              <select v-model="sourceNode">
-                <option v-for="node of nodesToAdd" :key="node.id" :value="node.id">{{ node.title }}</option>
-              </select>
-              <br>
+            <div v-if="nodesToAdd.length > 0">
+              <div class="select">
+                <select v-model="sourceNode">
+                  <option
+                    v-for="node of nodesToAdd"
+                    :key="node.id"
+                    :value="node.id"
+                  >{{ node.title }}</option>
+                </select>
+              </div>
               <button
                 class="button is-success"
                 @click="addEdge(sourceNode)"
                 :disabled="!sourceNode"
               >Adicionar</button>
             </div>
+            <div v-else>Nenhum objeto disponível.</div>
           </div>
         </div>
       </div>
@@ -95,12 +100,12 @@
 
 <script>
 import Graphs from "@/services/graph";
-import ModalSelectTopic from "@/components/ModalSelectTopic";
+import ModalSelectObject from "@/components/ModalSelectObject";
 import _ from "lodash";
 
 export default {
   components: {
-    ModalSelectTopic
+    ModalSelectObject
   },
   data() {
     return {
@@ -136,11 +141,11 @@ export default {
         }
       });
     },
-    addNode: function(topic) {
+    addNode: function(object) {
       this.isOpenModalAddNode = false;
-      console.log("--", topic);
+
       let node = {
-        topic_id: topic.id
+        object_id: object.id
       };
       console.log("addNode", node);
       Graphs.addNode(this.graph.id, node)

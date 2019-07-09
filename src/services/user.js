@@ -2,14 +2,14 @@ import API from './API.js'
 
 export default {
   list() {
-    return API.get('users').catch(err => err.response)
+    return API.get('users')
   },
   update(user_id, user) {
-    return API.put('users/' + user_id, user).catch(err => err.response)
+    return API.put('users/' + user_id, user)
   },
   detail(token = false) {
     API.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
-    return API.get('user').catch(err => err.response)
+    return API.get('user')
   },
   hasPermission(permissions, required_permissions) {
     let required = required_permissions.split('|') // or
