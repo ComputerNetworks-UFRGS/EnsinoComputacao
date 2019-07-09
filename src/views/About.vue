@@ -1,14 +1,9 @@
 <template>
-  <section class="about-page">
-    <GojsTest class="graphContainer" :yearsMode="yearsMode"></GojsTest>
-  </section>
+  <section class="container">sobre...</section>
 </template>
 <script>
-import GojsTest from "@/components/GojsTest.vue";
 export default {
-  components: {
-    GojsTest
-  },
+  components: {},
   data() {
     return {
       yearsMode: false
