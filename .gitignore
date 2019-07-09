@@ -2,6 +2,10 @@
 node_modules
 /dist
 api
+/composer
+composer.json
+composer.lock
+/vendor
 
 # local env files
 .env.local
