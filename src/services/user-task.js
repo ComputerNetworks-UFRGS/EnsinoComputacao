@@ -31,9 +31,9 @@ export default {
   getStatusLabel(status_id) {
     let labels = {
         'CREATED': 'A publicar',
-        'FOR_REVIEW': 'Aguardando revisão',
+        'FOR_REVIEW': 'Aguardando avaliação de revisor',
         'DENIED': 'Publicação negada',
-        'DENIED_NEED_FIX': 'Aguardando ajustes',
+        'DENIED_NEED_FIX': 'Aguardando ajustes do autor',
         'PUBLISHED': 'Publicada',
         'REVIEWED': 'Revisada'
     }
