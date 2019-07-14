@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <router-link
       v-auth="'skill.create'"
       to="/dash/habilidades/criar"
@@ -10,24 +10,31 @@
 
     <div class="card">
       <div class="card-content">
-        <div class="columns skill-list" v-for="skill of skills" :key="skill.id">
-          <div class="column is-10 nowrap-text">
-            <!-- <span class="tag is-small is-light">{{ skill.code }}</span> -->
-            {{ skill.name }}
-          </div>
-          <div class="column">
-            <div class="field has-addons is-pulled-right">
-              <p class="control">
-                <router-link
-                  v-auth="'skill.detail'"
-                  :to="'/dash/habilidades/editar/' + skill.id"
-                  class="button is-small"
-                >Editar</router-link>
-              </p>
+        <div v-if="isLoading">
+          <br />
+          <br />
+        </div>
+        <div v-else>
+          <div class="columns skill-list" v-for="skill of skills" :key="skill.id">
+            <div class="column is-10 nowrap-text">
+              <!-- <span class="tag is-small is-light">{{ skill.code }}</span> -->
+              {{ skill.name }}
             </div>
-            <div class="btn-group"></div>
+            <div class="column">
+              <div class="field has-addons is-pulled-right">
+                <p class="control">
+                  <router-link
+                    v-auth="'skill.detail'"
+                    :to="'/dash/habilidades/editar/' + skill.id"
+                    class="button is-small"
+                  >Editar</router-link>
+                </p>
+              </div>
+              <div class="btn-group"></div>
+            </div>
           </div>
         </div>
+        <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
       </div>
     </div>
   </div>
@@ -40,6 +47,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
+      isLoading: false,
       skills: []
     };
   },
@@ -48,11 +56,15 @@ export default {
   },
   methods: {
     fetch() {
+      this.isLoading = true
       Skills.list()
         .then(res => res.data)
         .then(skills => {
           this.skills = skills;
-        });
+        })
+        .finally(() => {
+          this.isLoading = false
+        })
     }
   },
   computed: {}

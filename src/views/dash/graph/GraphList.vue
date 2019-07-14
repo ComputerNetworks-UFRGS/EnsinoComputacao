@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <router-link
       to="/dash/curriculos/criar"
       class="button is-success is-pulled-right"
@@ -11,24 +11,31 @@
 
     <div class="card">
       <div class="card-content">
-        <div class="columns graph-list" v-for="graph of graphs" :key="graph.id">
-          <div class="column is-10 nowrap-text">
-            {{ graph.title }}
-            <small>{{ graph.description }}</small>
-          </div>
-          <div class="column">
-            <div class="field has-addons is-pulled-right">
-              <p class="control">
-                <router-link
-                  v-auth="'curri.detail'"
-                  :to="'/dash/curriculos/editar/' + graph.id"
-                  class="button is-small"
-                >Editar</router-link>
-              </p>
+        <div v-if="isLoading">
+          <br />
+          <br />
+        </div>
+        <div v-else>
+          <div class="columns graph-list" v-for="graph of graphs" :key="graph.id">
+            <div class="column is-10 nowrap-text">
+              {{ graph.title }}
+              <small>{{ graph.description }}</small>
             </div>
-            <div class="btn-group"></div>
+            <div class="column">
+              <div class="field has-addons is-pulled-right">
+                <p class="control">
+                  <router-link
+                    v-auth="'curri.detail'"
+                    :to="'/dash/curriculos/editar/' + graph.id"
+                    class="button is-small"
+                  >Editar</router-link>
+                </p>
+              </div>
+              <div class="btn-group"></div>
+            </div>
           </div>
         </div>
+        <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
       </div>
     </div>
   </div>
@@ -41,6 +48,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
+      isLoading: false,
       graphs: []
     };
   },
@@ -49,10 +57,14 @@ export default {
   },
   methods: {
     fetch() {
+      this.isLoading = true;
       Graphs.list()
         .then(res => res.data)
         .then(graphs => {
           this.graphs = graphs;
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     }
   },

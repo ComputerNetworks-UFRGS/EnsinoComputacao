@@ -6,25 +6,32 @@
       to="/dash/objetos/criar"
       class="button is-success is-pulled-right"
     >Adicionar objeto</router-link>
-    <h4 class="title is-4">Objetos de apredizagem</h4>
+    <h4 class="title is-4">Objetos de ensino</h4>
 
     <div class="card">
       <div class="card-content">
-        <div class="columns skill-list" v-for="object of objects" :key="object.id">
-          <div class="column is-10 nowrap-text">{{ object.name }}</div>
-          <div class="column">
-            <div class="field has-addons is-pulled-right">
-              <p class="control">
-                <router-link
-                  v-auth="'topics.edit'"
-                  :to="'/dash/objetos/editar/' + object.id"
-                  class="button is-small"
-                >Editar</router-link>
-              </p>
+        <div v-if="isLoading">
+          <br />
+          <br />
+        </div>
+        <div v-else>
+          <div class="columns skill-list" v-for="object of objects" :key="object.id">
+            <div class="column is-10 nowrap-text">{{ object.name }}</div>
+            <div class="column">
+              <div class="field has-addons is-pulled-right">
+                <p class="control">
+                  <router-link
+                    v-auth="'topics.edit'"
+                    :to="'/dash/objetos/editar/' + object.id"
+                    class="button is-small"
+                  >Editar</router-link>
+                </p>
+              </div>
+              <div class="btn-group"></div>
             </div>
-            <div class="btn-group"></div>
           </div>
         </div>
+        <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
       </div>
     </div>
   </div>
@@ -36,6 +43,7 @@ import Objects from "@/services/object";
 export default {
   data() {
     return {
+      isLoading: false,
       objects: []
     };
   },
@@ -44,10 +52,14 @@ export default {
   },
   methods: {
     fetch() {
+      this.isLoading = true;
       Objects.list()
         .then(res => res.data)
         .then(objects => {
           this.objects = objects;
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     }
   }
