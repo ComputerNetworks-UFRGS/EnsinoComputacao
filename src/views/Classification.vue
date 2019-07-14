@@ -36,6 +36,7 @@
         </li>
       </ul>
     </div>
+    <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
   </section>
 </template>
 
@@ -50,15 +51,20 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       tree: {},
       selectedSkill: false,
       tasks: []
     };
   },
   mounted() {
+    this.isLoading = true
     Skills.tree()
       .then(res => res.data)
-      .then(stage => (this.tree = stage.axis));
+      .then(stage => (this.tree = stage.axis))
+      .finally(() => {
+        this.isLoading = false
+      })
   },
   methods: {
     listTasks(skill) {
