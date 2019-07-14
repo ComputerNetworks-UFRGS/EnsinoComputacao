@@ -1,0 +1,516 @@
+{
+  "width": 2000,
+  "height": 1000,
+  "background": "#fafafa",
+  "nodes": [
+    {
+      "id": "23",
+      "content": {
+        "text": "Segurança digital",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 3,
+      "point": {
+        "x": 250,
+        "y": 150
+      }
+    },
+    {
+      "id": "27",
+      "content": {
+        "text": "Fundamentos de Sistemas distribuídos",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 3,
+      "point": {
+        "x": 575,
+        "y": 200
+      }
+    },
+    {
+      "id": "32",
+      "content": {
+        "text": "Armazenamento de dados",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 3,
+      "point": {
+        "x": 425,
+        "y": 350
+      }
+    },
+    {
+      "id": "33",
+      "content": {
+        "text": "Internet",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 2,
+      "point": {
+        "x": 400,
+        "y": 50
+      }
+    },
+    {
+      "id": "38",
+      "content": {
+        "text": "Proteção de dados",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 1,
+      "point": {
+        "x": 125,
+        "y": 200
+      }
+    },
+    {
+      "id": "39",
+      "content": {
+        "text": "Fundamentos de transmissão de dados",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 1,
+      "point": {
+        "x": 235,
+        "y": 500
+      }
+    },
+    {
+      "id": "44",
+      "content": {
+        "text": "Sistema operacional",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 2,
+      "point": {
+        "x": 700,
+        "y": 350
+      }
+    },
+    {
+      "id": "48",
+      "content": {
+        "text": "Codificação em formato digital",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 3,
+      "point": {
+        "x": 75,
+        "y": 350
+      }
+    },
+
+    {
+      "id": "45",
+      "content": {
+        "text": "Arquitetura básica de computadores",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 2,
+      "point": {
+        "x": 875,
+        "y": 500
+      }
+    },
+
+    {
+      "id": "51",
+      "content": {
+        "text": "Interface",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 2,
+      "point": {
+        "x": 950,
+        "y": 70
+      }
+    },
+    {
+      "id": "52",
+      "content": {
+        "text": "Dados",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 2,
+      "point": {
+        "x": 100,
+        "y": 50
+      }
+    },
+    {
+      "id": "56",
+      "content": {
+        "text": "Hardware e Software",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 2,
+      "point": {
+        "x": 650,
+        "y": 70
+      }
+    },
+    {
+      "id": "57",
+      "content": {
+        "text": "Noção de Instrução de Máquina",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 2,
+      "point": {
+        "x": 650,
+        "y": 70
+      }
+    },
+    {
+      "id": "61",
+      "content": {
+        "text": "Proteção de Informação",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 1,
+      "point": {
+        "x": 650,
+        "y": 70
+      }
+    },
+    {
+      "id": "62",
+      "content": {
+        "text": "Códigos",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 1,
+      "point": {
+        "x": 650,
+        "y": 70
+      }
+    },
+    {
+      "id": "63",
+      "content": {
+        "text": "Informação",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 1,
+      "point": {
+        "x": 650,
+        "y": 70
+      }
+    },
+    {
+      "id": "64",
+      "content": {
+        "text": "Máquina: Terminologia & uso de dispositinvos computacionais",
+        "color": "#94FACC"
+      },
+      "width": 150,
+      "height": 60,
+      "shape": "rectangle",
+      "year": 1,
+      "point": {
+        "x": 650,
+        "y": 70
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "16a6fa5fcef59eff",
+      "source": "27",
+      "destination": "23",
+      "point": {
+        "x": 513.5,
+        "y": 141.5665575679169
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a6fa699dfebc00",
+      "source": "32",
+      "destination": "27",
+      "point": {
+        "x": 567,
+        "y": 308.9741685618817
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a6fa730e8b1280",
+      "source": "33",
+      "destination": "23",
+      "point": {
+        "x": 420,
+        "y": 156.78081598907
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a6fa868b9ecbe9",
+      "source": "38",
+      "destination": "32",
+      "point": {
+        "x": 313.5,
+        "y": 302.3187373345162
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a6fa8abba854bf",
+      "source": "38",
+      "destination": "33",
+      "point": {
+        "x": 265.5,
+        "y": 107.91112634055145
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a6fa9b304d6c88",
+      "source": "39",
+      "destination": "32",
+      "point": {
+        "x": 463,
+        "y": 480.80390721816286
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a6faa8a74e9bd5",
+      "source": "44",
+      "destination": "27",
+      "point": {
+        "x": 711,
+        "y": 295.26990206128016
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a6fab229dedb3c",
+      "source": "45",
+      "destination": "32",
+      "point": {
+        "x": 727,
+        "y": 459.07898417185856
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a7e631ee9b3962",
+      "source": "38",
+      "destination": "48",
+      "point": {
+        "x": 175,
+        "y": 300.5807622950121
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a7e638020ccfea",
+      "source": "39",
+      "destination": "48",
+      "point": {
+        "x": 190,
+        "y": 477.58076229501216
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a7e64f8f157865",
+      "source": "51",
+      "destination": "45",
+      "point": {
+        "x": 1259,
+        "y": 244.1232468844616
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a7e65586b835c1",
+      "source": "52",
+      "destination": "48",
+      "point": {
+        "x": -12,
+        "y": 235.58724043144622
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a7e65da6bbf444",
+      "source": "56",
+      "destination": "44",
+      "point": {
+        "x": 851,
+        "y": 235.30971421465222
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "16a7e665ed4c1ac8",
+      "source": "56",
+      "destination": "45",
+      "point": {
+        "x": 1100.5,
+        "y": 226.80971421465222
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "1",
+      "source": "57",
+      "destination": "44",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "2",
+      "source": "61",
+      "destination": "48",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "3",
+      "source": "62",
+      "destination": "48",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "4",
+      "source": "63",
+      "destination": "52",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "5",
+      "source": "63",
+      "destination": "61",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "6",
+      "source": "63",
+      "destination": "62",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "7",
+      "source": "64",
+      "destination": "48",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "8",
+      "source": "64",
+      "destination": "51",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "9",
+      "source": "64",
+      "destination": "52",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "10",
+      "source": "64",
+      "destination": "56",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    },
+    {
+      "id": "11",
+      "source": "64",
+      "destination": "57",
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "color": "#F5228E"
+    }
+  ]
+}
