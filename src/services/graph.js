@@ -4,8 +4,10 @@ export default {
     list() {
         return API.get('graphs/')
     },
-    detail(graph_id) {
-        return API.get('graphs/' + graph_id)
+    detail(graph_id, params = {}) {
+        return API.get('graphs/' + graph_id, {
+            params: params
+        })
     },
     create(graph) {
         return API.post('graphs/', graph)
