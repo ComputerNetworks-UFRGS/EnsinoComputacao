@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <router-link
       v-auth="'task.create'"
       to="/dash/atividades/criar"
@@ -10,59 +10,62 @@
 
     <div class="card">
       <div class="card-content">
-        <div v-if="orderedTasks.length > 0" >
-        <div class="columns task-list" v-for="task of orderedTasks" :key="task.id">
-          <div class="column is-8 nowrap-text">
-            <b>{{ task.title }}</b>&nbsp;
-            <br>
-            <span
-              class="tag is-small"
-              :class="getColorLabel(task.status)"
-            >{{ getStatusLabel(task.status) }}</span>
-          </div>
-          <div class="column">
-            <div class="field has-addons is-pulled-right">
-              <p class="control">
-                <button
-                  v-if="canPublish(task)"
-                  v-auth="'task.edit'"
-                  @click="publish(task)"
-                  class="button is-link is-small is-sucess"
-                >
-                  <span v-if="task.status == 5">Publicar nova versão</span>
-                  <span v-else>Publicar</span>
-                </button>
-              </p>
-              <p class="control">
-                <router-link
-                  :to="'/atividades/' + task.id"
-                  v-if="task.status == 4"
-                  class="button is-link is-small"
-                >Ver no site</router-link>
-              </p>
-              <p class="control">
-                <router-link
-                  v-auth="'task.detail'"
-                  :to="'/dash/atividades/editar/' + task.id"
-                  class="button is-small"
-                >Editar</router-link>
-              </p>
-              <p class="control">
-                <router-link
-                  v-auth="'task.detail'"
-                  :to="'/dash/atividades/anexos/' + task.id"
-                  class="button is-small"
-                >Anexos
-                </router-link>
-              </p>
-            </div>
-            <div class="btn-group"></div>
-          </div>
-        </div>
+        <div v-if="isLoading">
+          <br><br>
         </div>
         <div v-else>
-          Nenhuma atividade criada.
+          <div v-if="orderedTasks.length > 0">
+            <div class="columns task-list" v-for="task of orderedTasks" :key="task.id">
+              <div class="column is-8 nowrap-text">
+                <b>{{ task.title }}</b>&nbsp;
+                <br />
+                <span
+                  class="tag is-small"
+                  :class="getColorLabel(task.status)"
+                >{{ getStatusLabel(task.status) }}</span>
+              </div>
+              <div class="column">
+                <div class="field has-addons is-pulled-right">
+                  <p class="control">
+                    <button
+                      v-if="canPublish(task)"
+                      v-auth="'task.edit'"
+                      @click="publish(task)"
+                      class="button is-link is-small is-sucess"
+                    >
+                      <span v-if="task.status == 5">Publicar nova versão</span>
+                      <span v-else>Publicar</span>
+                    </button>
+                  </p>
+                  <p class="control">
+                    <router-link
+                      :to="'/atividades/' + task.id"
+                      v-if="task.status == 4"
+                      class="button is-link is-small"
+                    >Ver no site</router-link>
+                  </p>
+                  <p class="control">
+                    <router-link
+                      v-auth="'task.detail'"
+                      :to="'/dash/atividades/editar/' + task.id"
+                      class="button is-small"
+                    >Editar</router-link>
+                  </p>
+                  <p class="control">
+                    <router-link
+                      v-auth="'task.detail'"
+                      :to="'/dash/atividades/anexos/' + task.id"
+                      class="button is-small"
+                    >Anexos</router-link>
+                  </p>
+                </div>
+                <div class="btn-group"></div>
+              </div>
+            </div>
+          </div>
+          <div v-else>Nenhuma atividade criada.</div>
         </div>
+        <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
       </div>
     </div>
 
@@ -75,11 +78,11 @@
 </template>
 
 <script>
-import UserTasks from "@/services/user-task"
-import Reviews from "@/services/review"
-import UseService from "@/services/user"
-import _ from "lodash"
-import ModalComment from "@/components/ModalComment"
+import UserTasks from "@/services/user-task";
+import Reviews from "@/services/review";
+import UseService from "@/services/user";
+import _ from "lodash";
+import ModalComment from "@/components/ModalComment";
 
 export default {
   components: {
@@ -87,6 +90,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       tasks: [],
       isOpenCommentModal: false,
       selectedTask: false
@@ -97,10 +101,14 @@ export default {
   },
   methods: {
     fetch() {
+      this.isLoading = true;
       UserTasks.list()
         .then(res => res.data)
         .then(tasks => {
           this.tasks = tasks;
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     canPublish(task) {

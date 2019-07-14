@@ -54,6 +54,7 @@
         </div>
       </div>
     </div>
+    <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
   </section>
 </template>
 
@@ -68,6 +69,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       tasks: [],
       filters: {
         plugged: {
@@ -97,10 +99,11 @@ export default {
           }
         }
         this.tree = stage.axis;
-      });
+      })
   },
   methods: {
     fetchTasks() {
+      this.isLoading = true
       let params = {};
       if (this.filters.age !== "todos") {
         params["ages"] = this.age_groups[this.filters.age];
@@ -121,11 +124,13 @@ export default {
       if (objects.length > 0) {
         params["objects"] = objects;
       }
-      console.log("objects", objects);
 
       Tasks.list(params)
         .then(res => res.data)
-        .then(tasks => (this.tasks = tasks));
+        .then(tasks => (this.tasks = tasks))
+        .finally(() => {
+          this.isLoading = false
+        })
     },
     toggleObject(object) {
       object.active = !object.active;

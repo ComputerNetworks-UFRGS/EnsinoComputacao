@@ -19,6 +19,7 @@
     <div class="container">
       <skill-List :years="years" @click="listTasks"></skill-List>
     </div>
+    <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
   </section>
 </template>
 
@@ -35,16 +36,21 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       years: {},
       selectedSkill: false,
       tasks: []
     };
   },
   mounted() {
+    this.isLoading = true;
     Skills.years()
       .then(res => res.data)
       .then(years => {
-        this.years = years
+        this.years = years;
+      })
+      .finally(() => {
+        this.isLoading = false;
       });
   },
   methods: {
