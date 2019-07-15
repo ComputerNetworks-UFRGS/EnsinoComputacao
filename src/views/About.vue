@@ -1,9 +1,18 @@
 <template>
-  <section class="container">sobre...</section>
+  <section class="container">
+    Sobre...
+    <hr />
+    <dependency-highlight></dependency-highlight>
+    <hr />
+  </section>
 </template>
 <script>
+import DependencyHighlight from "@/components/DependencyHighlight";
+
 export default {
-  components: {},
+  components: {
+    DependencyHighlight
+  },
   data() {
     return {
       yearsMode: false
