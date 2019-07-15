@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <div class="columns">
       <div class="column is-6">
         <div class="columns">
@@ -8,8 +8,11 @@
           <div class="column is-2">
             <button class="button is-primary is-large" @click="setYearsModeFalse()">Tudo</button>
           </div>
-          <div class="column is-6">
-            <years-dropdown @selectYear="selectYear"/>
+          <div class="column is-2">
+            <years-dropdown @selectYear="selectYear" />
+          </div>
+          <div class="column is-2">
+            <button class="button is-primary is-large" @click="filtersModal = true">Filtrar</button>
           </div>
         </div>
       </div>
@@ -18,6 +21,7 @@
       id="grafoTeste"
       style="height: 800px; width: 1800px; border: 0px solid black; display: block; margin: 0 auto"
     ></div>
+    <modal-graph-filters :show="filtersModal" @close="filtersModal = false" />
   </div>
 </template>
 
@@ -25,18 +29,24 @@
 import go, { Transaction } from "../../node_modules/gojs/release/go-debug.js";
 import json from "@/assets/data.json";
 import YearsDropdown from "@/components/YearsDropdown.vue";
+import ModalGraphFilters from "@/components/ModalGraphFilters.vue";
 export default {
   components: {
-    YearsDropdown
+    YearsDropdown,
+    ModalGraphFilters
   },
   props: {},
   data() {
     return {
       builder: null,
       graph: null,
-      nodes: json.nodes,
-      edges: json.links,
-      selectedYear: -1
+      nodes: [],
+      edges: [],
+      selectedYear: -1,
+      filters: {
+        years: []
+      },
+      filtersModal: false
     };
   },
   methods: {
@@ -45,74 +55,10 @@ export default {
 
       var grafo = this.graph;
 
-      var nodeDataArray = [];
-      var linkDataArray = [];
+      this.nodes = this.ApplyFilters(json.nodes, json.links).nodes;
+      this.edges = this.ApplyFilters(json.nodes, json.links).edges;
 
-      var groups = [];
-
-      console.log(this.yearsMode);
-
-      this.nodes.forEach(node => {
-        if (this.yearsMode) {
-          var tempNode = {
-            key: node.id,
-            text: node.content.text,
-            color: node.content.color,
-            year: node.year,
-            group: node.year
-          };
-          nodeDataArray.push(tempNode);
-          if (groups.indexOf(tempNode.group) === -1) {
-            var tempGroup = {
-              key: tempNode.group,
-              isGroup: true
-            };
-            nodeDataArray.push(tempGroup);
-            groups.push(tempNode.group);
-          }
-        } else {
-          var tempNodeYears = {
-            key: node.id,
-            text: node.content.text,
-            color: node.content.color,
-            year: node.year
-          };
-          if (this.selectedYear === -1) {
-            nodeDataArray.push(tempNodeYears);
-          } else if (this.selectedYear === tempNodeYears.year) {
-            nodeDataArray.push(tempNodeYears);
-          }
-        }
-      });
-
-      grafo.model.linkDataArray = [];
-
-      groups.sort();
-
-      this.edges.forEach(edge => {
-        var tempEdge = {
-          to: edge.destination,
-          from: edge.source
-        };
-        if (!this.yearsMode) {
-          linkDataArray.push(tempEdge);
-        } else if (
-          nodeDataArray.find(node => node.key === tempEdge.to).group ===
-          nodeDataArray.find(node => node.key === tempEdge.from).group
-        ) {
-          linkDataArray.push(tempEdge);
-        }
-      });
-
-      for (var i = 0; i < groups.length - 1; i++) {
-        var tempEdge = {
-          to: groups[i + 1],
-          from: groups[i]
-        };
-        linkDataArray.push(tempEdge);
-      }
-
-      grafo.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+      grafo.model = new go.GraphLinksModel(this.nodes, this.edges);
 
       grafo.groupTemplate = $(
         go.Group,
@@ -216,6 +162,77 @@ export default {
     selectYear(year) {
       this.selectedYear = year;
       this.buildGraph();
+    },
+    ApplyFilters(rawNodes, rawLinks) {
+      var nodeDataArray = [];
+      var linkDataArray = [];
+
+      var groups = [];
+
+      rawNodes.forEach(node => {
+        if (this.yearsMode) {
+          var tempNode = {
+            key: node.id,
+            text: node.content.text,
+            color: node.content.color,
+            year: node.year,
+            group: node.year
+          };
+          nodeDataArray.push(tempNode);
+          if (groups.indexOf(tempNode.group) === -1) {
+            var tempGroup = {
+              key: tempNode.group,
+              isGroup: true
+            };
+            nodeDataArray.push(tempGroup);
+            groups.push(tempNode.group);
+          }
+        } else {
+          var tempNodeYears = {
+            key: node.id,
+            text: node.content.text,
+            color: node.content.color,
+            year: node.year
+          };
+          if (this.selectedYear === -1) {
+            nodeDataArray.push(tempNodeYears);
+          } else if (this.selectedYear === tempNodeYears.year) {
+            nodeDataArray.push(tempNodeYears);
+          }
+        }
+      });
+
+      groups.sort();
+
+      rawLinks.forEach(edge => {
+        var tempEdge = {
+          to: edge.destination,
+          from: edge.source
+        };
+        if (!this.yearsMode) {
+          linkDataArray.push(tempEdge);
+        } else if (
+          nodeDataArray.find(node => node.key === tempEdge.to).group ===
+          nodeDataArray.find(node => node.key === tempEdge.from).group
+        ) {
+          linkDataArray.push(tempEdge);
+        }
+      });
+
+      for (var i = 0; i < groups.length - 1; i++) {
+        var tempEdge = {
+          to: groups[i + 1],
+          from: groups[i]
+        };
+        linkDataArray.push(tempEdge);
+      }
+
+      var grafo = {
+        nodes: nodeDataArray,
+        edges: linkDataArray
+      };
+
+      return grafo;
     }
   },
   computed: {
