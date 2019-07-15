@@ -21,7 +21,7 @@
       id="grafoTeste"
       style="height: 800px; width: 1800px; border: 0px solid black; display: block; margin: 0 auto"
     ></div>
-    <modal-graph-filters :show="filtersModal" @close="filtersModal = false" />
+    <modal-graph-filters :show="filtersModal" @close="CloseFiltersModal" />
   </div>
 </template>
 
@@ -44,7 +44,9 @@ export default {
       edges: [],
       selectedYear: -1,
       filters: {
-        years: []
+        years: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        axis: [1, 2, 3],
+        separateYears: false
       },
       filtersModal: false
     };
@@ -151,7 +153,7 @@ export default {
       text.stroke = "black";
     },
     setYearsModeFalse() {
-      this.selectedYear = -1;
+      this.filters.separateYears = false;
       this.buildGraph();
     },
     nodeClicked(e, obj) {
@@ -160,7 +162,13 @@ export default {
       this.$emit("nodeClicked", node.data.key);
     },
     selectYear(year) {
-      this.selectedYear = year;
+      if (year === 0) {
+        this.filters.separateYears = true;
+      } else {
+        this.filters.separateYears = false;
+        this.filters.years = [year];
+        this.selectedYear = year;
+      }
       this.buildGraph();
     },
     ApplyFilters(rawNodes, rawLinks) {
@@ -192,6 +200,7 @@ export default {
             key: node.id,
             text: node.content.text,
             color: node.content.color,
+            group: node.year,
             year: node.year
           };
           if (this.selectedYear === -1) {
@@ -233,11 +242,19 @@ export default {
       };
 
       return grafo;
+    },
+    CloseFiltersModal(filters) {
+      this.filters.years = filters.selectedYears;
+      this.filters.axis = filters.selectedAxis;
+      this.filters.separateYears = filters.separateYears;
+
+      this.filtersModal = false;
+      this.buildGraph();
     }
   },
   computed: {
     yearsMode() {
-      if (this.selectedYear === 0) {
+      if (this.filters.separateYears) {
         return true;
       } else {
         return false;
