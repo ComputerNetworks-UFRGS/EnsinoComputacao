@@ -224,18 +224,18 @@ export default {
           year: node.year,
           group: node.year
         };
-        if (this.yearsMode) {
-          if (groups.indexOf(tempNode.group) === -1) {
-            var tempGroup = {
-              key: tempNode.group,
-              isGroup: true
-            };
-            nodeDataArray.push(tempGroup);
-            groups.push(tempNode.group);
-          }
-        }
         if (this.filters.years.indexOf(tempNode.year.toString()) != -1) {
           nodeDataArray.push(tempNode);
+          if (this.yearsMode) {
+            if (groups.indexOf(tempNode.group) === -1) {
+              var tempGroup = {
+                key: tempNode.group,
+                isGroup: true
+              };
+              nodeDataArray.push(tempGroup);
+              groups.push(tempNode.group);
+            }
+          }
         }
       });
 
