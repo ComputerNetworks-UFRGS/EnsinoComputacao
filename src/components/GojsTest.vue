@@ -21,7 +21,12 @@
       id="grafoTeste"
       style="height: 800px; width: 1800px; border: 0px solid black; display: block; margin: 0 auto"
     ></div>
-    <modal-graph-filters :show="filtersModal" @close="CloseFiltersModal" />
+    <modal-graph-filters
+      v-if="filtersModal"
+      :show="filtersModal"
+      :inputFilters="filters"
+      @close="CloseFiltersModal"
+    />
   </div>
 </template>
 
@@ -44,8 +49,8 @@ export default {
       edges: [],
       selectedYear: -1,
       filters: {
-        years: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        axis: [1, 2, 3],
+        years: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+        axis: ["1", "2", "3"],
         separateYears: false
       },
       filtersModal: false
@@ -57,8 +62,13 @@ export default {
 
       var grafo = this.graph;
 
-      this.nodes = this.ApplyFilters(json.nodes, json.links).nodes;
-      this.edges = this.ApplyFilters(json.nodes, json.links).edges;
+      var rawNodes = json.nodes;
+      var rawEdges = json.links;
+
+      var filteredGraph = this.ApplyFilters(rawNodes, rawEdges);
+
+      this.nodes = filteredGraph.nodes;
+      this.edges = filteredGraph.edges;
 
       grafo.model = new go.GraphLinksModel(this.nodes, this.edges);
 
@@ -135,6 +145,13 @@ export default {
           margin: 2
         })
       );
+
+      grafo.linkTemplate = $(
+        go.Link,
+        $(go.Shape),
+        $(go.Shape, { toArrow: "Standard" }),
+        new go.Binding("opacity", "opacity")
+      );
     },
     mouseEnter(e, obj) {
       var shape = obj.findObject("SHAPE");
@@ -142,6 +159,9 @@ export default {
       shape.stroke = "#94FACC";
       var text = obj.findObject("TEXT");
       text.stroke = "white";
+      obj.findLinksConnected().each(function(link) {
+        link.opacity = 1.0;
+      });
     },
     mouseLeave(e, obj) {
       var shape = obj.findObject("SHAPE");
@@ -151,14 +171,33 @@ export default {
       // Return the TextBlock's stroke to its default
       var text = obj.findObject("TEXT");
       text.stroke = "black";
+      obj.findLinksConnected().each(function(link) {
+        if (link.data.differentGroups) {
+          link.opacity = 0.0;
+        }
+      });
     },
     setYearsModeFalse() {
+      this.filters.years = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ];
       this.filters.separateYears = false;
+      this.filters.axis = ["1", "2", "3"];
       this.buildGraph();
     },
     nodeClicked(e, obj) {
       var node = obj.part;
-      //console.log("sal");
       this.$emit("nodeClicked", node.data.key);
     },
     selectYear(year) {
@@ -166,7 +205,7 @@ export default {
         this.filters.separateYears = true;
       } else {
         this.filters.separateYears = false;
-        this.filters.years = [year];
+        this.filters.years = [year.toString()];
         this.selectedYear = year;
       }
       this.buildGraph();
@@ -178,15 +217,14 @@ export default {
       var groups = [];
 
       rawNodes.forEach(node => {
+        var tempNode = {
+          key: node.id,
+          text: node.content.text,
+          color: node.content.color,
+          year: node.year,
+          group: node.year
+        };
         if (this.yearsMode) {
-          var tempNode = {
-            key: node.id,
-            text: node.content.text,
-            color: node.content.color,
-            year: node.year,
-            group: node.year
-          };
-          nodeDataArray.push(tempNode);
           if (groups.indexOf(tempNode.group) === -1) {
             var tempGroup = {
               key: tempNode.group,
@@ -195,36 +233,37 @@ export default {
             nodeDataArray.push(tempGroup);
             groups.push(tempNode.group);
           }
-        } else {
-          var tempNodeYears = {
-            key: node.id,
-            text: node.content.text,
-            color: node.content.color,
-            group: node.year,
-            year: node.year
-          };
-          if (this.selectedYear === -1) {
-            nodeDataArray.push(tempNodeYears);
-          } else if (this.selectedYear === tempNodeYears.year) {
-            nodeDataArray.push(tempNodeYears);
-          }
+        }
+        if (this.filters.years.indexOf(tempNode.year.toString()) != -1) {
+          nodeDataArray.push(tempNode);
         }
       });
 
       groups.sort();
 
       rawLinks.forEach(edge => {
-        var tempEdge = {
-          to: edge.destination,
-          from: edge.source
-        };
-        if (!this.yearsMode) {
-          linkDataArray.push(tempEdge);
-        } else if (
-          nodeDataArray.find(node => node.key === tempEdge.to).group ===
-          nodeDataArray.find(node => node.key === tempEdge.from).group
+        if (
+          nodeDataArray.find(node => node.key === edge.destination) &&
+          nodeDataArray.find(node => node.key === edge.source)
         ) {
-          linkDataArray.push(tempEdge);
+          var tempEdge = {
+            to: edge.destination,
+            from: edge.source,
+            differentGroups: false,
+            opacity: 1.0
+          };
+          if (!this.yearsMode) {
+            linkDataArray.push(tempEdge);
+          } else {
+            linkDataArray.push(tempEdge);
+            if (
+              nodeDataArray.find(node => node.key === tempEdge.to).group !=
+              nodeDataArray.find(node => node.key === tempEdge.from).group
+            ) {
+              tempEdge.differentGroups = true;
+              tempEdge.opacity = 0.0;
+            }
+          }
         }
       });
 

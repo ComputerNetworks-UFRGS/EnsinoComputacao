@@ -76,6 +76,9 @@ export default {
     title: {
       type: String,
       default: "Filtrar"
+    },
+    inputFilters: {
+      required: true
     }
   },
   data() {
@@ -93,7 +96,11 @@ export default {
     }
   },
   methods: {},
-  mounted() {}
+  mounted() {
+    this.filters.selectedYears = this.inputFilters.years;
+    this.filters.selectedAxis = this.inputFilters.axis;
+    this.filters.separateYears = this.inputFilters.separateYears;
+  }
 };
 </script>
 
