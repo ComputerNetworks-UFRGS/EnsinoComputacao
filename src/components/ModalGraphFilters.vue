@@ -48,14 +48,6 @@
             <label class="label">Algum outro filtro</label>
           </div>
         </div>
-        <p class="content">
-          <b>Selection:</b>
-          {{ filters.selectedYears }}
-          <b>Selection:</b>
-          {{ filters.selectedAxis }}
-          <b>Selection:</b>
-          {{ filters.separateYears }}
-        </p>
       </div>
 
       <footer class="card-footer">

@@ -32,6 +32,7 @@
 
 <script id="sample">
 import go, { Transaction } from "../../node_modules/gojs/release/go-debug.js";
+import Graph from "@/services/graph";
 import json from "@/assets/data.json";
 import YearsDropdown from "@/components/YearsDropdown.vue";
 import ModalGraphFilters from "@/components/ModalGraphFilters.vue";
@@ -53,7 +54,8 @@ export default {
         axis: ["1", "2", "3"],
         separateYears: false
       },
-      filtersModal: false
+      filtersModal: false,
+      isLoading: false
     };
   },
   methods: {
@@ -62,8 +64,23 @@ export default {
 
       var grafo = this.graph;
 
-      var rawNodes = json.nodes;
-      var rawEdges = json.links;
+      var rawNodes;
+      var rawEdges;
+
+      this.isLoading = true;
+
+      Graph.list()
+        .then(res => res.data)
+        .then(nodes => (rawNodes = nodes))
+        .then(links => (rawEdges = links))
+        .finally(() => {
+          this.isLoading = false;
+        });
+
+      console.log(rawNodes, rawEdges);
+
+      rawNodes = json.nodes;
+      rawEdges = json.links;
 
       var filteredGraph = this.ApplyFilters(rawNodes, rawEdges);
 
@@ -148,7 +165,7 @@ export default {
 
       grafo.linkTemplate = $(
         go.Link,
-        $(go.Shape),
+        $(go.Shape, { strokeWidth: 1.5 }),
         $(go.Shape, { toArrow: "Standard" }),
         new go.Binding("opacity", "opacity")
       );
@@ -160,7 +177,9 @@ export default {
       var text = obj.findObject("TEXT");
       text.stroke = "white";
       obj.findLinksConnected().each(function(link) {
-        link.opacity = 1.0;
+        if (link.data.differentGroups) {
+          link.opacity = 0.5;
+        }
       });
     },
     mouseLeave(e, obj) {
