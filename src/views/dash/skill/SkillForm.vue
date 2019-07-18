@@ -139,8 +139,10 @@ export default {
 
     AgeGroups.list()
       .then(res => res.data)
+      .then(res => res.data)
       .then(age_groups => {
         this.age_groups = age_groups;
+        console.log('age_groups', age_groups)
       });
   },
   methods: {

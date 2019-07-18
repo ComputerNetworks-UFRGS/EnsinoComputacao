@@ -12,8 +12,8 @@
             'node-current': nodes[node.id].isSelected
         }"
       >
-        <!-- {{ node.id }})
-        [{{ node.step }}] -->
+        <!-- {{ node.id }}) -->
+        <!-- [{{ node.step }}] -->
         {{ node.title }}
       </div>
       <br />
@@ -27,7 +27,7 @@ import _ from "lodash";
 
 export default {
   name: "dependency-highlight",
-  props: [],
+  props: {},
   data() {
     return {
       steps: [],
@@ -39,8 +39,9 @@ export default {
   },
   methods: {
     fetch() {
-      Graphs.detail(1, {
-        view: "steps"
+      Graphs.detail(7, {
+        // view: "steps"
+        view: "years"
       })
         .then(res => res.data)
         .then(res => res.data)

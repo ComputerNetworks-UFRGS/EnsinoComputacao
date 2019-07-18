@@ -2,7 +2,7 @@
   <section class="atividades pt">
     <div class="container">
       <div class="columns">
-        <div class="column is-4">
+        <div class="column is-narrow" style="max-width: 200px">
           <div class="field">
             <label class="label">Ano recomendado</label>
           </div>
