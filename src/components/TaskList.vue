@@ -25,7 +25,11 @@
               </div>
 
               <footer class="card-footer">
-                <a href="#!" @click.prevent="selectTask(task)" class="card-footer-item">Detalhes</a>
+                <a
+                  href="#!"
+                  @click.prevent="selectTask(task)"
+                  class="card-footer-item"
+                >Mais informações</a>
               </footer>
             </div>
           </div>
@@ -38,9 +42,12 @@
     </div>
 
     <menu-side :isOpen="selectedTask > 0" :is-right="true" @close="selectedTask = false">
-      <div v-if="selectedTask">
-        <task-detail :task-id="selectedTask"></task-detail>
-        <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">Detalhes</router-link>
+      <div v-if="selectedTask" class="task-detail-box">
+        <task-detail :task-id="selectedTask" class="task-detail-content"></task-detail>
+        <div class="task-detail-footer card-footer">
+          <a class="card-footer-item" href="#!" @click.prevent="selectedTask = false">Fechar</a>
+          <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">Ver atividade</router-link>
+        </div>
       </div>
     </menu-side>
   </div>
@@ -88,16 +95,32 @@ export default {
     }
   }
   .component-sidenav {
-    padding: 12px;
+    padding: 12px 12px 0px 12px;
     background: white;
     border-left: 4px solid #dddddd;
-    width: 70vw!important;
+    width: 70vw !important;
   }
+}
+.task-detail-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .task-detail-content {
+    display: flex;
+    flex-grow: 1;
+    background: white;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  // .task-detail-footer {
+  //   background: green;
+  // }
 }
 @media (max-width: 768px) {
   .component-task-list {
     .component-sidenav {
-      width: 100vw!important;
+      width: 100vw !important;
     }
   }
 }
