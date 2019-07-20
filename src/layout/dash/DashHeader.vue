@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand">
         <router-link class="navbar-item" to="/">
-          <img src="img/brand/color.png" alt="EduSBC">
+          <img src="img/brand/color.png" alt="compeduba">
         </router-link>
 
         <a

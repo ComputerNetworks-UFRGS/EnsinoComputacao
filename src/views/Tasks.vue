@@ -1,5 +1,5 @@
 <template>
-  <section class="atividades pt">
+  <section class="atividades pd">
     <div class="container">
       <div class="columns">
         <div class="column is-narrow" style="max-width: 200px">

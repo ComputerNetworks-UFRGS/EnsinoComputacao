@@ -3,13 +3,12 @@
     <section class="hero is-medium is-primary is-bold">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">
-            Encontre e compartilhe atividades para o ensino
-            de computação no Ensino Fundamental e no Ensino Médio.
+          <h4 class="title is-4">
+            Encontre e crie atividades para o ensino de computação.
             <br>
             <br>
-            <router-link to="/atividades" class="button is-light is-medium">Ver atividades</router-link>
-          </h1>
+            <router-link to="/atividades" class="button is-light">Ver atividades</router-link>
+          </h4>
           <a
             href="http://www.sbc.org.br"
             target="_blank"
@@ -22,7 +21,7 @@
       </div>
     </section>
 
-    <div class="container">
+    <div class="container pd">
       <br>
       <br>
       <div class="columns is-centered">

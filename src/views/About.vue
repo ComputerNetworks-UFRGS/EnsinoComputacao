@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container pd">
     Sobre...
     <hr />
     <dependency-highlight></dependency-highlight>

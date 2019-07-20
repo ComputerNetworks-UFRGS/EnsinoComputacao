@@ -32,8 +32,8 @@ export default {
 #app main {
   flex-grow: 1;
   padding-bottom: 30px;
-  .pt {
-    padding-top: 20px;
+  .pd {
+    padding: 12px;
   }
 }
 </style>

@@ -6,8 +6,9 @@ import AppFooter from "./layout/AppFooter"
 import Home from "./views/Home.vue"
 import Tasks from "./views/Tasks.vue"
 import Task from "./views/Task.vue"
-import Skills from "./views/Skills.vue"
 import Classification from "./views/Classification.vue"
+import ClassificationTree from './views/ClassificationTree.vue'
+import Skills from "./views/Skills.vue"
 import GraphView from "./views/GraphView.vue"
 import About from "./views/About.vue"
 import Contact from "./views/Contact.vue"
@@ -81,22 +82,23 @@ let router = new Router({
       }
     },
     {
-      path: "/habilidades",
-      name: "skills",
-      components: {
-        header: AppHeader,
-        default: Skills,
-        footer: AppFooter
-      }
-    },
-    {
       path: "/classificacao",
-      name: "classification",
       components: {
         header: AppHeader,
         default: Classification,
         footer: AppFooter
-      }
+      },
+      children: [
+        {
+          path: '',
+          component: ClassificationTree,
+        },
+        {
+          path: 'por-ano',
+          component: Skills,
+        },
+        
+      ]
     },
     {
       path: "/grafo",
