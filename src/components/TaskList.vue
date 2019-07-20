@@ -4,7 +4,7 @@
       <div class="column" v-if="tasks.length > 0">
         <div class="columns is-multiline">
           <div
-            class="column is-12-mobile is-6-tablet is-4-desktop is-3-widescreen"
+            class="column is-12-mobile is-6-tablet is-4-desktop is-4-widescreen"
             v-for="task of tasks"
             :key="task.id"
           >
@@ -31,15 +31,13 @@
           </div>
         </div>
       </div>
-      <div class="column" v-else>Nenhuma atividade encontrada com este filtro.</div>
+      <div class="column" v-else>
+        <h5 class="title is-5">Nenhuma atividade encontrada.</h5>
+        <h6 class="subtitle is-6">Tente utilizar outros filtros.</h6>
+      </div>
     </div>
 
-    <menu-side
-      :isOpen="selectedTask > 0"
-      :is-right="true"
-      :width="'80vh'"
-      @close="selectedTask = false"
-    >
+    <menu-side :isOpen="selectedTask > 0" :is-right="true" @close="selectedTask = false">
       <div v-if="selectedTask">
         <task-detail :task-id="selectedTask"></task-detail>
         <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">Detalhes</router-link>
@@ -93,6 +91,14 @@ export default {
     padding: 12px;
     background: white;
     border-left: 4px solid #dddddd;
+    width: 70vw!important;
+  }
+}
+@media (max-width: 768px) {
+  .component-task-list {
+    .component-sidenav {
+      width: 100vw!important;
+    }
   }
 }
 </style>
