@@ -1,5 +1,5 @@
 <template>
-  <section class="recuperar-senha">
+  <section class="recuperar-senha pd">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-5">

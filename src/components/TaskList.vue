@@ -1,27 +1,127 @@
 <template>
-  <div class="columns">
-    <div class="column" v-if="tasks.length > 0">
-      <div class="columns" v-for="task of tasks" :key="task.id">
-        <div class="column is-9">
-          <b>{{ task.title }}</b>
-        </div>
-        <div class="column is-3 has-text-right">
-          <router-link :to="'/atividades/'+task.id" class="button is-small is-light">Ver atividade</router-link>
+  <div class="component-task-list">
+    <div class="columns">
+      <div class="column" v-if="tasks.length > 0">
+        <div class="columns is-multiline">
+          <div
+            class="column is-12-mobile is-6-tablet is-4-desktop is-4-widescreen"
+            v-for="task of tasks"
+            :key="task.id"
+          >
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-2by1">
+                  <img
+                    src="https://bulma.io/images/placeholders/640x320.png"
+                    alt="Placeholder image"
+                  />
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="content">
+                  <div class="content-text">{{ task.title }}</div>
+                  <div class="content-footer"></div>
+                </div>
+              </div>
+
+              <footer class="card-footer">
+                <a
+                  href="#!"
+                  @click.prevent="selectTask(task)"
+                  class="card-footer-item"
+                >Mais informações</a>
+              </footer>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="column" v-else>
+        <h5 class="title is-5">Nenhuma atividade encontrada.</h5>
+        <h6 class="subtitle is-6">Tente utilizar outros filtros.</h6>
+      </div>
     </div>
-    <div class="column" v-else>Nenhuma atividade encontrada com este filtro.</div>
+
+    <menu-side :isOpen="selectedTask > 0" :is-right="true" @close="selectedTask = false">
+      <div v-if="selectedTask" class="task-detail-box">
+        <task-detail :task-id="selectedTask" class="task-detail-content"></task-detail>
+        <div class="task-detail-footer card-footer">
+          <a class="card-footer-item" href="#!" @click.prevent="selectedTask = false">Fechar</a>
+          <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">Ver atividade</router-link>
+        </div>
+      </div>
+    </menu-side>
   </div>
 </template>
 
 <script>
+import MenuSide from "@/components/MenuSide";
+import TaskDetail from "@/components/TaskDetail";
+
 export default {
   name: "task-list",
   props: {
     tasks: Array
+  },
+  components: {
+    MenuSide,
+    TaskDetail
+  },
+  data() {
+    return {
+      selectedTask: false
+    };
+  },
+  methods: {
+    selectTask(task) {
+      this.selectedTask = task.id;
+    }
   }
 };
 </script>
 
-<style>
+<style lang="scss">
+.component-task-list {
+  .card-content {
+    padding: 16px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .card-content {
+      display: flex;
+      flex-grow: 1;
+      padding: 1rem;
+    }
+  }
+  .component-sidenav {
+    padding: 12px 12px 0px 12px;
+    background: white;
+    border-left: 4px solid #dddddd;
+    width: 70vw !important;
+  }
+}
+.task-detail-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .task-detail-content {
+    display: flex;
+    flex-grow: 1;
+    background: white;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  // .task-detail-footer {
+  //   background: green;
+  // }
+}
+@media (max-width: 768px) {
+  .component-task-list {
+    .component-sidenav {
+      width: 100vw !important;
+    }
+  }
+}
 </style>

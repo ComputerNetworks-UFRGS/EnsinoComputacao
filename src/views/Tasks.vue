@@ -1,8 +1,8 @@
 <template>
-  <section class="atividades pt">
+  <section class="atividades pd">
     <div class="container">
       <div class="columns">
-        <div class="column is-4">
+        <div class="column is-narrow" style="max-width: 200px">
           <div class="field">
             <label class="label">Ano recomendado</label>
           </div>
@@ -29,7 +29,7 @@
             <b-checkbox v-model="filters.plugged.no">Desplugada</b-checkbox>
           </div>
 
-          <br />
+          <!-- <br />
           <div class="field">
             <label class="label">Objeto de conhecimento</label>
           </div>
@@ -47,7 +47,7 @@
                 </b-checkbox>
               </div>
             </div>
-          </ul>
+          </ul> -->
         </div>
         <div class="column">
           <task-list :tasks="tasks"></task-list>
@@ -89,17 +89,17 @@ export default {
   },
   mounted() {
     this.fetchTasks();
-    Skills.tree()
-      .then(res => res.data)
-      .then(stage => {
-        for (let axis of stage.axis) {
-          this.$set(axis, "active", false);
-          for (let object of axis.objects) {
-            this.$set(object, "active", false);
-          }
-        }
-        this.tree = stage.axis;
-      })
+    // Skills.tree()
+    //   .then(res => res.data)
+    //   .then(stage => {
+    //     for (let axis of stage.axis) {
+    //       this.$set(axis, "active", false);
+    //       for (let object of axis.objects) {
+    //         this.$set(object, "active", false);
+    //       }
+    //     }
+    //     this.tree = stage.axis;
+    //   })
   },
   methods: {
     fetchTasks() {

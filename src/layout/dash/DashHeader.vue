@@ -1,36 +1,36 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
-      <div class="navbar-brand">
-        <router-link class="navbar-item" to="/">
-          <img src="img/brand/color.png" alt="EduSBC">
-        </router-link>
-
-        <a
-          role="button"
-          class="navbar-burger burger"
-          aria-label="menu"
-          aria-expanded="false"
-          @click="isMenuOpen = !isMenuOpen"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div class="navbar-menu" :class="{'is-active': isMenuOpen}" @click="isMenuOpen = false">
-        <div class="navbar-end">
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">{{ ($store.state.user ? $store.state.user.name : 'Meus dados') }}</a>
-
-            <div class="navbar-dropdown is-right ">
-              <router-link class="navbar-item" to="/">voltar para o site</router-link>
-              <hr class="navbar-divider">
-              <a class="navbar-item" href="#/" @click="logout">Sair</a>
+      <div class="navbar-end is-pulled-right">
+        <div class="navbar-item">
+          <div
+            class="dropdown is-right"
+            :class="{'is-active': isMenuOpen}"
+            @click="isMenuOpen = !isMenuOpen"
+          >
+            <div class="dropdown-trigger">
+              <button class="button is-light">
+                <span>{{ ($store.state.user ? $store.state.user.name : 'Meus dados') }}</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-content">
+                <router-link class="dropdown-item" to="/">Voltar para o site</router-link>
+                <hr class="dropdown-divider" />
+                <a class="dropdown-item" href="#/" @click="logout">Sair</a>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="navbar-brand">
+        <router-link class="navbar-item" to="/">
+          <img src="img/brand/color.png" alt="compeduba" />
+        </router-link>
       </div>
     </div>
   </nav>
@@ -55,5 +55,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.navbar {
+  background: #fafafa !important;
+}
 </style>
