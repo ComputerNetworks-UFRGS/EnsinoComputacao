@@ -4,12 +4,12 @@
       <div class="column" v-if="tasks.length > 0">
         <div class="columns is-multiline">
           <div
-            class="column is-12-mobile is-6-tablet is-4-desktop is-4-widescreen"
+            class="column is-12-mobile is-6-tablet is-4-desktop is-4-widescreen list-of-tasks"
             v-for="task of tasks"
             :key="task.id"
           >
             <div class="card">
-              <div class="card-image">
+              <div class="card-image is-hidden-mobile">
                 <figure class="image is-2by1">
                   <img
                     src="https://bulma.io/images/placeholders/640x320.png"
@@ -20,11 +20,18 @@
               <div class="card-content">
                 <div class="content">
                   <div class="content-text">{{ task.title }}</div>
-                  <div class="content-footer"></div>
+                  <div class="content-footer">
+                    <button @click.prevent="selectTask(task)" class="button button is-light">
+                      <span>Ver</span>
+                      <span class="icon">
+                        <i class="fas fa-angle-right"></i>
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <footer class="card-footer">
+              <footer class="card-footer is-hidden-mobile">
                 <a
                   href="#!"
                   @click.prevent="selectTask(task)"
@@ -45,8 +52,18 @@
       <div v-if="selectedTask" class="task-detail-box">
         <task-detail :task-id="selectedTask" class="task-detail-content"></task-detail>
         <div class="task-detail-footer card-footer">
-          <a class="card-footer-item" href="#!" @click.prevent="selectedTask = false">Fechar</a>
-          <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">Ver atividade</router-link>
+          <a class="card-footer-item" href="#!" @click.prevent="selectedTask = false">
+            <span class="icon">
+              <i class="fas fa-times"></i>
+            </span>
+            <span>Voltar</span>
+          </a>
+          <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">
+            <span>Ver atividade</span>
+            <span class="icon">
+              <i class="fas fa-angle-right"></i>
+            </span>
+          </router-link>
         </div>
       </div>
     </menu-side>
@@ -121,6 +138,25 @@ export default {
   .component-task-list {
     .component-sidenav {
       width: 100vw !important;
+    }
+    .list-of-tasks {
+      padding: 0px;
+      .card-content {
+        .content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          .content-text {
+            width: 100%;
+          }
+          .content-footer {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
     }
   }
 }
