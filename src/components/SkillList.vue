@@ -1,20 +1,28 @@
 <template>
   <div>
-    <div class="columns year-wrapper" v-for="(objects, year) of years" :key="year">
-      <div class="column is-1 year center-vertical-text">{{ year }}</div>
-      <div class="column is-11">
-        <div class="columns objects" v-for="(skills, object) of objects" :key="object">
+    <div class="columns">
+      <div class="column is-1">Ano de ensino</div>
+      <div class="column is-11">Objeto de aprendizado</div>
+    </div>
+    <div class="columns year-wrapper" v-for="(age, year) of years" :key="year">
+      <div class="column is-2 year center-vertical-text">{{ age.idade.idade_nome }}</div>
+      <div class="column is-10">
+        <div class="columns objects" v-for="(skills, object) of age.objects" :key="object">
           <div class="column is-4 px-0 center-vertical-text object">
             <b>{{ object }}</b>
           </div>
           <div class="column is-8 px-0">
+            <!-- {{ skills.length }} -->
             <div
               v-for="skill of skills"
               :key="skill.habilidade_id"
               class="skill"
               :class="'skill-'+skill.eixo_code"
               @click="$emit('click', skill)"
-            >{{ skill.habilidade_nome }}</div>
+            >
+              {{ skill.eixo_nome }}
+            <!-- {{ skill.habilidade_nome }} -->
+            </div>
           </div>
         </div>
       </div>
@@ -73,7 +81,7 @@ export default {
 .objects .skill:hover {
   background: rgba(0, 0, 0, 0.1);
 }
-.px-0  {
-    padding: 0px;
+.px-0 {
+  padding: 0px;
 }
 </style>

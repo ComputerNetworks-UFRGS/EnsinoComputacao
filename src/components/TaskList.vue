@@ -44,7 +44,7 @@
       </div>
       <div class="column" v-else>
         <h5 class="title is-5">Nenhuma atividade encontrada.</h5>
-        <h6 class="subtitle is-6">Tente utilizar outros filtros.</h6>
+        <!-- <h6 class="subtitle is-6">Tente utilizar outros filtros.</h6> -->
       </div>
     </div>
 
@@ -130,9 +130,6 @@ export default {
     overflow: hidden;
     overflow-y: auto;
   }
-  // .task-detail-footer {
-  //   background: green;
-  // }
 }
 @media (max-width: 768px) {
   .component-task-list {

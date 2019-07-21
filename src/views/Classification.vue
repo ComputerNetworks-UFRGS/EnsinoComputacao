@@ -8,8 +8,8 @@
           <span class="is-hidden-mobile">&nbsp;de ensino</span>
         </router-link>
         <router-link to="/classificacao/arvore" class="button is-white">
-          Hierarquia
-          <span class="is-hidden-mobile">&nbsp;de objetos</span>
+          Por eixo
+          <span class="is-hidden-mobile">&nbsp;de ensino</span>
         </router-link>
       </div>
       <router-view></router-view>
@@ -23,12 +23,14 @@ export default {};
 
 <style lang="scss">
 .classificacao {
-  .button {
-    background: transparent!important;
-  }
-  .router-link-exact-active {
-    background: #7957d5!important;
-    color: white!important;
+  .has-addons {
+    .button {
+      background: transparent !important;
+    }
+    .router-link-exact-active {
+      background: #7957d5 !important;
+      color: white !important;
+    }
   }
 }
 </style>

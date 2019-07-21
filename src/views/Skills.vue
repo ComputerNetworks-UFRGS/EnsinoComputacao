@@ -11,7 +11,12 @@
           </div>
         </div>
         <footer class="card-footer">
-          <a href="#!" class="card-footer-item" @click="closeListTasks">Ok, fechar</a>
+          <a href="#!" class="card-footer-item" @click.prevent="closeListTasks">
+            <span class="icon">
+              <i class="fas fa-times"></i>
+            </span>
+            <span>Voltar</span>
+          </a>
         </footer>
       </div>
     </b-modal>
