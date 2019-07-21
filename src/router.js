@@ -91,11 +91,11 @@ let router = new Router({
       children: [
         {
           path: '',
-          component: ClassificationTree,
+          component: Skills,
         },
         {
-          path: 'por-ano',
-          component: Skills,
+          path: 'arvore',
+          component: ClassificationTree,
         },
         
       ]
