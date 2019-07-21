@@ -20,7 +20,7 @@
               <div class="card-content">
                 <div class="content">
                   <div class="content-text">{{ task.title }}</div>
-                  <div class="content-footer">
+                  <div class="content-footer is-hidden-tablet">
                     <button @click.prevent="selectTask(task)" class="button button is-light">
                       <span>Ver</span>
                       <span class="icon">
