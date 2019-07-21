@@ -1,27 +1,35 @@
 <template>
-  <div>
-    <div class="columns">
-      <div class="column is-1">Ano de ensino</div>
-      <div class="column is-11">Objeto de aprendizado</div>
-    </div>
+  <div class="classificacao-years">
     <div class="columns year-wrapper" v-for="(age, year) of years" :key="year">
       <div class="column is-2 year center-vertical-text">{{ age.idade.idade_nome }}</div>
       <div class="column is-10">
-        <div class="columns objects" v-for="(skills, object) of age.objects" :key="object">
-          <div class="column is-4 px-0 center-vertical-text object">
-            <b>{{ object }}</b>
-          </div>
-          <div class="column is-8 px-0">
-            <!-- {{ skills.length }} -->
-            <div
-              v-for="skill of skills"
-              :key="skill.habilidade_id"
-              class="skill"
-              :class="'skill-'+skill.eixo_code"
-              @click="$emit('click', skill)"
-            >
-              {{ skill.eixo_nome }}
-            <!-- {{ skill.habilidade_nome }} -->
+        <div v-for="(skills, object) of age.objects" :key="object" class="card">
+          <header class="card-header" @click.prevent="skills.isOpen = !skills.isOpen">
+            <p class="card-header-title">{{ object }}</p>
+            <a href="#!" class="card-header-icon">
+              <span class="icon">
+                <i
+                  class="fas"
+                  :class="{
+                    'fa-angle-down': skills.isOpen,
+                    'fa-angle-right': !skills.isOpen,
+                  }"
+                ></i>
+              </span>
+            </a>
+          </header>
+
+          <div class="card-content" :class="{'is-hidden': !skills.isOpen}">
+            <div class="content">
+              <div class="columns is-multiline">
+                <div class="column is-6 is-4-widescreen" v-for="skill of skills.skills" :key="skill.habilidade_id">
+                  <div class="box" @click="$emit('click', skill)" :class="'skill-'+skill.eixo_code">
+                    {{ skill.habilidade_nome }}
+                    <div class="flex-spacing"></div>                    
+                    <button class="button is-light is-small is-fullwidth">Ver atividades</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -39,7 +47,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .skill {
   text-align: justify;
   border-bottom: 1px solid #ddd;
@@ -74,7 +82,7 @@ export default {
   border-bottom: 1px solid #ddd;
 }
 .year {
-  background: #ddd;
+  background: #f2f2f2;
   justify-content: center;
   font-size: 20px;
 }
@@ -83,5 +91,14 @@ export default {
 }
 .px-0 {
   padding: 0px;
+}
+.box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .flex-spacing {
+    display: flex;
+    flex-grow: 1;
+  }
 }
 </style>

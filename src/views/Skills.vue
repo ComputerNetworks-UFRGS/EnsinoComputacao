@@ -52,7 +52,16 @@ export default {
     Skills.years()
       .then(res => res.data)
       .then(years => {
+        for (let i in years) {
+          for (let j in years[i].objects) {
+            years[i].objects[j] = {
+              isOpen: false,
+              skills: years[i].objects[j]
+            };
+          }
+        }
         this.years = years;
+        console.log(this.years);
       })
       .finally(() => {
         this.isLoading = false;
@@ -75,5 +84,28 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.habilidades {
+  .modal-content {
+    height: 100%;
+    .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .card-content {
+        display: flex;
+        flex-grow: 1;
+        .content {
+          width: 100%;
+        }
+      }
+
+      .content figure {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    }
+  }
+}
 </style>
