@@ -35,6 +35,24 @@
       </div>
 
       <div class="field">
+        <label class="label">Ano recomendado</label>
+        <div class="control">
+          <div class="select">
+            <select v-model="form.age_group_id">
+              <option
+                :value="age_group.id"
+                v-for="age_group of age_groups"
+                :key="age_group.id"
+              >{{ age_group.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="help is-danger" v-if="errors.age_group_id.length > 0">
+          <div v-for="error in errors.age_group_id" :key="error">{{ error }}</div>
+        </div>
+      </div>
+
+      <div class="field">
         <label class="label">Eixo de ensino</label>
         <div class="control">
           <div class="select">
@@ -66,6 +84,7 @@
 <script>
 import Axis from "@/services/axis";
 import Objects from "@/services/object";
+import AgeGroups from "@/services/age-group";
 
 export default {
   data() {
@@ -74,14 +93,17 @@ export default {
       form: {
         name: "",
         description: "",
-        learning_axis_id: ""
+        learning_axis_id: "",
+        age_group_id: ""
       },
       errors: {
         name: [],
         description: [],
-        learning_axis_id: []
+        learning_axis_id: [],
+        age_group_id: []
       },
-      axis: []
+      axis: [],
+      age_groups: []
     };
   },
   created() {
@@ -102,6 +124,13 @@ export default {
       .then(axis => {
         this.axis = axis;
       });
+
+    AgeGroups.list()
+      .then(res => res.data)
+      .then(res => res.data)
+      .then(age_groups => {
+        this.age_groups = age_groups;
+      });
   },
   methods: {
     create() {
@@ -112,7 +141,8 @@ export default {
       let data = {
         name: this.form.name,
         description: this.form.description,
-        learning_axis_id: this.form.learning_axis_id
+        learning_axis_id: this.form.learning_axis_id,
+        age_group_id: this.form.age_group_id
       };
 
       let request = "";
@@ -136,8 +166,7 @@ export default {
       this.$dialog.confirm({
         message: "Confirma exclusão de objeto?",
         onConfirm: () => {
-          Objects.delete(this.objectId)
-          .finally(() => {
+          Objects.delete(this.objectId).finally(() => {
             this.$router.push("/dash/objetos/");
           });
         }

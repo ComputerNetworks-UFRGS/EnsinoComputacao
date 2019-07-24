@@ -1,4 +1,4 @@
-# compeduba
+# EnsinoComputacao
 
 ## Project setup
 ```

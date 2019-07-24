@@ -1,5 +1,5 @@
 <template>
-  <section class="contact-page">
+  <section class="contact-page pd">
     <div class="container">
       <br>
       <div class="columns is-centered">

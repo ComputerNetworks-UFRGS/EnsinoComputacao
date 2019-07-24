@@ -1,19 +1,10 @@
 <template>
-  <section class="container">sobre...</section>
+  <section class="container pd">Sobre...</section>
 </template>
 <script>
 export default {
-  components: {},
-  data() {
-    return {
-      yearsMode: false
-    };
-  }
-};
-</script>
-<style>
-.graphContainer {
-  display: block;
-  margin: 0 auto;
+  
 }
-</style>
+</script>
+
+<style></style>;

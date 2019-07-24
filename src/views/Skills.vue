@@ -1,5 +1,5 @@
 <template>
-  <section class="habilidades pt">
+  <section class="habilidades pd">
     <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
       <div class="card">
         <header class="card-header">
@@ -11,7 +11,12 @@
           </div>
         </div>
         <footer class="card-footer">
-          <a href="#!" class="card-footer-item" @click="closeListTasks">Ok, fechar</a>
+          <a href="#!" class="card-footer-item" @click.prevent="closeListTasks">
+            <span class="icon">
+              <i class="fas fa-times"></i>
+            </span>
+            <span>Voltar</span>
+          </a>
         </footer>
       </div>
     </b-modal>
@@ -19,6 +24,7 @@
     <div class="container">
       <skill-List :years="years" @click="listTasks"></skill-List>
     </div>
+    <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
   </section>
 </template>
 
@@ -35,16 +41,30 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       years: {},
       selectedSkill: false,
       tasks: []
     };
   },
   mounted() {
+    this.isLoading = true;
     Skills.years()
       .then(res => res.data)
       .then(years => {
-        this.years = years
+        for (let i in years) {
+          for (let j in years[i].objects) {
+            years[i].objects[j] = {
+              isOpen: false,
+              skills: years[i].objects[j]
+            };
+          }
+        }
+        this.years = years;
+        console.log(this.years);
+      })
+      .finally(() => {
+        this.isLoading = false;
       });
   },
   methods: {
@@ -64,5 +84,28 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.habilidades {
+  .modal-content {
+    height: 100%;
+    .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .card-content {
+        display: flex;
+        flex-grow: 1;
+        .content {
+          width: 100%;
+        }
+      }
+
+      .content figure {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    }
+  }
+}
 </style>
