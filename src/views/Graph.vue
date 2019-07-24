@@ -28,7 +28,7 @@
           </div>
           <div v-if="currentMode == 'gojs'">
             <ModalTasks :show="tasksModal" @close="closeModal"></ModalTasks>
-            <GojsTest @nodeClicked="openModal"></GojsTest>
+            <GojsTest :graph-id="graph.id" @nodeClicked="openModal"></GojsTest>
           </div>
           <div v-if="currentMode == 'years'">
             <dependency-highlight
@@ -76,7 +76,8 @@ export default {
       });
   },
   methods: {
-    openModal(id) {
+    openModal(node) {
+      console.log('id', node)
       this.tasksModal = true;
     },
     closeModal() {

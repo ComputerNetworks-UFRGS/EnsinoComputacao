@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <div class="columns">
       <div class="column is-6">
         <div class="columns">
@@ -9,7 +9,7 @@
             <button class="button is-primary is-large" @click="setYearsModeFalse()">Tudo</button>
           </div>
           <div class="column is-6">
-            <years-dropdown @selectYear="selectYear"/>
+            <years-dropdown @selectYear="selectYear" />
           </div>
         </div>
       </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script id="sample">
+import Graphs from "@/services/graph";
 import go, { Transaction } from "../../node_modules/gojs/release/go-debug.js";
 import json from "@/assets/data.json";
 import YearsDropdown from "@/components/YearsDropdown.vue";
@@ -29,15 +30,39 @@ export default {
   components: {
     YearsDropdown
   },
-  props: {},
+  props: ["graphId"],
   data() {
     return {
       builder: null,
       graph: null,
-      nodes: json.nodes,
-      edges: json.links,
+      nodes: [],
+      edges: [],
       selectedYear: -1
     };
+  },
+  mounted() {
+    Graphs.detail(this.graphId, {
+      view: "gojs"
+    })
+      .then(res => res.data)
+      .then(res => res.data)
+      .then(graph => {
+        this.edges = graph.edges;
+        this.nodes = graph.nodes;
+
+        this.builder = go.GraphObject.make;
+        var $ = this.builder;
+
+        var grafo = $(go.Diagram, "grafoTeste", {
+          hoverDelay: 15,
+          "undoManager.isEnabled": true,
+          allowHorizontalScroll: false,
+          allowVerticalScroll: false
+        });
+
+        this.graph = grafo;
+        this.buildGraph();
+      });
   },
   methods: {
     buildGraph() {
@@ -50,16 +75,14 @@ export default {
 
       var groups = [];
 
-      console.log(this.yearsMode);
-
       this.nodes.forEach(node => {
         if (this.yearsMode) {
           var tempNode = {
             key: node.id,
-            text: node.content.text,
-            color: node.content.color,
-            year: node.year,
-            group: node.year
+            text: node.title,
+            color: "#99ef9d",
+            year: node.age_group.code,
+            group: node.age_group.code
           };
           nodeDataArray.push(tempNode);
           if (groups.indexOf(tempNode.group) === -1) {
@@ -73,9 +96,9 @@ export default {
         } else {
           var tempNodeYears = {
             key: node.id,
-            text: node.content.text,
-            color: node.content.color,
-            year: node.year
+            text: node.title,
+            color: "#99ef9d",
+            year: node.age_group.code
           };
           if (this.selectedYear === -1) {
             nodeDataArray.push(tempNodeYears);
@@ -210,8 +233,7 @@ export default {
     },
     nodeClicked(e, obj) {
       var node = obj.part;
-      //console.log("sal");
-      this.$emit("nodeClicked", node.data.key);
+      this.$emit("nodeClicked", node.key);
     },
     selectYear(year) {
       this.selectedYear = year;
@@ -226,20 +248,6 @@ export default {
         return false;
       }
     }
-  },
-  mounted() {
-    this.builder = go.GraphObject.make;
-    var $ = this.builder;
-
-    var grafo = $(go.Diagram, "grafoTeste", {
-      hoverDelay: 15,
-      "undoManager.isEnabled": true,
-      allowHorizontalScroll: false,
-      allowVerticalScroll: false
-    });
-
-    this.graph = grafo;
-    this.buildGraph();
   }
 };
 </script>
