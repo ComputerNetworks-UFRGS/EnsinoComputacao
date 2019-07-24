@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="steps is-vertical">
+    <div class="steps" :class="{'is-vertical': isVertical}">
       <div v-for="step of steps" :key="step.id" class="step">
         <div
           v-for="node of step"
@@ -12,11 +12,7 @@
               'node-dependent': nodes[node.id].isDependent,
               'node-current': nodes[node.id].isSelected
           }"
-        >
-          <!-- {{ node.id }}) -->
-          <!-- [{{ node.step }}] -->
-          {{ node.title }}
-        </div>
+        >{{ node.title }}</div>
         <br />
       </div>
     </div>
@@ -38,7 +34,18 @@ import _ from "lodash";
 
 export default {
   name: "dependency-highlight",
-  props: ["viewMode", "graphId"],
+  props: {
+    viewMode: {
+      type: undefined
+    },
+    graphId: {
+      type: undefined
+    },
+    isVertical: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       steps: [],
@@ -154,9 +161,9 @@ export default {
   flex-direction: unset!important;
   align-items: flex-start!important;
   .step {
-    flex-direction: column;
+    flex-direction: column!important;
     .node {
-      margin-bottom: 8px;
+      margin-bottom: 8px!important;
     }
   }
 }

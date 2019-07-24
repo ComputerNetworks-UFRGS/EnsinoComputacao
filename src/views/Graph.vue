@@ -23,6 +23,7 @@
               key="steps"
               :view-mode="'steps'"
               :graph-id="graph.id"
+              :is-vertical="true"
             ></dependency-highlight>
           </div>
           <div v-if="currentMode == 'gojs'">
@@ -48,7 +49,6 @@ import Graphs from "@/services/graph";
 import DependencyHighlight from "@/components/DependencyHighlight";
 import GojsTest from "@/components/GojsTest";
 import ModalTasks from "@/components/ModalTasks";
-// import json from "@/assets/data.json";
 
 export default {
   components: {
