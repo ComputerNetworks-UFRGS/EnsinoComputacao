@@ -5,7 +5,7 @@
         <div class="container">
           <h1 class="title cursor" @click="$router.push('/atividades')">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            <!-- {{ task.title }} -->
+            {{ task.title }}
           </h1>
           <!-- <h2 class="subtitle" v-if="task.user">Criado por: {{ task.user.name }}</h2> -->
         </div>
@@ -19,12 +19,27 @@
 </template>
 <script>
 import TaskDetail from "@/components/TaskDetail";
+import Tasks from "@/services/task";
 
 export default {
   components: {
     TaskDetail
-  }
-};
+  },
+  data() {
+    return {
+      task: {}
+    };
+  },
+  created() {
+    Tasks.detail(this.$route.params.id)
+      .then(res => res.data)
+      .then(task => {
+        this.task = task;
+      });
+  },
+}
+
+
 </script>
 
 <style lang="scss">
