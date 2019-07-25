@@ -56,26 +56,8 @@ export default {
       return this.show;
     }
   },
-  methods: {
-    add() {
-      let formData = new FormData();
-      formData.append("title", this.attachment.title);
-      formData.append("description", this.attachment.description);
-      formData.append("file", this.file);
-      this.reset();
-      this.$emit("add", formData);
-    },
-    reset() {
-      this.description = {
-        title: "",
-        description: ""
-      };
-      this.file = null;
-    }
-  },
-  mounted() {
-    // console.log("oi ", this.$props.show);
-  }
+  methods: {},
+  mounted() {}
 };
 </script>
 
