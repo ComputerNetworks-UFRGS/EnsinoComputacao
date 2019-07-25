@@ -1,35 +1,55 @@
 <template>
-  <section class="atividades pt">
+  <section class="atividades pd">
     <div class="container">
       <div class="columns">
-        <div class="column is-4">
-          <div class="field">
-            <label class="label">Ano recomendado</label>
-          </div>
-          <div class="field">
-            <b-radio v-model="filters.age" native-value="todos">Todos os anos</b-radio>
-          </div>
-          <div class="field">
-            <b-radio v-model="filters.age" native-value="iniciais">Anos iniciais</b-radio>
-          </div>
-          <div class="field">
-            <b-radio v-model="filters.age" native-value="finais">Anos finais</b-radio>
-          </div>
-          <div class="field">
-            <b-radio v-model="filters.age" native-value="medio">Ensino médio</b-radio>
-          </div>
-          <br />
-          <div class="field">
-            <label class="label">Tipo de atividade</label>
-          </div>
-          <div class="field">
-            <b-checkbox v-model="filters.plugged.yes">Plugada</b-checkbox>
-          </div>
-          <div class="field">
-            <b-checkbox v-model="filters.plugged.no">Desplugada</b-checkbox>
-          </div>
+        <div class="column is-narrow">
+          <button
+            @click="isFiltersOpen = !isFiltersOpen"
+            class="is-hidden-tablet button button is-light"
+            :class="{'is-menu-open': isFiltersOpen}"
+          >
+            <span class="icon">
+              <i class="fas" :class="'fa-sliders-h'"></i>
+            </span>
+            <span>Filtros</span>
+            <span class="icon">
+              <i
+                class="fas"
+                :class="{
+            'fa-angle-down': isFiltersOpen,
+            'fa-angle-right': !isFiltersOpen,
+          }"
+              ></i>
+            </span>
+          </button>
 
-          <br />
+          <div class="filters" :class="{'is-hidden-mobile': !isFiltersOpen}">
+            <div class="field">
+              <label class="label">Ano recomendado</label>
+            </div>
+            <div class="field">
+              <b-radio v-model="filters.age" native-value="todos">Todos os anos</b-radio>
+            </div>
+            <div class="field">
+              <b-radio v-model="filters.age" native-value="iniciais">Anos iniciais</b-radio>
+            </div>
+            <div class="field">
+              <b-radio v-model="filters.age" native-value="finais">Anos finais</b-radio>
+            </div>
+            <div class="field">
+              <b-radio v-model="filters.age" native-value="medio">Ensino médio</b-radio>
+            </div>
+            <div class="field">
+              <label class="label">Tipo de atividade</label>
+            </div>
+            <div class="field">
+              <b-checkbox v-model="filters.plugged.yes">Plugada</b-checkbox>
+            </div>
+            <div class="field">
+              <b-checkbox v-model="filters.plugged.no">Desplugada</b-checkbox>
+            </div>
+          </div>
+          <!-- <br />
           <div class="field">
             <label class="label">Objeto de conhecimento</label>
           </div>
@@ -47,7 +67,7 @@
                 </b-checkbox>
               </div>
             </div>
-          </ul>
+          </ul>-->
         </div>
         <div class="column">
           <task-list :tasks="tasks"></task-list>
@@ -84,26 +104,28 @@ export default {
         finais: ["06", "07", "08", "09"],
         medio: ["EM"]
       },
-      tree: {}
+      tree: {},
+      isFiltersOpen: false
     };
   },
   mounted() {
     this.fetchTasks();
-    Skills.tree()
-      .then(res => res.data)
-      .then(stage => {
-        for (let axis of stage.axis) {
-          this.$set(axis, "active", false);
-          for (let object of axis.objects) {
-            this.$set(object, "active", false);
-          }
-        }
-        this.tree = stage.axis;
-      })
+    // Skills.tree()
+    //   .then(res => res.data)
+    //   .then(stage => {
+    //     for (let axis of stage.axis) {
+    //       this.$set(axis, "active", false);
+    //       for (let object of axis.objects) {
+    //         this.$set(object, "active", false);
+    //       }
+    //     }
+    //     this.tree = stage.axis;
+    //   })
   },
   methods: {
     fetchTasks() {
-      this.isLoading = true
+      this.isLoading = true;
+      // this.isFiltersOpen = false;
       let params = {};
       if (this.filters.age !== "todos") {
         params["ages"] = this.age_groups[this.filters.age];
@@ -129,8 +151,8 @@ export default {
         .then(res => res.data)
         .then(tasks => (this.tasks = tasks))
         .finally(() => {
-          this.isLoading = false
-        })
+          this.isLoading = false;
+        });
     },
     toggleObject(object) {
       object.active = !object.active;
@@ -153,8 +175,26 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .cursor {
   cursor: pointer;
+}
+@media (min-width: 768px) {
+  .filters {
+    max-width: 200px;
+  }
+}
+@media (max-width: 768px) {
+  .filters {
+    padding: 12px;
+    background: #f5f5f5;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+  .is-menu-open {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
 }
 </style>

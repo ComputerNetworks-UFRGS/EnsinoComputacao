@@ -1,71 +1,61 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
+      <app-header-buttons class="is-hidden-desktop is-pulled-right"></app-header-buttons>
       <div class="navbar-brand">
         <router-link class="navbar-item" to="/">
-          <img src="img/brand/color.png" alt="EduSBC">
+          <img src="img/brand/color.png" alt="compeduba" />
         </router-link>
-
-        <a
-          role="button"
-          class="navbar-burger burger"
-          aria-label="menu"
-          aria-expanded="false"
-          @click="isMenuOpen = !isMenuOpen"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
       </div>
 
-      <div class="navbar-menu" :class="{'is-active': isMenuOpen}" @click="isMenuOpen = false">
+      <div class="navbar-menu is-active">
         <div class="navbar-start">
           <router-link to="/atividades" class="navbar-item">Atividades</router-link>
-          <router-link to="/habilidades" class="navbar-item">Habilidades</router-link>
-          <router-link to="/classificacao" class="navbar-item">Classificação</router-link>
-          <router-link to="/grafo" class="navbar-item">Grafos</router-link>
+          <router-link to="/classificacao" class="navbar-item">Objetos de aprendizado</router-link>
+          <router-link to="/planos-de-ensino" class="navbar-item">Planos de ensino</router-link>
         </div>
-
-        <div class="navbar-end" v-if="isAuth">
-          <div class="navbar-item">
-            <div class="buttons">
-              <router-link to="/dash/atividades/" class="button is-primary">{{ $store.state.user.name }}</router-link>
-            </div>
-          </div>
-        </div>
-        <div class="navbar-end" v-else>
-          <div class="navbar-item">
-            <div class="buttons">
-              <router-link to="/login" class="button is-light">Entrar</router-link>
-              <router-link to="/cadastro" class="button is-primary">
-                <span class="nav-link-inner--text">Criar conta</span>
-              </router-link>
-            </div>
-          </div>
-        </div>
+        <app-header-buttons class="is-hidden-mobile is-hidden-tablet-only"></app-header-buttons>
       </div>
     </div>
   </nav>
 </template>
 <script>
-import AuthService from "@/services/auth";
+import AppHeaderButtons from "./AppHeaderButtons";
 
 export default {
-  data() {
-    return {
-      isAuth: false,
-      isMenuOpen: false,
-    };
-  },
-  created() {
-    this.isAuth = AuthService.loggedIn();
+  components: {
+    AppHeaderButtons
   }
 };
 </script>
-<style>
-.navbar .navbar-start .router-link-exact-active {
-  background: #7957d5!important;
-  color: white!important; 
+<style scoped lang="scss">
+.navbar {
+  background: #fafafa !important;
+}
+.navbar .navbar-start .is-active {
+  background: #7957d5 !important;
+  color: white !important;
+}
+@media (max-width: 1023px) {
+  .navbar-menu {
+    padding: 0px;
+    box-shadow: unset;
+    .navbar-start {
+      background: #fafafa;
+      display: flex;
+      justify-content: center;
+      .navbar-item {
+        flex-shrink: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 1rem;
+        font-size: 0.9rem;
+        padding: 12px 8px;
+        width: 100%;
+      }
+    }
+  }
 }
 </style>

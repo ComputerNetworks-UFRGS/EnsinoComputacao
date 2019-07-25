@@ -31,6 +31,7 @@
 </template>
 
 <script id="sample">
+import Graphs from "@/services/graph";
 import go, { Transaction } from "../../node_modules/gojs/release/go-debug.js";
 import Graph from "@/services/graph";
 import json from "@/assets/data.json";
@@ -41,7 +42,7 @@ export default {
     YearsDropdown,
     ModalGraphFilters
   },
-  props: {},
+  props: ["graphId"],
   data() {
     return {
       builder: null,
@@ -57,6 +58,30 @@ export default {
       filtersModal: false,
       isLoading: false
     };
+  },
+  mounted() {
+    Graphs.detail(this.graphId, {
+      view: "gojs"
+    })
+      .then(res => res.data)
+      .then(res => res.data)
+      .then(graph => {
+        this.edges = graph.edges;
+        this.nodes = graph.nodes;
+
+        this.builder = go.GraphObject.make;
+        var $ = this.builder;
+
+        var grafo = $(go.Diagram, "grafoTeste", {
+          hoverDelay: 15,
+          "undoManager.isEnabled": true,
+          allowHorizontalScroll: false,
+          allowVerticalScroll: false
+        });
+
+        this.graph = grafo;
+        this.buildGraph();
+      });
   },
   methods: {
     buildGraph() {
@@ -76,6 +101,40 @@ export default {
         .finally(() => {
           this.isLoading = false;
         });
+      var groups = [];
+
+      this.nodes.forEach(node => {
+        if (this.yearsMode) {
+          var tempNode = {
+            key: node.id,
+            text: node.title,
+            color: "#99ef9d",
+            year: node.age_group.code,
+            group: node.age_group.code
+          };
+          nodeDataArray.push(tempNode);
+          if (groups.indexOf(tempNode.group) === -1) {
+            var tempGroup = {
+              key: tempNode.group,
+              isGroup: true
+            };
+            nodeDataArray.push(tempGroup);
+            groups.push(tempNode.group);
+          }
+        } else {
+          var tempNodeYears = {
+            key: node.id,
+            text: node.title,
+            color: "#99ef9d",
+            year: node.age_group.code
+          };
+          if (this.selectedYear === -1) {
+            nodeDataArray.push(tempNodeYears);
+          } else if (this.selectedYear === tempNodeYears.year) {
+            nodeDataArray.push(tempNodeYears);
+          }
+        }
+      });
 
       console.log(rawNodes, rawEdges);
 
@@ -318,20 +377,6 @@ export default {
         return false;
       }
     }
-  },
-  mounted() {
-    this.builder = go.GraphObject.make;
-    var $ = this.builder;
-
-    var grafo = $(go.Diagram, "grafoTeste", {
-      hoverDelay: 15,
-      "undoManager.isEnabled": true,
-      allowHorizontalScroll: false,
-      allowVerticalScroll: false
-    });
-
-    this.graph = grafo;
-    this.buildGraph();
   }
 };
 </script>

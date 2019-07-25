@@ -1,5 +1,5 @@
 <template>
-  <section class="register">
+  <section class="register pd">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-5">
