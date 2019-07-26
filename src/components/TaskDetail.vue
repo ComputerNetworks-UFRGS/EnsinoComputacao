@@ -16,7 +16,7 @@
             <span v-html="task.description"></span>
           </div>
         </div>
-        <div class="column">
+        <div class="column is-4 right-menu">
           <div v-if="task.is_plugged">
             <b>Atividade plugada</b>
             <br />Requer uso de computadores.
@@ -28,7 +28,8 @@
 
           <div v-if="task.skills && task.skills.length > 0">
             <br />
-            <b>Habilidade(s) trabalhada(s)</b>
+            <div><b>Habilidade(s) trabalhada(s)</b></div>
+
             <span v-for="skill of task.skills" :key="skill.id">
               <span class="tag cursor" @click="skill.showDescription = !skill.showDescription">
                 <span class="icon">
@@ -111,6 +112,9 @@ export default {
 </script>
 <style lang="scss">
 .task-detail {
+  .tag {
+    margin: 6px 8px 0px 0px;
+  }
   .task {
     img {
       width: 100%;
@@ -129,6 +133,17 @@ export default {
     p,
     blockquote {
       margin-bottom: 0px !important;
+    }
+  }
+  .card-content {
+    // margin-top: 0px;
+    padding-right: 0.75rem;
+    padding-top: 0.75rem;
+    .right-menu {
+      background: #fafafa;
+    }
+    .columns {
+      width: 100%;
     }
   }
 }

@@ -22,11 +22,18 @@
           <div class="card-content" :class="{'is-hidden': !skills.isOpen}">
             <div class="content">
               <div class="columns is-multiline">
-                <div class="column is-6 is-4-widescreen" v-for="skill of skills.skills" :key="skill.habilidade_id">
+                <div
+                  class="column is-6 is-4-widescreen"
+                  v-for="skill of skills.skills"
+                  :key="skill.habilidade_id"
+                >
                   <div class="box" @click="$emit('click', skill)" :class="'skill-'+skill.eixo_code">
                     {{ skill.habilidade_nome }}
-                    <div class="flex-spacing"></div>                    
-                    <button class="button is-light is-small is-fullwidth">Ver atividades</button>
+                    <div class="flex-spacing"></div>
+                    <button class="button is-light is-small is-fullwidth">
+                      <span v-if="edit">Ver atividades</span>
+                      <span v-else>Selecionar atividade</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -42,7 +49,21 @@
 export default {
   name: "skill-List",
   props: {
-    years: Object
+    years: Object,
+    edit: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted() {
+    for (let i in this.years) {
+      for (let j in this.years[i].objects) {
+        this.$set(this.years[i].objects, j, {
+          isOpen: false,
+          skills: this.years[i].objects[j]
+        });
+      }
+    }
   }
 };
 </script>
