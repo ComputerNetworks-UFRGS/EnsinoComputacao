@@ -40,6 +40,8 @@ import GraphList from "./views/dash/graph/GraphList"
 import GraphForm from "./views/dash/graph/GraphForm"
 import GraphEdit from "./views/dash/graph/GraphEdit"
 
+import AxisDiagram from "./views/AxisDiagram"
+
 
 Vue.use(Router);
 
@@ -53,6 +55,12 @@ let router = new Router({
         header: AppHeader,
         default: Home,
         footer: AppFooter
+      }
+    },
+    {
+      path: '/teste',
+      components: {
+        default: AxisDiagram
       }
     },
     {
