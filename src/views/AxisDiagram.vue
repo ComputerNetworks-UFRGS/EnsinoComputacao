@@ -1,12 +1,19 @@
 <template>
   <div>
+    <button @click="exportPositions()">Export</button>
     <div id="teste">
       <div
         v-for="node of nodes"
         :key="node.id"
         :id="node.id"
+        :ref="node.id"
         class="node"
-        :class="{'hover': node.hovered}"
+        :class="{
+          'node-hover': node.hovered,
+          'node-highlight': node.highlight,
+          'node-dependent': node.isDependent,
+          'node-current': node.isSelected
+        }"
         :style="{
           'top': node.y,
           'left': node.x
@@ -24,64 +31,80 @@
   </div>
 </template>
 <script>
+import Graphs from "@/services/graph";
 import { jsPlumb } from "../../node_modules/jsplumb/dist/js/jsplumb";
 
 export default {
   data() {
     return {
-      x: 0,
-      y: 0,
-      plumb: null,
-      nodes: [
-        { id: "da", title: "las dad", x: "200px", y: "50px", hovered: false },
-        { id: "db", title: "div b", x: "50px", y: "200px", hovered: false },
-        { id: "dc", title: "div c", x: "300px", y: "400px", hovered: false },
-        { id: "dd", title: "div a", x: "400px", y: "200px", hovered: false }
-      ],
-      edges: [
-        { source: "da", target: "db" },
-        { source: "da", target: "dc" },
-        { source: "db", target: "dc" },
-        { source: "da", target: "dd" }
-      ]
+      nodes: [],
+      edges: []
     };
   },
   methods: {
-    teste() {
-      this.plumb(this.x, this.y);
-    },
     nodeClick(node) {
-      console.log("nodeclick", node.id);
+      // console.log("nodeclick", node.id);
     },
     nodeMouseover(node) {
-      console.log("mouseover", node.id);
+      // console.log("mouseover", node.id);
       node.hovered = true;
     },
     nodeMoueleave(node) {
-      console.log("mouseleave", node.id);
+      // console.log("mouseleave", node.id);
       node.hovered = false;
+    },
+    exportPositions() {
+      for (let node of this.nodes) {
+        console.log(
+          node.id,
+          this.$refs[node.id][0].style.top,
+          this.$refs[node.id][0].style.left
+        );
+      }
     }
   },
   mounted() {
-    let cmp = this;
+    Graphs.detail(1, {
+      view: "jsplumb"
+    })
+      .then(res => res.data)
+      .then(res => res.data)
+      .then(graph => {
+        for (let node of graph.nodes) {
+          node["highlight"] = false;
+          node["isDependent"] = false;
+          node["isSelected"] = false;
+          // node["step"] = i;
+          // this.$set(this.nodes, node.id, node);
+        }
+        this.nodes = graph.nodes;
+        this.edges = graph.edges;
+        // console.log('steps', graph.steps)
 
-    jsPlumb.ready(function() {
-      let pb = jsPlumb.getInstance({
-        Container: "teste",
-        Connector: ["Bezier", { curviness: 50 }],
-        Endpoint: ["Blank", { radius: 3 }],
-        Overlays: [["Arrow", { location: 1, width: 8, length: 8 }]],
-        Anchors: ["Bottom", "Top"]
+        let cmp = this;
+
+        setTimeout(() => {
+          jsPlumb.ready(function() {
+            let pb = jsPlumb.getInstance({
+              Container: "teste",
+              Connector: ["Bezier", { curviness: 50 }],
+              Endpoint: ["Blank", { radius: 3 }],
+              Overlays: [["Arrow", { location: 1, width: 8, length: 8 }]],
+              Anchors: ["Bottom", "Top"]
+            });
+
+            pb.batch(function() {
+              for (let edge of cmp.edges) {
+                pb.connect(edge);
+              }
+
+              for (let node of cmp.nodes) {
+                pb.draggable(node.id);
+              }
+            });
+          });
+        }, 100);
       });
-
-      for (let edge of cmp.edges) {
-        pb.connect(edge);
-      }
-
-      for (let node of cmp.nodes) {
-        pb.draggable(node.id);
-      }
-    });
   }
 };
 </script>
@@ -97,8 +120,10 @@ export default {
     border: 1px solid #ddd;
     cursor: pointer;
     border-radius: 20px;
+    width: 100px;
+    font-size: 12px;
 
-    &.hover {
+    &.node-hover {
       background: #dddddd;
     }
 
