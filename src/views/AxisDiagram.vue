@@ -9,7 +9,6 @@
         :ref="node.id"
         class="node"
         :class="{
-          'node-hover': node.hovered,
           'node-highlight': node.highlight,
           'node-dependent': node.isDependent,
           'node-current': node.isSelected
@@ -37,31 +36,10 @@ import { jsPlumb } from "../../node_modules/jsplumb/dist/js/jsplumb";
 export default {
   data() {
     return {
-      nodes: [],
-      edges: []
+      nodes: {},
+      edges: [],
+      pb: null
     };
-  },
-  methods: {
-    nodeClick(node) {
-      // console.log("nodeclick", node.id);
-    },
-    nodeMouseover(node) {
-      // console.log("mouseover", node.id);
-      node.hovered = true;
-    },
-    nodeMoueleave(node) {
-      // console.log("mouseleave", node.id);
-      node.hovered = false;
-    },
-    exportPositions() {
-      for (let node of this.nodes) {
-        console.log(
-          node.id,
-          this.$refs[node.id][0].style.top,
-          this.$refs[node.id][0].style.left
-        );
-      }
-    }
   },
   mounted() {
     Graphs.detail(1, {
@@ -79,35 +57,112 @@ export default {
         }
         this.nodes = graph.nodes;
         this.edges = graph.edges;
-        // console.log('steps', graph.steps)
 
         let cmp = this;
 
         setTimeout(() => {
           jsPlumb.ready(function() {
-            let pb = jsPlumb.getInstance({
+            cmp.pb = jsPlumb.getInstance({
               Container: "teste",
-              Connector: ["Bezier", { curviness: 50 }],
+              // Connector: ["Straight"],
+              Connector: ["Bezier", { curviness: 30 }],
               Endpoint: ["Blank", { radius: 3 }],
               Overlays: [["Arrow", { location: 1, width: 8, length: 8 }]],
               Anchors: ["Bottom", "Top"]
             });
 
-            pb.batch(function() {
+            cmp.pb.batch(function() {
               for (let edge of cmp.edges) {
-                pb.connect(edge);
+                edge["cssClass"] = "edd";
+                console.log("edge", edge);
+                cmp.pb.connect(edge);
               }
 
               for (let node of cmp.nodes) {
-                pb.draggable(node.id);
+                cmp.pb.draggable(node.id);
               }
             });
           });
         }, 100);
       });
+  },
+
+  methods: {
+    nodeClick(node) {
+      this.clearHighlight();
+      this.pb.select({ source: node.id }).setPaintStyle({
+        stroke: "black",
+        strokeWidth: 3
+      });
+
+      node.isSelected = true;
+      this.highlightNodeUp(node);
+      this.highlightNodeDown(node);
+    },
+    nodeMouseover(node) {
+      // node.isSelected = true;
+      // this.highlightNodeUp(node.dependencies);
+      // this.highlightNodeDown(node);
+    },
+    nodeMoueleave(node) {
+      // this.clearHighlight();
+      // console.log("mouseleave", node.id);
+    },
+    clearHighlight() {
+      this.pb.select().setPaintStyle({
+        stroke: "#aaaaaa",
+        strokeWidth: 1
+      });
+      for (let node of this.nodes) {
+        node.isSelected = false;
+        node.highlight = false;
+        node.isDependent = false;
+      }
+    },
+    highlightNodeUp(node) {
+      for (let dependency of node.dependencies) {
+        let dep_node = this.nodes.find(i => i.id == "node-" + dependency);
+        dep_node.highlight = true;
+        this.pb.select({ 
+          source: dep_node.id,
+          target: node.id
+        }).setPaintStyle({
+          stroke: "black",
+          strokeWidth: 3
+        });
+        this.highlightNodeUp(dep_node);
+      }
+    },
+    highlightNodeDown(node) {
+      if (node.dependents) {
+        for (let dependent of node.dependents) {
+          let dep_node = this.nodes.find(i => i.id == "node-" + dependent);
+          if (dep_node && (true || dep_node.step == parseInt(dep_node.step) + 1)) {
+            dep_node.isDependent = true;
+          }
+        }
+      }
+    },
+    exportPositions() {
+      for (let node of this.nodes) {
+        // TODO...
+        console.log(
+          node.id,
+          this.$refs[node.id][0].style.top,
+          this.$refs[node.id][0].style.left
+        );
+      }
+    }
   }
 };
 </script>
+
+<style>
+.teste svg.edd path {
+  stroke: #ddd;
+  stroke-width: 1;
+}
+</style>
 
 <style lang="scss" scoped>
 #teste {
@@ -120,15 +175,22 @@ export default {
     border: 1px solid #ddd;
     cursor: pointer;
     border-radius: 20px;
-    width: 100px;
+    width: 140px;
     font-size: 12px;
 
-    &.node-hover {
-      background: #dddddd;
+    &.node-highlight {
+      background: #fffebe;
+    }
+    &.node-dependent {
+      background: #80ecff;
+    }
+    &.node-current {
+      background: #6ee974;
     }
 
     .node-content {
-      padding: 20px;
+      padding: 8px;
+      text-align: center;
     }
   }
 }
