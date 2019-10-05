@@ -2,12 +2,27 @@
   <div>
     <button @click="exportPositions()">Export</button>
     <div id="teste">
+      <div 
+        class="group" 
+        v-for="group of groups" 
+        :id="group.id" 
+        :key="group.id"
+        :ref="group.id"
+        :style="{
+          'top': group.y + 'px',
+          'left': group.x + 'px',
+          'height': group.height + 'px'
+        }">
+        <br>
+        ok...
+        <br>
+      </div>
       <div
+        class="node"
         v-for="node of nodes"
         :key="node.id"
         :id="node.id"
         :ref="node.id"
-        class="node"
         :class="{
           'node-highlight': node.highlight,
           'node-dependent': node.isDependent,
@@ -38,6 +53,26 @@ export default {
     return {
       nodes: {},
       edges: [],
+      groups: [
+        {
+          id: 'group1',
+          height: 100,
+          x: 0,
+          y: 0,
+        },
+        {
+          id: 'group2',
+          height: 200,
+          x: 0,
+          y: 0,
+        },
+        {
+          id: 'group3',
+          height: 300,
+          x: 0,
+          y: 0,
+        },
+      ],
       pb: null
     };
   },
@@ -52,11 +87,17 @@ export default {
           node["highlight"] = false;
           node["isDependent"] = false;
           node["isSelected"] = false;
-          // node["step"] = i;
-          // this.$set(this.nodes, node.id, node);
         }
         this.nodes = graph.nodes;
         this.edges = graph.edges;
+
+        // set groups position
+        let groupMarginTop = 12
+        let groupCurrPosTop = 0
+        for (let group of this.groups) {      
+          group.y = groupMarginTop + groupCurrPosTop
+          groupCurrPosTop += groupMarginTop + group.height
+        }
 
         let cmp = this;
 
@@ -72,15 +113,29 @@ export default {
             });
 
             cmp.pb.batch(function() {
+
+              for (let group of cmp.groups) {
+                cmp.pb.addGroup({
+                  el: cmp.$refs[group.id],
+                  id: group.id,
+                  constrain: true,
+                  anchor: "Continuous",
+                  endpoint: "Blank",
+                  droppable: false
+                });
+              }
+
               for (let edge of cmp.edges) {
                 edge["cssClass"] = "edd";
-                console.log("edge", edge);
                 cmp.pb.connect(edge);
               }
 
               for (let node of cmp.nodes) {
                 cmp.pb.draggable(node.id);
+                console.log('node.id', node.id, cmp.$refs[node.id][0])
+                cmp.pb.addToGroup("group1", cmp.$refs[node.id][0]);
               }
+
             });
           });
         }, 100);
@@ -121,7 +176,7 @@ export default {
     },
     highlightNodeUp(node) {
       for (let dependency of node.dependencies) {
-        let dep_node = this.nodes.find(i => i.id == "node-" + dependency);
+        let dep_node = this.nodes.find(i => i.id == "node" + dependency);
         dep_node.highlight = true;
         this.pb.select({ 
           source: dep_node.id,
@@ -136,7 +191,7 @@ export default {
     highlightNodeDown(node) {
       if (node.dependents) {
         for (let dependent of node.dependents) {
-          let dep_node = this.nodes.find(i => i.id == "node-" + dependent);
+          let dep_node = this.nodes.find(i => i.id == "node" + dependent);
           if (dep_node && (true || dep_node.step == parseInt(dep_node.step) + 1)) {
             dep_node.isDependent = true;
           }
@@ -164,11 +219,23 @@ export default {
 }
 </style>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
+body, html {
+  background: #444!important;
+}
+
 #teste {
   position: relative;
   height: 100%;
   border: 1px solid blue;
+
+  .group {
+    position: absolute;
+    background: #333;
+    border: 1px solid red;
+    width: 800px;
+  }
 
   .node {
     position: absolute;
@@ -177,6 +244,7 @@ export default {
     border-radius: 20px;
     width: 140px;
     font-size: 12px;
+    background: #888;
 
     &.node-highlight {
       background: #fffebe;
