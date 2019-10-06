@@ -39,6 +39,7 @@ import SkillForm from "./views/dash/skill/SkillForm"
 import GraphList from "./views/dash/graph/GraphList"
 import GraphForm from "./views/dash/graph/GraphForm"
 import GraphEdit from "./views/dash/graph/GraphEdit"
+import GraphEditPreview from "./views/dash/graph/GraphEditPreview"
 
 import AxisDiagram from "./views/AxisDiagram"
 
@@ -259,7 +260,17 @@ let router = new Router({
         },
         {
           path: 'curriculos/editar/:id',
+          component: GraphForm,
+          props: true
+        },
+        {
+          path: 'curriculos/editar/:id/criar',
           component: GraphEdit,
+          props: true
+        },
+        {
+          path: 'curriculos/editar/:id/visual',
+          component: GraphEditPreview,
           props: true
         },
       ]

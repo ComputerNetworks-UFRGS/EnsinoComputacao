@@ -17,7 +17,7 @@
         </div>
         <div v-else>
           <div class="columns graph-list" v-for="graph of graphs" :key="graph.id">
-            <div class="column is-10 nowrap-text">
+            <div class="column is-8 nowrap-text">
               {{ graph.title }}
               <small>{{ graph.description }}</small>
             </div>
@@ -29,6 +29,13 @@
                     :to="'/dash/curriculos/editar/' + graph.id"
                     class="button is-small"
                   >Editar</router-link>
+                </p>
+                <p class="control">
+                  <router-link
+                    v-auth="'curri.detail'"
+                    :to="'/dash/curriculos/editar/' + graph.id + '/criar'"
+                    class="button is-small"
+                  >Gerenciar objetos</router-link>
                 </p>
               </div>
               <div class="btn-group"></div>
