@@ -13,35 +13,30 @@
           'left': group.x + 'px',
           'height': group.height + 'px'
         }">
-        <br>
-        ok...
-        <br>
+        <div
+          class="node"
+          v-for="node of group.nodes"
+          :key="node.id"
+          :id="node.id"
+          :ref="node.id"
+          :class="{
+            'node-highlight': node.highlight,
+            'node-dependent': node.isDependent,
+            'node-current': node.isSelected
+          }"
+          :style="{
+            'top': node.y,
+            'left': node.x
+          }"
+          @click="nodeClick(node)"
+          @mouseover="nodeMouseover(node)"
+          @mouseleave="nodeMoueleave(node)"
+        >
+          <div class="node-content" v-html="node.title"></div>
+        </div>
       </div>
-      <div
-        class="node"
-        v-for="node of nodes"
-        :key="node.id"
-        :id="node.id"
-        :ref="node.id"
-        :class="{
-          'node-highlight': node.highlight,
-          'node-dependent': node.isDependent,
-          'node-current': node.isSelected
-        }"
-        :style="{
-          'top': node.y,
-          'left': node.x
-        }"
-        @click="nodeClick(node)"
-        @mouseover="nodeMouseover(node)"
-        @mouseleave="nodeMoueleave(node)"
-      >
-        <div class="node-content" v-html="node.title"></div>
-      </div>
+      
     </div>
-    <!-- <input type="text" v-model="x" />
-    <input type="text" v-model="y" />
-    <button @click="teste">aaa</button>-->
   </div>
 </template>
 <script>
@@ -51,28 +46,8 @@ import { jsPlumb } from "../../node_modules/jsplumb/dist/js/jsplumb";
 export default {
   data() {
     return {
-      nodes: {},
       edges: [],
-      groups: [
-        {
-          id: 'group1',
-          height: 100,
-          x: 0,
-          y: 0,
-        },
-        {
-          id: 'group2',
-          height: 200,
-          x: 0,
-          y: 0,
-        },
-        {
-          id: 'group3',
-          height: 300,
-          x: 0,
-          y: 0,
-        },
-      ],
+      groups: [],
       pb: null
     };
   },
@@ -83,18 +58,21 @@ export default {
       .then(res => res.data)
       .then(res => res.data)
       .then(graph => {
-        for (let node of graph.nodes) {
-          node["highlight"] = false;
-          node["isDependent"] = false;
-          node["isSelected"] = false;
+        for (let group of graph.groups) {
+          for (let node of group.nodes) {
+            node["highlight"] = false;
+            node["isDependent"] = false;
+            node["isSelected"] = false;
+          }
         }
-        this.nodes = graph.nodes;
         this.edges = graph.edges;
+        this.groups = graph.groups
 
         // set groups position
         let groupMarginTop = 12
         let groupCurrPosTop = 0
         for (let group of this.groups) {      
+          console.log('group', group.id)
           group.y = groupMarginTop + groupCurrPosTop
           groupCurrPosTop += groupMarginTop + group.height
         }
@@ -105,8 +83,9 @@ export default {
           jsPlumb.ready(function() {
             cmp.pb = jsPlumb.getInstance({
               Container: "teste",
-              // Connector: ["Straight"],
-              Connector: ["Bezier", { curviness: 30 }],
+              // Connector: ["Flowchart"],
+              Connector: ["Straight"],
+              // Connector: ["Bezier", { curviness: 30 }],
               Endpoint: ["Blank", { radius: 3 }],
               Overlays: [["Arrow", { location: 1, width: 8, length: 8 }]],
               Anchors: ["Bottom", "Top"]
@@ -116,24 +95,26 @@ export default {
 
               for (let group of cmp.groups) {
                 cmp.pb.addGroup({
-                  el: cmp.$refs[group.id],
+                  el: cmp.$refs[group.id][0],
                   id: group.id,
-                  constrain: true,
                   anchor: "Continuous",
                   endpoint: "Blank",
-                  droppable: false
+                  constrain: true,
+                  droppable: false,
+                  draggable: false,
                 });
+              }
+
+              for (let group of cmp.groups) {
+                for (let node of group.nodes) {
+                  cmp.pb.draggable(node.id);
+                  cmp.pb.addToGroup(group.id, cmp.$refs[node.id][0]);
+                }
               }
 
               for (let edge of cmp.edges) {
                 edge["cssClass"] = "edd";
                 cmp.pb.connect(edge);
-              }
-
-              for (let node of cmp.nodes) {
-                cmp.pb.draggable(node.id);
-                console.log('node.id', node.id, cmp.$refs[node.id][0])
-                cmp.pb.addToGroup("group1", cmp.$refs[node.id][0]);
               }
 
             });
@@ -168,15 +149,27 @@ export default {
         stroke: "#aaaaaa",
         strokeWidth: 1
       });
-      for (let node of this.nodes) {
-        node.isSelected = false;
-        node.highlight = false;
-        node.isDependent = false;
+      for (let group of this.groups) {
+        for (let node of group.nodes) {
+          node.isSelected = false;
+          node.highlight = false;
+          node.isDependent = false;
+        }
       }
+    },
+    getNode(id) {
+      for(let group of this.groups) {
+        for(let node of group.nodes) {
+          if(node.id == id) {
+            return node
+          }
+        } 
+      }
+      return undefined
     },
     highlightNodeUp(node) {
       for (let dependency of node.dependencies) {
-        let dep_node = this.nodes.find(i => i.id == "node" + dependency);
+        let dep_node = this.getNode("node" + dependency)
         dep_node.highlight = true;
         this.pb.select({ 
           source: dep_node.id,
@@ -191,7 +184,7 @@ export default {
     highlightNodeDown(node) {
       if (node.dependents) {
         for (let dependent of node.dependents) {
-          let dep_node = this.nodes.find(i => i.id == "node" + dependent);
+          let dep_node = this.getNode("node" + dependent)
           if (dep_node && (true || dep_node.step == parseInt(dep_node.step) + 1)) {
             dep_node.isDependent = true;
           }
@@ -199,13 +192,15 @@ export default {
       }
     },
     exportPositions() {
-      for (let node of this.nodes) {
-        // TODO...
-        console.log(
-          node.id,
-          this.$refs[node.id][0].style.top,
-          this.$refs[node.id][0].style.left
-        );
+      for(let group of this.groups) {
+        for (let node of group.nodes) {
+            // TODO...
+          console.log(
+            node.id,
+            this.$refs[node.id][0].style.top,
+            this.$refs[node.id][0].style.left
+          );
+        }
       }
     }
   }
@@ -232,7 +227,7 @@ body, html {
 
   .group {
     position: absolute;
-    background: #333;
+    background: rgba(1,1,1,0.5);
     border: 1px solid red;
     width: 800px;
   }
