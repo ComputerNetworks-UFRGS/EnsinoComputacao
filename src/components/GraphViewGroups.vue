@@ -51,7 +51,11 @@ import { jsPlumb } from "../../node_modules/jsplumb/dist/js/jsplumb";
 
 export default {
   name: 'graph-view-groups',
-  props: ['graphId'],
+  props: {
+    graphId: {
+      type: undefined,
+    },
+  },
   data() {
     return {
       edges: [],
@@ -61,10 +65,9 @@ export default {
   },
   mounted() {
 
-    Graphs.detail(8, {
+    Graphs.detail(this.graphId, {
       view: "jsplumb",
       groupByYear: 1,
-      groupByStep: 0, // TODO: ...
     })
       .then(res => res.data)
       .then(res => res.data)

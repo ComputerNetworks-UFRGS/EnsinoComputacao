@@ -1,10 +1,19 @@
 <template>
     <div>
-        <router-link :to="'/dash/curriculos/editar/' + $route.params.id" class="button is-default">Voltar</router-link>
-        <graph-view-groups 
-            :graph-id="$route.params.id" 
-            @exportPositions="exportPositions"></graph-view-groups>
-        <!-- <graph-view></graph-view> -->
+        <router-link :to="'/dash/curriculos/editar/' + $route.params.id + '/criar'" class="button is-default">Voltar</router-link>
+        <div v-if="graph && graph.id">
+            
+            <graph-view-groups 
+                v-if="graph.group_by_year"
+                :graph-id="graph.id"
+                @exportPositions="exportPositions"></graph-view-groups>
+            
+            <graph-view 
+                v-if="!graph.group_by_year"
+                :graph-id="graphId"
+                @exportPositions="exportPositions"></graph-view>
+
+        </div>
     </div>
 </template>
 
@@ -17,6 +26,26 @@ export default {
     components: {
         GraphViewGroups,
         GraphView
+    },
+    data () {
+        return {
+            graph: {},
+            graphId: false,
+        }
+    },
+    created() {
+        this.graphId = this.$route.params.id;
+        
+        if (this.graphId) {
+            Graphs.detail(this.graphId)
+                .then(res => res.data)
+                .then(graph => {
+                    this.graph = graph;
+                    console.log('graph', graph)
+                });
+        } else {
+            this.$router.push('/dash/curriculos')
+        }
     },
     methods: {
         exportPositions(positions) {

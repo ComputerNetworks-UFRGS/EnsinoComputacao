@@ -1,6 +1,6 @@
 <template>
     <div class="axis-diagram">
-        <button @click="exportPositions()">Export</button>
+        <button class="button is-info" @click="exportPositions()">Salvar posições</button>
         <div id="graph-view">
             <div class="node" v-for="node of nodes" :key="node.id" :id="node.id" :ref="node.id" :class="{
                             'node-highlight': node.highlight,
@@ -22,6 +22,11 @@ import { jsPlumb } from "../../node_modules/jsplumb/dist/js/jsplumb";
 
 export default {
     name: 'graph-view',
+    props: {
+        graphId: {
+            type: undefined,
+        },
+    },
     data() {
         return {
             edges: [],
@@ -31,7 +36,7 @@ export default {
     },
     mounted() {
 
-        Graphs.detail(1, {
+        Graphs.detail(this.graphId, {
                 view: "jsplumb",
                 groupByYear: 0,
             })
@@ -144,15 +149,17 @@ export default {
             }
         },
         exportPositions() {
-
-            for (let node of this.nodes) {
-                console.log(
-                    node.id,
-                    this.$refs[node.id][0].style.top,
-                    this.$refs[node.id][0].style.left
-                );
-            }
-        }
+            let positions = []
+            
+                for (let node of this.nodes) {
+                positions.push({
+                    id: parseInt(node.id.replace('node', '')),
+                    x: parseInt(this.$refs[node.id][0].style.left.replace('px', '')),
+                    y: parseInt(this.$refs[node.id][0].style.top.replace('px', ''))
+                })
+                }
+            this.$emit('exportPositions', positions);
+        },
     }
 };
 </script>
@@ -162,12 +169,7 @@ export default {
     #graph-view {
         position: relative;
         height: 100%;
-        border: 1px solid blue;
-        .group {
-            position: absolute;
-            background: rgba(1, 1, 1, 0.5);
-            border: 1px solid red;
-        }
+        
         .node {
             position: absolute;
             border: 1px solid #ddd;
