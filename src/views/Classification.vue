@@ -11,6 +11,9 @@
           Por eixo
           <span class="is-hidden-mobile">&nbsp;de ensino</span>
         </router-link>
+        <router-link to="/classificacao/eixos" class="button is-white">
+          Eixo por ano
+        </router-link>
       </div>
       <router-view></router-view>
     </div>

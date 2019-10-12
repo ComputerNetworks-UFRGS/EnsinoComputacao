@@ -8,6 +8,7 @@ import Tasks from "./views/Tasks.vue"
 import Task from "./views/Task.vue"
 import Classification from "./views/Classification.vue"
 import ClassificationTree from './views/ClassificationTree.vue'
+import ClassificationAxis from './views/ClassificationAxis.vue'
 import Skills from "./views/Skills.vue"
 import Graphs from "./views/Graphs.vue"
 import Graph from "./views/Graph.vue"
@@ -107,7 +108,10 @@ let router = new Router({
           path: 'arvore',
           component: ClassificationTree,
         },
-
+        {
+          path: 'eixos',
+          component: ClassificationAxis,
+        },
       ]
     },
     {
