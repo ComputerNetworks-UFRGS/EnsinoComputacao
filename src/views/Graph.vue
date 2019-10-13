@@ -27,7 +27,7 @@
             ></dependency-highlight>
           </div>
           <div v-if="currentMode == 'gojs'">
-            <div v-if="graph && graph.id">
+            <div class="graph-box"  v-if="graph && graph.id">
                 <graph-view-groups 
                     v-if="graph.group_by_year"
                     :graph-id="graph.id"></graph-view-groups>
@@ -47,16 +47,13 @@
 <script>
 import Graphs from "@/services/graph";
 import DependencyHighlight from "@/components/DependencyHighlight";
-import GojsTest from "@/components/GojsTest";
 import ModalTasks from "@/components/ModalTasks";
 import GraphViewGroups from "@/components/GraphViewGroups";
 import GraphView from "@/components/GraphView";
 
-
 export default {
   components: {
     DependencyHighlight,
-    GojsTest,
     ModalTasks,
     GraphViewGroups,
     GraphView
@@ -91,4 +88,13 @@ export default {
   }
 };
 </script>
-
+<style scoped lang="scss">
+.graph-box {
+  min-height: 1000px;
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+</style>

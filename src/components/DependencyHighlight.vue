@@ -115,12 +115,18 @@ export default {
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  overflow-x: auto;
-  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  align-items: flex-start;
 }
 .step {
   margin-bottom: 12px;
   display: flex;
+  border: 1px solid #ddd;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
 }
 .node {
   border: 1px solid #ddd;

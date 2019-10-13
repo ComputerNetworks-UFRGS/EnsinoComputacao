@@ -1,6 +1,6 @@
 <template>
   <div class="axis-diagram">
-    <button class="button is-info" @click="exportPositions()">Salvar posições</button>
+    <button v-if="showEdit" class="button is-info" @click="exportPositions()">Salvar posições</button>
     <div id="graphViewGroups">
       <div 
         class="group" 
@@ -55,6 +55,10 @@ export default {
     graphId: {
       type: undefined,
     },
+    showEdit: {
+      type: Boolean,
+      default: false,
+    }
   },
   data() {
     return {

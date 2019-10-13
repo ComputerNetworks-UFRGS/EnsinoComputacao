@@ -1,6 +1,8 @@
 <template>
     <div class="axis-diagram">
-        <button class="button is-info" @click="exportPositions()">Salvar posições</button>
+        <button class="button is-info" @click="exportPositions()" v-if="showEdit">
+            Salvar posições
+        </button>
         <div id="graph-view">
             <div class="node" v-for="node of nodes" :key="node.id" :id="node.id" :ref="node.id" :class="{
                             'node-highlight': node.highlight,
@@ -26,6 +28,10 @@ export default {
         graphId: {
             type: undefined,
         },
+        showEdit: {
+            type: Boolean,
+            default: false,
+        }
     },
     data() {
         return {

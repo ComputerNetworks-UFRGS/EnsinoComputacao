@@ -47,7 +47,7 @@
                                 >
 
                                     {{ skill.name }}
-                                    <button class="button is-info is-small">
+                                    <button class="button is-info is-small is-fullwidth">
                                         Ver atividades relacionadas 
                                     </button>
                                 </div>
