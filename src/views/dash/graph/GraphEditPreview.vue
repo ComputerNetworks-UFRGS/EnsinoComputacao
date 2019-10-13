@@ -6,11 +6,13 @@
             <graph-view-groups 
                 v-if="graph.group_by_year"
                 :graph-id="graph.id"
+                :show-edit="true"
                 @exportPositions="exportPositions"></graph-view-groups>
             
             <graph-view 
                 v-if="!graph.group_by_year"
                 :graph-id="graphId"
+                :show-edit="true"
                 @exportPositions="exportPositions"></graph-view>
 
         </div>
