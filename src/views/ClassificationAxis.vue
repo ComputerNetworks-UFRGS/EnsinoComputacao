@@ -1,26 +1,6 @@
 <template>
     <div class="">
-        <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
-        <div class="card">
-            <header class="card-header">
-            <p class="card-header-title">{{ selectedSkill.habilidade_nome }}</p>
-            </header>
-            <div class="card-content">
-            <div class="content">
-                <task-list :tasks="tasks"></task-list>
-            </div>
-            </div>
-            <footer class="card-footer">
-            <a href="#!" class="card-footer-item" @click.prevent="closeListTasks">
-                <span class="icon">
-                <i class="fas fa-times"></i>
-                </span>
-                <span>Voltar</span>
-            </a>
-            </footer>
-        </div>
-        </b-modal>
-
+        <br>
 
 
         <div class="columns year-wrapper is-hidden-mobile">
@@ -54,26 +34,47 @@
 
                     <div class="card-content" :class="{'is-hidden': !object.isOpen}">
                         <div class="content">
-                            <div class="columns is-multiline">
-                                <div
+                            <ul>
+                                <li
                                     class="column is-12 is-12-widescreen"
                                     v-for="skill of object.skills"
                                     :key="'skill'+skill.id"
+                                    @click="listTasks(skill)"
                                 >
-                                    <div class="box" @click="listTasks(skill)" :class="'skill-'+a.axis.code">
-                                        {{ skill.name }}
-                                    <div class="flex-spacing"></div>
-                                    <button class="button is-light is-small is-fullwidth">
+
+                                    {{ skill.name }}
+                                    <button class="button is-light is-small">
                                         Ver atividades
                                     </button>
-                                    </div>
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
+            <div class="card">
+                <header class="card-header">
+                <p class="card-header-title">{{ selectedSkill.habilidade_nome }}</p>
+                </header>
+                <div class="card-content">
+                <div class="content">
+                    <task-list :tasks="tasks"></task-list>
+                </div>
+                </div>
+                <footer class="card-footer">
+                <a href="#!" class="card-footer-item" @click.prevent="closeListTasks">
+                    <span class="icon">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>Voltar</span>
+                </a>
+                </footer>
+            </div>
+        </b-modal>
+
     </div>
 </template>
 

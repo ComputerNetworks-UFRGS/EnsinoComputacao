@@ -96,23 +96,9 @@ let router = new Router({
       path: "/classificacao",
       components: {
         header: AppHeader,
-        default: Classification,
+        default: ClassificationAxis,
         footer: AppFooter
       },
-      children: [
-        {
-          path: '',
-          component: Skills,
-        },
-        {
-          path: 'arvore',
-          component: ClassificationTree,
-        },
-        {
-          path: 'eixos',
-          component: ClassificationAxis,
-        },
-      ]
     },
     {
       path: "/planos-de-ensino",
