@@ -4,14 +4,6 @@
     <router-link to="/dash/curriculos/" class="button is-white is-pulled-right">Cancelar</router-link>
     <h4 class="title is-4">Editar: {{ graph.title }}</h4>
 
-    <button
-      v-if="graph && graph.id"
-      @click="remove"
-      class="button is-small is-light"
-      v-auth="'curri.delete'"
-    >Excluir este currículo</button>
-    <hr v-auth="'curri.edit'" />
-
     <div>
       <div class="table is-fullwidth">
         <button
@@ -19,6 +11,8 @@
           @click="openModalAddNode"
           v-auth="'curri.edit'"
         >Adicionar objeto</button>
+
+        <router-link class="button" :to="'/dash/curriculos/editar/' + graph.id + '/visual'">Posicionar objetos</router-link>
 
         <hr />
         <span v-if="graph.nodes && graph.nodes.length > 0">
@@ -130,16 +124,6 @@ export default {
             this.graph = graph;
           });
       }
-    },
-    remove: function() {
-      this.$dialog.confirm({
-        message: "Confirma exclusão de currículo?",
-        onConfirm: () => {
-          Graphs.remove(this.graph.id).finally(() => {
-            this.$router.push("/dash/curriculos");
-          });
-        }
-      });
     },
     addNode: function(object) {
       this.isOpenModalAddNode = false;

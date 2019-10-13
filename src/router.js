@@ -8,6 +8,7 @@ import Tasks from "./views/Tasks.vue"
 import Task from "./views/Task.vue"
 import Classification from "./views/Classification.vue"
 import ClassificationTree from './views/ClassificationTree.vue'
+import ClassificationAxis from './views/ClassificationAxis.vue'
 import Skills from "./views/Skills.vue"
 import Graphs from "./views/Graphs.vue"
 import Graph from "./views/Graph.vue"
@@ -39,6 +40,9 @@ import SkillForm from "./views/dash/skill/SkillForm"
 import GraphList from "./views/dash/graph/GraphList"
 import GraphForm from "./views/dash/graph/GraphForm"
 import GraphEdit from "./views/dash/graph/GraphEdit"
+import GraphEditPreview from "./views/dash/graph/GraphEditPreview"
+
+import AxisDiagram from "./views/AxisDiagram"
 
 
 Vue.use(Router);
@@ -53,6 +57,12 @@ let router = new Router({
         header: AppHeader,
         default: Home,
         footer: AppFooter
+      }
+    },
+    {
+      path: '/teste',
+      components: {
+        default: AxisDiagram
       }
     },
     {
@@ -86,20 +96,9 @@ let router = new Router({
       path: "/classificacao",
       components: {
         header: AppHeader,
-        default: Classification,
+        default: ClassificationAxis,
         footer: AppFooter
       },
-      children: [
-        {
-          path: '',
-          component: Skills,
-        },
-        {
-          path: 'arvore',
-          component: ClassificationTree,
-        },
-
-      ]
     },
     {
       path: "/planos-de-ensino",
@@ -251,7 +250,17 @@ let router = new Router({
         },
         {
           path: 'curriculos/editar/:id',
+          component: GraphForm,
+          props: true
+        },
+        {
+          path: 'curriculos/editar/:id/criar',
           component: GraphEdit,
+          props: true
+        },
+        {
+          path: 'curriculos/editar/:id/visual',
+          component: GraphEditPreview,
           props: true
         },
       ]
