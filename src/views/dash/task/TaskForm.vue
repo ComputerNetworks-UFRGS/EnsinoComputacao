@@ -72,6 +72,28 @@
           <span v-if="form.skill">Alterar habilidade</span>
           <span v-else>Selecionar habilidades</span>
         </button>
+
+
+        <br><br>
+        <div class="field">
+          <label class="label">TAGs relacionadas</label>
+          <div class="control">
+            <b-taginput
+                v-model="form.tags"
+                :data="filteredTags"
+                autocomplete
+                :allow-new="true"
+                :open-on-focus="false"
+                field="value"
+                placeholder="Adicionar tag"
+                @typing="getFilteredTags">
+            </b-taginput>
+          </div>
+          <div class="help is-danger" v-if="errors.tags.length > 0">
+            <div v-for="error in errors.tags" :key="error">{{ error }}</div>
+          </div>
+        </div>
+
       </div>
 
       <br>
@@ -109,6 +131,7 @@
 <script>
 import UserTasks from "@/services/user-task";
 import Skills from "@/services/skill";
+import Tags from "@/services/tag";
 import SkillList from "@/components/SkillList";
 import { VueEditor } from "vue2-editor";
 import _ from "lodash";
@@ -129,14 +152,18 @@ export default {
         title: "",
         description: "",
         is_plugged: false,
-        skills: []
+        skills: [],
+        tags: []
       },
       errors: {
         title: [],
         description: [],
         is_plugged: [],
-        skills: []
-      }
+        skills: [],
+        tags: []
+      },
+      filteredTags: [],
+      tags: [],
     };
   },
   created() {
@@ -151,6 +178,12 @@ export default {
     Skills.years()
       .then(res => res.data)
       .then(years => (this.years = years));
+    
+    Tags.list()
+      .then(res => res.data)
+      .then(tags => {
+        this.tags = tags
+      })
   },
   methods: {
     create() {
@@ -162,7 +195,13 @@ export default {
         title: this.form.title,
         description: this.form.description,
         is_plugged: this.form.is_plugged,
-        skills: _.map(this.form.skills, s => s.habilidade_id)
+        skills: _.map(this.form.skills, s => s.habilidade_id),
+        tags: _.map(this.form.tags, t => {
+          if(t.id) {
+            return t.id
+          }
+          return t
+        })
       };
 
       let request = "";
@@ -200,6 +239,14 @@ export default {
           });
         }
       });
+    },
+    getFilteredTags(text) {
+      this.filteredTags = this.tags.filter((option) => {
+        return option.value
+          .toString()
+          .toLowerCase()
+          .indexOf(text.toLowerCase()) >= 0
+      })
     }
   }
 };

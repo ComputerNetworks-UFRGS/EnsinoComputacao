@@ -11,7 +11,7 @@
                     <br />
                 </div>
                 <div v-else>
-                    <div class="columns">
+                    <div class="columns is-hidden-mobile">
                         <div class="column is-4">
                             <b>Identificador</b>
                         </div>
@@ -25,11 +25,11 @@
                         </div>
                     </div>
     
-                    <div class="columns" v-for="tag of tags" :key="tags.id">
-                        <div class="column is-4">
+                    <div class="columns is-mobile" v-for="tag of tags" :key="tags.id">
+                        <div class="column is-hidden-mobile is-4">
                             {{ tag.key }}
                         </div>
-                        <div class="column is-4">
+                        <div class="column">
                             {{ tag.value }}
                         </div>
                         <div class="column is-2">
