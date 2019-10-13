@@ -2,7 +2,7 @@ import API from './API.js'
 
 export default {
     list() {
-        return API.get('graphs/')
+        return API.get('graphs')
     },
     detail(graph_id, params = {}) {
         return API.get('graphs/' + graph_id, {
