@@ -33,6 +33,8 @@ import UserList from "./views/dash/user/UserList"
 import UserForm from "./views/dash/user/UserForm"
 import ReviewList from "./views/dash/review/ReviewList"
 import ReviewEdit from "./views/dash/review/ReviewEdit"
+import TagList from "./views/dash/tag/TagList"
+import TagForm from "./views/dash/tag/TagForm"
 import ObjectList from "./views/dash/object/ObjectList"
 import ObjectForm from "./views/dash/object/ObjectForm"
 import SkillList from "./views/dash/skill/SkillList"
@@ -214,6 +216,18 @@ let router = new Router({
         {
           path: 'revisao/:id',
           component: ReviewEdit,
+        },
+        {
+          path: 'tags',
+          component: TagList,
+        },
+        {
+          path: 'tags/criar',
+          component: TagForm,
+        },
+        {
+          path: 'tags/editar/:id',
+          component: TagForm,
         },
         {
           path: 'objetos',

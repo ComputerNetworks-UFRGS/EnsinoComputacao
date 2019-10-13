@@ -1,41 +1,45 @@
 <template>
-    <div class="">
-        <br>
+    <section class="classificacao pd">
+        <div class="container">
+            <br>
 
 
-        <div class="columns year-wrapper is-hidden-mobile">
-            <div class="column is-2 year center-vertical-text"></div>
-            <div class="column is-3 year center-vertical-text" v-for="a of axis" :key="'header' + a.id" :style="{'background-color': a.color}">
-                {{ a.name }}
-            </div>
-        </div>
-    
-        <div class="columns year-wrapper" v-for="year of years" :key="year.ageGroup.id">
-            <div class="column is-2 year center-vertical-text">{{ year.ageGroup.name }}</div>
-            <div class="column is-3" v-for="a of year.axis" :key="year.ageGroup.id+'?'+a.axis.id" :style="{'backgroundColor': a.axis.color}">
-                <div class="year center-vertical-text is-hidden-tablet">
-                    {{ a.axis.name }}
+            <div class="columns year-wrapper is-hidden-mobile">
+                <div class="column is-2 year center-vertical-text"></div>
+                <div class="column is-3 year center-vertical-text" v-for="a of axis" :key="'header' + a.id" :style="{'background-color': a.color}">
+                    {{ a.name }}
                 </div>
-                <div v-for="object of a.objects" :key="'object-'+object.id" class="card">
-                    <header class="card-header" @click.prevent="object.isOpen = !object.isOpen">
-                        <p class="card-header-title">{{ object.name }}</p>
-                        <a href="#!" class="card-header-icon">
-                            <span class="icon">
-                                <i
-                                class="fas"
-                                :class="{
-                                    'fa-angle-down': object.isOpen,
-                                    'fa-angle-right': !object.isOpen,
-                                }"
-                                ></i>
-                            </span>
-                        </a>
-                    </header>
+            </div>
+        
+            <div class="columns year-wrapper" v-for="year of years" :key="year.ageGroup.id">
+                <div class="column is-2 year center-vertical-text">{{ year.ageGroup.name }}</div>
+                <div class="column is-3" v-for="a of year.axis" :key="year.ageGroup.id+'?'+a.axis.id" :style="{'backgroundColor': a.axis.color}">
+                    <div class="year center-vertical-text is-hidden-tablet">
+                        {{ a.axis.name }}
+                    </div>
+                    <div v-for="object of a.objects" :key="'object-'+object.id" class="card">
+                        <header class="card-header" @click.prevent="object.isOpen = !object.isOpen">
+                            <p class="card-header-title">{{ object.name }}</p>
+                            <a href="#!" class="card-header-icon">
+                                <span class="icon">
+                                    <i
+                                    class="fas"
+                                    :class="{
+                                        'fa-angle-down': object.isOpen,
+                                        'fa-angle-right': !object.isOpen,
+                                    }"
+                                    ></i>
+                                </span>
+                            </a>
+                        </header>
 
-                    <div class="card-content" :class="{'is-hidden': !object.isOpen}">
-                        <div class="content">
-                            <ul>
-                                <li
+                        <div class="" :class="{'is-hidden': !object.isOpen}">
+                            <div class="content">
+                                <div class="has-text-centered">
+                                    <br>
+                                    <b>Habilidades</b>
+                                </div>
+                                <div
                                     class="column is-12 is-12-widescreen"
                                     v-for="skill of object.skills"
                                     :key="'skill'+skill.id"
@@ -43,39 +47,39 @@
                                 >
 
                                     {{ skill.name }}
-                                    <button class="button is-light is-small">
-                                        Ver atividades
+                                    <button class="button is-info is-small">
+                                        Ver atividades relacionadas 
                                     </button>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
+                <div class="card">
+                    <header class="card-header">
+                    <p class="card-header-title">{{ selectedSkill.habilidade_nome }}</p>
+                    </header>
+                    <div class="card-content">
+                    <div class="content">
+                        <task-list :tasks="tasks"></task-list>
+                    </div>
+                    </div>
+                    <footer class="card-footer">
+                    <a href="#!" class="card-footer-item" @click.prevent="closeListTasks">
+                        <span class="icon">
+                        <i class="fas fa-times"></i>
+                        </span>
+                        <span>Voltar</span>
+                    </a>
+                    </footer>
+                </div>
+            </b-modal>
+
         </div>
-
-        <b-modal :active="selectedSkill !== false" @close="selectedSkill = false">
-            <div class="card">
-                <header class="card-header">
-                <p class="card-header-title">{{ selectedSkill.habilidade_nome }}</p>
-                </header>
-                <div class="card-content">
-                <div class="content">
-                    <task-list :tasks="tasks"></task-list>
-                </div>
-                </div>
-                <footer class="card-footer">
-                <a href="#!" class="card-footer-item" @click.prevent="closeListTasks">
-                    <span class="icon">
-                    <i class="fas fa-times"></i>
-                    </span>
-                    <span>Voltar</span>
-                </a>
-                </footer>
-            </div>
-        </b-modal>
-
-    </div>
+    </section>
 </template>
 
 <script>
@@ -122,7 +126,7 @@ export default {
         listTasks(skill) {
             this.selectedSkill = skill;
             Tasks.list({
-                skills: [skill.habilidade_id]
+                skills: [skill.id]
             })
                 .then(res => res.data)
                 .then(tasks => (this.tasks = tasks));
