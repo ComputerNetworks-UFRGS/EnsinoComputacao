@@ -34,6 +34,9 @@
             <li v-auth="'review.list'">
               <a href="#!" @click.prevent="goTo('/dash/revisao')">Revisão de atividades</a>
             </li>
+            <li v-auth="'tag.list'">
+              <a href="#!" @click.prevent="goTo('/dash/tags')">TAGs das atividades</a>
+            </li>
           </ul>
 
           <p class="menu-label" v-auth="'role.list|users.list'">Administração</p>

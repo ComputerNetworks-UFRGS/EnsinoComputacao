@@ -61,7 +61,6 @@ export default {
           }
         }
         this.years = years;
-        console.log(this.years);
       })
       .finally(() => {
         this.isLoading = false;

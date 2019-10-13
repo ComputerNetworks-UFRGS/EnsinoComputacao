@@ -12,6 +12,9 @@ export default {
     create(graph) {
         return API.post('graphs/', graph)
     },
+    update(graph_id, graph) {
+        return API.put('graphs/' + graph_id, graph)
+    },
     remove(graph_id) {
         return API.delete('graphs/' + graph_id)
     },
@@ -28,4 +31,7 @@ export default {
         let url = 'graphs/' + graph_id + '/edge/' + from_id + '/' + to_id
         return API.delete(url)
     },
+    updatePositions(graph_id, data) {
+        return API.put('graphs/' + graph_id + '/nodes', data)
+    }
 }

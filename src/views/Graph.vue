@@ -23,20 +23,20 @@
               key="steps"
               :view-mode="'steps'"
               :graph-id="graph.id"
-              :is-vertical="true"
+              :is-vertical="false"
             ></dependency-highlight>
           </div>
           <div v-if="currentMode == 'gojs'">
-            <ModalTasks :show="tasksModal" @close="closeModal"></ModalTasks>
-            <GojsTest :graph-id="graph.id" @nodeClicked="openModal"></GojsTest>
-          </div>
-          <div v-if="currentMode == 'years'">
-            <dependency-highlight
-              v-if="graph && graph.id"
-              key="years"
-              :view-mode="'years'"
-              :graph-id="graph.id"
-            ></dependency-highlight>
+            <div class="graph-box"  v-if="graph && graph.id">
+                <graph-view-groups 
+                    v-if="graph.group_by_year"
+                    :graph-id="graph.id"></graph-view-groups>
+                
+                <graph-view 
+                    v-if="!graph.group_by_year"
+                    :graph-id="graph.id"></graph-view>
+
+            </div>
           </div>
         </div>
       </div>
@@ -47,14 +47,16 @@
 <script>
 import Graphs from "@/services/graph";
 import DependencyHighlight from "@/components/DependencyHighlight";
-import GojsTest from "@/components/GojsTest";
 import ModalTasks from "@/components/ModalTasks";
+import GraphViewGroups from "@/components/GraphViewGroups";
+import GraphView from "@/components/GraphView";
 
 export default {
   components: {
     DependencyHighlight,
-    GojsTest,
-    ModalTasks
+    ModalTasks,
+    GraphViewGroups,
+    GraphView
   },
   data() {
     return {
@@ -63,7 +65,7 @@ export default {
       viewModes: [
         { key: "steps", label: "Pré-requisitos" },
         { key: "gojs", label: "Hierarquia" },
-        { key: "years", label: "Por ano" }
+        // { key: "years", label: "Por ano" }
       ],
       currentMode: "steps"
     };
@@ -86,4 +88,13 @@ export default {
   }
 };
 </script>
-
+<style scoped lang="scss">
+.graph-box {
+  min-height: 1000px;
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+</style>

@@ -8,8 +8,11 @@
           <div class="column is-2">
             <button class="button is-primary is-large" @click="setYearsModeFalse()">Tudo</button>
           </div>
-          <div class="column is-6">
+          <div class="column is-2">
             <years-dropdown @selectYear="selectYear" />
+          </div>
+          <div class="column is-2">
+            <button class="button is-primary is-large" @click="filtersModal = true">Filtrar</button>
           </div>
         </div>
       </div>
@@ -18,17 +21,26 @@
       id="grafoTeste"
       style="height: 800px; width: 1800px; border: 0px solid black; display: block; margin: 0 auto"
     ></div>
+    <modal-graph-filters
+      v-if="filtersModal"
+      :show="filtersModal"
+      :inputFilters="filters"
+      @close="CloseFiltersModal"
+    />
   </div>
 </template>
 
 <script id="sample">
 import Graphs from "@/services/graph";
 import go, { Transaction } from "../../node_modules/gojs/release/go-debug.js";
+import Graph from "@/services/graph";
 import json from "@/assets/data.json";
 import YearsDropdown from "@/components/YearsDropdown.vue";
+import ModalGraphFilters from "@/components/ModalGraphFilters.vue";
 export default {
   components: {
-    YearsDropdown
+    YearsDropdown,
+    ModalGraphFilters
   },
   props: ["graphId"],
   data() {
@@ -37,7 +49,14 @@ export default {
       graph: null,
       nodes: [],
       edges: [],
-      selectedYear: -1
+      selectedYear: -1,
+      filters: {
+        years: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+        axis: ["1", "2", "3"],
+        separateYears: false
+      },
+      filtersModal: false,
+      isLoading: false
     };
   },
   mounted() {
@@ -70,9 +89,18 @@ export default {
 
       var grafo = this.graph;
 
-      var nodeDataArray = [];
-      var linkDataArray = [];
+      var rawNodes;
+      var rawEdges;
 
+      this.isLoading = true;
+
+      Graph.list()
+        .then(res => res.data)
+        .then(nodes => (rawNodes = nodes))
+        .then(links => (rawEdges = links))
+        .finally(() => {
+          this.isLoading = false;
+        });
       var groups = [];
 
       this.nodes.forEach(node => {
@@ -108,34 +136,17 @@ export default {
         }
       });
 
-      grafo.model.linkDataArray = [];
+      console.log(rawNodes, rawEdges);
 
-      groups.sort();
+      rawNodes = json.nodes;
+      rawEdges = json.links;
 
-      this.edges.forEach(edge => {
-        var tempEdge = {
-          to: edge.destination,
-          from: edge.source
-        };
-        if (!this.yearsMode) {
-          linkDataArray.push(tempEdge);
-        } else if (
-          nodeDataArray.find(node => node.key === tempEdge.to).group ===
-          nodeDataArray.find(node => node.key === tempEdge.from).group
-        ) {
-          linkDataArray.push(tempEdge);
-        }
-      });
+      var filteredGraph = this.ApplyFilters(rawNodes, rawEdges);
 
-      for (var i = 0; i < groups.length - 1; i++) {
-        var tempEdge = {
-          to: groups[i + 1],
-          from: groups[i]
-        };
-        linkDataArray.push(tempEdge);
-      }
+      this.nodes = filteredGraph.nodes;
+      this.edges = filteredGraph.edges;
 
-      grafo.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+      grafo.model = new go.GraphLinksModel(this.nodes, this.edges);
 
       grafo.groupTemplate = $(
         go.Group,
@@ -210,6 +221,13 @@ export default {
           margin: 2
         })
       );
+
+      grafo.linkTemplate = $(
+        go.Link,
+        $(go.Shape, { strokeWidth: 1.5 }),
+        $(go.Shape, { toArrow: "Standard" }),
+        new go.Binding("opacity", "opacity")
+      );
     },
     mouseEnter(e, obj) {
       var shape = obj.findObject("SHAPE");
@@ -217,6 +235,11 @@ export default {
       shape.stroke = "#94FACC";
       var text = obj.findObject("TEXT");
       text.stroke = "white";
+      obj.findLinksConnected().each(function(link) {
+        if (link.data.differentGroups) {
+          link.opacity = 0.5;
+        }
+      });
     },
     mouseLeave(e, obj) {
       var shape = obj.findObject("SHAPE");
@@ -226,23 +249,129 @@ export default {
       // Return the TextBlock's stroke to its default
       var text = obj.findObject("TEXT");
       text.stroke = "black";
+      obj.findLinksConnected().each(function(link) {
+        if (link.data.differentGroups) {
+          link.opacity = 0.0;
+        }
+      });
     },
     setYearsModeFalse() {
-      this.selectedYear = -1;
+      this.filters.years = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ];
+      this.filters.separateYears = false;
+      this.filters.axis = ["1", "2", "3"];
       this.buildGraph();
     },
     nodeClicked(e, obj) {
       var node = obj.part;
-      this.$emit("nodeClicked", node.key);
+      this.$emit("nodeClicked", node.data.key);
     },
     selectYear(year) {
-      this.selectedYear = year;
+      if (year === 0) {
+        this.filters.separateYears = true;
+      } else {
+        this.filters.separateYears = false;
+        this.filters.years = [year.toString()];
+        this.selectedYear = year;
+      }
+      this.buildGraph();
+    },
+    ApplyFilters(rawNodes, rawLinks) {
+      var nodeDataArray = [];
+      var linkDataArray = [];
+
+      var groups = [];
+
+      rawNodes.forEach(node => {
+        var tempNode = {
+          key: node.id,
+          text: node.content.text,
+          color: node.content.color,
+          year: node.year,
+          group: node.year
+        };
+        if (this.filters.years.indexOf(tempNode.year.toString()) != -1) {
+          nodeDataArray.push(tempNode);
+          if (this.yearsMode) {
+            if (groups.indexOf(tempNode.group) === -1) {
+              var tempGroup = {
+                key: tempNode.group,
+                isGroup: true
+              };
+              nodeDataArray.push(tempGroup);
+              groups.push(tempNode.group);
+            }
+          }
+        }
+      });
+
+      groups.sort();
+
+      rawLinks.forEach(edge => {
+        if (
+          nodeDataArray.find(node => node.key === edge.destination) &&
+          nodeDataArray.find(node => node.key === edge.source)
+        ) {
+          var tempEdge = {
+            to: edge.destination,
+            from: edge.source,
+            differentGroups: false,
+            opacity: 1.0
+          };
+          if (!this.yearsMode) {
+            linkDataArray.push(tempEdge);
+          } else {
+            linkDataArray.push(tempEdge);
+            if (
+              nodeDataArray.find(node => node.key === tempEdge.to).group !=
+              nodeDataArray.find(node => node.key === tempEdge.from).group
+            ) {
+              tempEdge.differentGroups = true;
+              tempEdge.opacity = 0.0;
+            }
+          }
+        }
+      });
+
+      for (var i = 0; i < groups.length - 1; i++) {
+        var tempEdge = {
+          to: groups[i + 1],
+          from: groups[i]
+        };
+        linkDataArray.push(tempEdge);
+      }
+
+      var grafo = {
+        nodes: nodeDataArray,
+        edges: linkDataArray
+      };
+
+      return grafo;
+    },
+    CloseFiltersModal(filters) {
+      this.filters.years = filters.selectedYears;
+      this.filters.axis = filters.selectedAxis;
+      this.filters.separateYears = filters.separateYears;
+
+      this.filtersModal = false;
       this.buildGraph();
     }
   },
   computed: {
     yearsMode() {
-      if (this.selectedYear === 0) {
+      if (this.filters.separateYears) {
         return true;
       } else {
         return false;

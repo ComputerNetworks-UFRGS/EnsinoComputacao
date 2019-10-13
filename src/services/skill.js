@@ -7,6 +7,9 @@ export default {
   tree() {
     return API.get('skills/tree')
   },
+  axis() {
+    return API.get('skills/axis')
+  },
   list() {
     return API.get('skills')
   },
