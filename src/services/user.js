@@ -7,7 +7,7 @@ export default {
   update(user_id, user) {
     return API.put('users/' + user_id, user)
   },
-  detail(token = false) {
+  detail() {
     API.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
     return API.get('user')
   },

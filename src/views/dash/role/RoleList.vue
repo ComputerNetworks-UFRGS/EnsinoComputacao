@@ -64,7 +64,7 @@ export default {
       this.$dialog.confirm({
         message: "Confirma exclusão de perfil?",
         onConfirm: () => {
-          Roles.remove(role_id).then(res => {
+          Roles.remove(role_id).then(() => {
             this.fetchRoles();
           });
         }

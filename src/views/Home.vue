@@ -1,65 +1,181 @@
 <template>
-  <section class="home">
-    <section class="hero is-medium is-primary is-bold">
-      <div class="hero-body">
-        <div class="container">
-          <h4 class="title is-4">
-            Encontre e crie atividades para o ensino de computação.
-            <br>
-            <br>
-            <router-link to="/atividades" class="button is-light">Ver atividades</router-link>
-          </h4>
-          <a
-            href="http://www.sbc.org.br"
-            target="_blank"
-            class="is-pulled-right"
-            title="SBC - Sociedade Brasileira de Computação"
-          >
-            <img src="img/brand/logo-sbc.jpg" style="height: 60px;">
-          </a>
-        </div>
+  <section class="classificacao pd">
+    <div class="container is-widescreen">
+      <div class="columns is-marginless is-mobile">
+        <div
+          class="column is-4 axis center-vertical-text"
+          v-for="a of axis"
+          :key="'header' + a.id"
+          :style="{
+              'background-color': a.color,
+            }"
+          :class="{
+              'active-axis': a.id == activeAxis.id,
+            }"
+          @click="setActiveAxis(a)"
+        >{{ a.name }}</div>
       </div>
-    </section>
-
-    <div class="container pd">
-      <br>
-      <br>
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <h4
-            class="title is-4 has-text-centered"
-          >Conhece as Diretrizes para ensino de Computação na Educação Básica?</h4>
-          <br>
+      <div class="columns is-marginless is-mobile">
+        <div
+          v-for="a of axis"
+          :key="'content' + a.id"
+          v-show="a.id == activeAxis.id"
+          class="column is-narrow"
+          style="padding: 0px; width: 800px;"
+        >
+          <graph-view-groups class="graph" v-if="activeAxis" :graph-id="a.graph_id"></graph-view-groups>
+        </div>
+        <div class="column">
+          <h1>asdad</h1>
           <p>
-            A
-            <a
-              href="http://www.sbc.org.br"
-              target="_blank"
-            >Sociedade Brasileira de Computação (SBC)</a>
-            entende que é fundamental e estratégico para o Brasil que conteúdos de Computação
-            sejam ministrados na Educação Básica. Nos útimos dois anos uma comissão, designada
-            pela Diretoria de Educação trabalhou na elaboração de um documento que trata dos
-            referenciais de formação em Computação para a Educação Básica.
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
+            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
+            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
           </p>
         </div>
       </div>
-
-      <img src="img/graph_diretrizes.png">
-      <div class="has-text-centered">
-        <a
-          target="_blank"
-          href="http://sbc.org.br/documentos-da-sbc/send/203-educacao-basica/1220-bncc-em-itinerario-informativo-computacao-2"
-          class="button is-primary is-medium"
-        >Baixar documento</a>
-      </div>
-      <br>
-      <br>
     </div>
   </section>
 </template>
 
 <script>
+import _ from "lodash";
+import Axis from "@/services/axis";
+import Skills from "@/services/skill";
+// import Graphs from "@/services/graph";
+import AgeGroups from "@/services/age-group";
+import GraphViewGroups from "@/components/GraphViewGroups";
+import TaskList from "@/components/TaskList";
+import Tasks from "@/services/task";
+
 export default {
-  name: "home"
+  components: {
+    GraphViewGroups,
+    TaskList
+  },
+  data() {
+    return {
+      years: [],
+      axis: [],
+      tasks: [],
+      selectedSkill: false,
+      ageGroups: [
+        {
+          key: "AI",
+          label: "Anos Iniciais",
+          years: ["01", "02", "03", "04", "05"]
+        },
+        {
+          key: "AF",
+          label: "Anos Finais",
+          years: ["06", "07", "08", "09"]
+        },
+        {
+          key: "EM",
+          label: "Ensino Médio",
+          years: ["EM"]
+        }
+      ],
+      activeAxis: false
+    };
+  },
+  mounted() {
+    this.fetch();
+  },
+  methods: {
+    fetch() {
+      Axis.list()
+        .then(res => res.data)
+        .then(axis => {
+          this.activeAxis = _.head(axis);
+          // this.fetchGraph(this.activeAxis.graph_id)
+          this.axis = axis;
+        });
+    },
+    setActiveAxis(axis) {
+      this.activeAxis = axis;
+    }
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.axis {
+  text-align: center;
+  cursor: pointer;
+}
+.year {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  .text {
+    writing-mode: sideways-lr;
+    text-orientation: mixed;
+    text-align: center;
+  }
+}
+.year-block {
+  height: 214px;
+}
+.active-axis {
+  background: rgba(0, 0, 0, 0.4) !important;
+  color: white;
+}
+</style>
+<style lang="scss">
+.classificacao {
+  .container {
+    height: 2200px;
+    border: 1px solid red;
+  }
+}
+.graph {
+  .group {
+    display: flex;
+
+    .group-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      writing-mode: sideways-lr;
+      text-orientation: mixed;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+  }
+  // .group-nodes, .group-title {
+  // background: red!important;
+  // }
+}
+</style>

@@ -81,7 +81,6 @@
 <script>
 import Tasks from "@/services/task";
 import TaskList from "@/components/TaskList";
-import Skills from "@/services/skill";
 
 export default {
   components: {

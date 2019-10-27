@@ -8,7 +8,6 @@ import "buefy/dist/buefy.css";
 import AuthDirective from "@/directives/auth";
 
 Vue.use(Buefy);
-//Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 Vue.directive("auth", AuthDirective);
 

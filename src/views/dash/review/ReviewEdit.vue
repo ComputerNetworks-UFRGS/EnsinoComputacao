@@ -67,7 +67,6 @@
 
 <script>
 import Reviews from "@/services/review";
-import _ from "lodash";
 import ModalComment from "@/components/ModalComment";
 import ReviewList from "@/components/ReviewList";
 
@@ -114,7 +113,7 @@ export default {
         status: this.selectedStatus
       };
 
-      Reviews.setStatus(this.task.id, data).then(res => {
+      Reviews.setStatus(this.task.id, data).then(() => {
         this.$router.push("/dash/revisao");
       });
     },
@@ -123,7 +122,7 @@ export default {
         comment: comment
       };
 
-      Reviews.create(this.task.id, data).then(res => {
+      Reviews.create(this.task.id, data).then(() => {
         this.setStatus();
       });
     }

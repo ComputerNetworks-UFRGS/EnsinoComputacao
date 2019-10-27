@@ -30,7 +30,6 @@
 
 <script>
 import Graphs from "@/services/graph";
-import _ from "lodash";
 
 export default {
   name: "dependency-highlight",

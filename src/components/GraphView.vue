@@ -11,7 +11,7 @@
                         }" :style="{
                             'top': node.y,
                             'left': node.x
-                        }" @click="nodeClick(node)" @mouseover="nodeMouseover(node)" @mouseleave="nodeMoueleave(node)">
+                        }" @click="nodeClick(node)">
                 <div class="node-content" v-html="node.title"></div>
             </div>
         </div>
@@ -102,15 +102,15 @@ export default {
             this.highlightNodeUp(node);
             this.highlightNodeDown(node);
         },
-        nodeMouseover(node) {
+        // nodeMouseover(node) {
             // node.isSelected = true;
             // this.highlightNodeUp(node.dependencies);
             // this.highlightNodeDown(node);
-        },
-        nodeMoueleave(node) {
+        // },
+        // nodeMoueleave(node) {
             // this.clearHighlight();
             // console.log("mouseleave", node.id);
-        },
+        // },
         clearHighlight() {
             this.pb.select().setPaintStyle({
                 stroke: "#aaaaaa",
@@ -148,7 +148,7 @@ export default {
             if (node.dependents) {
                 for (let dependent of node.dependents) {
                     let dep_node = this.getNode("node" + dependent)
-                    if (dep_node && (true || dep_node.step == parseInt(dep_node.step) + 1)) {
+                    if (dep_node) {
                         dep_node.isDependent = true;
                     }
                 }

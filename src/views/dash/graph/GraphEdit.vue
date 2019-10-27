@@ -133,7 +133,7 @@ export default {
       };
       console.log("addNode", node);
       Graphs.addNode(this.graph.id, node)
-        .then(res => {
+        .then(() => {
           this.fetch();
         })
         .catch(err => {
@@ -145,7 +145,7 @@ export default {
         message: "Confirma exclusão de tópico?",
         onConfirm: () => {
           Graphs.removeNode(this.graph.id, node_id)
-            .then(res => {
+            .then(() => {
               this.fetch();
             })
             .catch(err => {
@@ -161,7 +161,7 @@ export default {
         to_id: this.selectedNode.id
       };
       Graphs.addEdge(this.graph.id, edge)
-        .then(res => {
+        .then(() => {
           this.fetch();
         })
         .catch(err => {
@@ -173,7 +173,7 @@ export default {
         message: "Confirma exclusão de dependência?",
         onConfirm: () => {
           Graphs.removeEdge(this.graph.id, from_id, to_id)
-            .then(res => {
+            .then(() => {
               this.fetch();
             })
             .catch(err => {

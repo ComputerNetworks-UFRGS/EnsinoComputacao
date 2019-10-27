@@ -25,7 +25,7 @@
                         </div>
                     </div>
     
-                    <div class="columns is-mobile" v-for="tag of tags" :key="tags.id">
+                    <div class="columns is-mobile" v-for="tag of tags" :key="tag.id">
                         <div class="column is-hidden-mobile is-4">
                             {{ tag.key }}
                         </div>

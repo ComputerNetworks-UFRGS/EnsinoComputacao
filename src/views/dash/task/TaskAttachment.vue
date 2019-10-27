@@ -83,7 +83,7 @@ export default {
         });
     },
     addAttachment(attachment) {
-      AttachmentService.create(this.taskId, attachment).then(res => {
+      AttachmentService.create(this.taskId, attachment).then(() => {
         this.isOpenAttachmentModal = false;
         this.fetch();
       });
@@ -92,7 +92,7 @@ export default {
       this.$dialog.confirm({
         message: "Confirma exclusão de anexo?",
         onConfirm: () => {
-          AttachmentService.remove(this.taskId, attachment_id).then(res => {
+          AttachmentService.remove(this.taskId, attachment_id).then(() => {
             this.fetch();
           });
         }

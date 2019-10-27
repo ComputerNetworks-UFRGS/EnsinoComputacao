@@ -4,10 +4,7 @@ import AppFooter from "./../layout/AppFooter"
 import Home from "./../views/Home.vue"
 import Tasks from "./../views/Tasks.vue"
 import Task from "./../views/Task.vue"
-import Classification from "./../views/Classification.vue"
-import ClassificationTree from './../views/ClassificationTree.vue'
 import ClassificationAxis from './../views/ClassificationAxis.vue'
-import Skills from "./../views/Skills.vue"
 import Graphs from "./../views/Graphs.vue"
 import Graph from "./../views/Graph.vue"
 import About from "./../views/About.vue"
@@ -15,7 +12,6 @@ import Contact from "./../views/Contact.vue"
 import Login from "./../views/auth/Login.vue"
 import Register from "./../views/auth/Register.vue"
 import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
-import AxisDiagram from "./../views/AxisDiagram"
 
 export default [
     {
@@ -25,12 +21,6 @@ export default [
             header: AppHeader,
             default: Home,
             footer: AppFooter
-        }
-    },
-    {
-        path: '/teste',
-        components: {
-            default: AxisDiagram
         }
     },
     {

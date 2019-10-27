@@ -47,14 +47,12 @@
 <script>
 import Graphs from "@/services/graph";
 import DependencyHighlight from "@/components/DependencyHighlight";
-import ModalTasks from "@/components/ModalTasks";
 import GraphViewGroups from "@/components/GraphViewGroups";
 import GraphView from "@/components/GraphView";
 
 export default {
   components: {
     DependencyHighlight,
-    ModalTasks,
     GraphViewGroups,
     GraphView
   },

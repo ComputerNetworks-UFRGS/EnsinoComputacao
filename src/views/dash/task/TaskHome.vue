@@ -119,7 +119,7 @@ export default {
 
       let permissions = this.$store.state.user.permissions;
       if (UseService.hasPermission(permissions, "task.no_review")) {
-        UserTasks.publish(this.selectedTask.id).then(res => {
+        UserTasks.publish(this.selectedTask.id).then(() => {
           this.fetch();
         });
       } else {
@@ -137,8 +137,8 @@ export default {
         comment: comment
       };
 
-      Reviews.create(this.selectedTask.id, data).then(res => {
-        UserTasks.publish(this.selectedTask.id).then(res => {
+      Reviews.create(this.selectedTask.id, data).then(() => {
+        UserTasks.publish(this.selectedTask.id).then(() => {
           this.fetch();
           this.isOpenCommentModal = false;
         });
