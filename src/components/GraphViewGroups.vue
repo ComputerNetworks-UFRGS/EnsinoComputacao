@@ -15,9 +15,7 @@
           'width': group.width + 'px'
         }"
       >
-        <div class="group-title">
-          {{ group.title }}
-        </div>
+        <div class="group-title">{{ group.title }}</div>
         <!-- <button @click="group.width += 10">+w</button>
           <button @click="group.width -= 10">-w</button>
           <button @click="group.height += 10">+h</button>
@@ -125,17 +123,16 @@ export default {
 
               for (let group of cmp.groups) {
                 for (let node of group.nodes) {
-                  // if (cmp.showEdit) {
-                  // }
-                  cmp.pb.draggable('graph' + cmp.graphId + '-' +node.id);
+
+                  cmp.pb.draggable("graph" + cmp.graphId + "-" + node.id);
                   cmp.pb.addToGroup(group.id, cmp.$refs[node.id][0]);
                 }
               }
 
               for (let edge of cmp.edges) {
                 edge["cssClass"] = "edd";
-                edge['source'] = 'graph' + cmp.graphId + '-' + edge['source']
-                edge['target'] = 'graph' + cmp.graphId + '-' + edge['target']
+                edge["source"] = "graph" + cmp.graphId + "-" + edge["source"];
+                edge["target"] = "graph" + cmp.graphId + "-" + edge["target"];
                 cmp.pb.connect(edge);
               }
             });
@@ -147,7 +144,9 @@ export default {
   methods: {
     nodeClick(node) {
       this.clearHighlight();
-      this.pb.select({ source: node.id }).setPaintStyle({
+      this.pb.select({ 
+        source: 'graph' + this.graphId + '-' + node.id
+      }).setPaintStyle({
         stroke: "black",
         strokeWidth: 3
       });
@@ -170,6 +169,7 @@ export default {
       }
     },
     getNode(id) {
+      id = 'node' + id
       for (let group of this.groups) {
         for (let node of group.nodes) {
           if (node.id == id) {
@@ -181,12 +181,14 @@ export default {
     },
     highlightNodeUp(node) {
       for (let dependency of node.dependencies) {
-        let dep_node = this.getNode("node" + dependency);
-        dep_node.highlight = true;
+        let dep_node = this.getNode(dependency);
+        if(dep_node) {
+          dep_node.highlight = true;
+        }
         this.pb
           .select({
-            source: dep_node.id,
-            target: node.id
+            source: 'graph' + this.graphId + '-' + dep_node.id,
+            target: 'graph' + this.graphId + '-' + node.id
           })
           .setPaintStyle({
             stroke: "black",
@@ -198,7 +200,7 @@ export default {
     highlightNodeDown(node) {
       if (node.dependents) {
         for (let dependent of node.dependents) {
-          let dep_node = this.getNode("node" + dependent);
+          let dep_node = this.getNode(dependent);
           if (dep_node) {
             dep_node.isDependent = true;
           }
@@ -246,13 +248,13 @@ export default {
       background: #888;
 
       &.node-highlight {
-        background: #fffebe;
+        background: #fffebe!important;
       }
       &.node-dependent {
-        background: #80ecff;
+        background: #80ecff!important;
       }
       &.node-current {
-        background: #6ee974;
+        background: #6ee974!important;
       }
 
       .node-content {

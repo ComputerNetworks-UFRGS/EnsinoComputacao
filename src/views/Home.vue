@@ -28,38 +28,39 @@
         <div class="column">
           <h1>asdad</h1>
           <p>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa 
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
             ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda<br>
+            dewa ysdaa sdlkas dkla sdsidewa ysda
+            <br />
           </p>
         </div>
       </div>
@@ -155,7 +156,8 @@ export default {
 .classificacao {
   .container {
     height: 2200px;
-    border: 1px solid red;
+    // border: 1px solid red;
+    background: rgba(0, 0, 0, 0.4) !important;
   }
 }
 .graph {
@@ -174,6 +176,13 @@ export default {
       color: white;
     }
   }
+
+  .node {
+    background: white!important;
+    border-radius: 4px!important;
+    max-width: 200px !important;
+  }
+
   // .group-nodes, .group-title {
   // background: red!important;
   // }
