@@ -33,5 +33,8 @@ export default {
     },
     updatePositions(graph_id, data) {
         return API.put('graphs/' + graph_id + '/nodes', data)
-    }
+    },
+    nodeDetail(graph_id, node_id) {
+        return API.get('graphs/' + graph_id + '/node/' + node_id)
+    } 
 }

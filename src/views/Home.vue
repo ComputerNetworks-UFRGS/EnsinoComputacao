@@ -15,53 +15,23 @@
           @click="setActiveAxis(a)"
         >{{ a.name }}</div>
       </div>
-      <div class="columns is-marginless is-mobile">
-        <div
-          v-for="a of axis"
-          :key="'content' + a.id"
-          v-show="a.id == activeAxis.id"
-          class="column is-narrow"
-          style="padding: 0px; width: 800px;"
-        >
-          <graph-view-groups class="graph" v-if="activeAxis" :graph-id="a.graph_id"></graph-view-groups>
+      <div
+        v-for="a of axis"
+        :key="'content' + a.id"
+        class="columns is-marginless is-mobile"
+        v-show="a.id == activeAxis.id"
+      >
+        <div class="column is-narrow" style="padding: 0px; width: 800px;">
+          <graph-view-groups
+            v-if="activeAxis"
+            :graph-id="a.graph_id"
+            class="graph"
+            @clickNode="clickNode"
+          ></graph-view-groups>
         </div>
         <div class="column">
-          <h1>asdad</h1>
-          <p>
-            a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />a sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsidewa
-            ysdaa sdlkas dkla sdsidewa ysdaa sdlkas dkla sdsi
-            dewa ysdaa sdlkas dkla sdsidewa ysda
-            <br />
-          </p>
+          <graph-node-detail v-if="activeAxis" :node="activeAxis.activeNode"></graph-node-detail>
+          <div v-else>Selecione um nodo do grafo</div>
         </div>
       </div>
     </div>
@@ -74,12 +44,14 @@ import Axis from "@/services/axis";
 import Skills from "@/services/skill";
 // import Graphs from "@/services/graph";
 import AgeGroups from "@/services/age-group";
+import GraphNodeDetail from "@/components/GraphNodeDetail";
 import GraphViewGroups from "@/components/GraphViewGroups";
 import TaskList from "@/components/TaskList";
-import Tasks from "@/services/task";
+import Graphs from "@/services/graph";
 
 export default {
   components: {
+    GraphNodeDetail,
     GraphViewGroups,
     TaskList
   },
@@ -87,7 +59,6 @@ export default {
     return {
       years: [],
       axis: [],
-      tasks: [],
       selectedSkill: false,
       ageGroups: [
         {
@@ -106,7 +77,7 @@ export default {
           years: ["EM"]
         }
       ],
-      activeAxis: false
+      activeAxis: false,
     };
   },
   mounted() {
@@ -117,13 +88,23 @@ export default {
       Axis.list()
         .then(res => res.data)
         .then(axis => {
+          for(let a of axis) {
+            a['activeNode'] = {}
+          }
           this.activeAxis = _.head(axis);
-          // this.fetchGraph(this.activeAxis.graph_id)
           this.axis = axis;
         });
     },
     setActiveAxis(axis) {
       this.activeAxis = axis;
+    },
+    clickNode(node) {
+      Graphs.nodeDetail(this.activeAxis.graph_id, node.id.replace("node", ""))
+        .then(res => res.data)
+        .then(nodeDetail => {
+          console.log('detail', nodeDetail)
+          this.activeAxis['activeNode'] = nodeDetail;
+        });
     }
   }
 };
@@ -178,8 +159,8 @@ export default {
   }
 
   .node {
-    background: white!important;
-    border-radius: 4px!important;
+    background: white !important;
+    border-radius: 4px !important;
     max-width: 200px !important;
   }
 

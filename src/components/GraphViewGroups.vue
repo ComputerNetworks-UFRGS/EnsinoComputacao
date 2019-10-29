@@ -154,6 +154,7 @@ export default {
       node.isSelected = true;
       this.highlightNodeUp(node);
       this.highlightNodeDown(node);
+      this.$emit('clickNode', node)
     },
     clearHighlight() {
       this.pb.select().setPaintStyle({

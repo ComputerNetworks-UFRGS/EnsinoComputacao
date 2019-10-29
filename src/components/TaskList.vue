@@ -4,7 +4,11 @@
       <div class="column" v-if="tasks.length > 0">
         <div class="columns is-multiline">
           <div
-            class="column is-12-mobile is-6-tablet is-4-desktop is-4-widescreen list-of-tasks"
+            class="column list-of-tasks"
+            :class="{
+              'is-12-mobile is-6-tablet is-4-desktop is-4-widescreen': isMobile,
+              'is-12': !isMobile
+            }"
             v-for="task of tasks"
             :key="task.id"
           >
@@ -77,7 +81,8 @@ import TaskDetail from "@/components/TaskDetail";
 export default {
   name: "task-list",
   props: {
-    tasks: Array
+    tasks: Array,
+    isMobile: Boolean
   },
   components: {
     MenuSide,
