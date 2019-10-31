@@ -21,7 +21,7 @@
         class="columns is-marginless is-mobile"
         v-show="a.id == activeAxis.id"
       >
-        <div class="column is-narrow" style="padding: 0px; width: 800px;">
+        <div class="column is-narrow" style="padding: 0px; width: 600px;">
           <graph-view-groups
             v-if="activeAxis"
             :graph-id="a.graph_id"
@@ -30,7 +30,7 @@
           ></graph-view-groups>
         </div>
         <div class="column">
-          <graph-node-detail v-if="activeAxis" :node="activeAxis.activeNode"></graph-node-detail>
+          <graph-node-detail v-if="activeAxis" :node="a.activeNode"></graph-node-detail>
           <div v-else>Selecione um nodo do grafo</div>
         </div>
       </div>
@@ -102,7 +102,6 @@ export default {
       Graphs.nodeDetail(this.activeAxis.graph_id, node.id.replace("node", ""))
         .then(res => res.data)
         .then(nodeDetail => {
-          console.log('detail', nodeDetail)
           this.activeAxis['activeNode'] = nodeDetail;
         });
     }

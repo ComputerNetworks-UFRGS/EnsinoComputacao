@@ -6,8 +6,8 @@
           <div
             class="column list-of-tasks"
             :class="{
-              'is-12-mobile is-6-tablet is-4-desktop is-4-widescreen': isMobile,
-              'is-12': !isMobile
+              'is-12-mobile is-6-tablet is-4-desktop is-4-widescreen': !isMobile,
+              'is-6': isMobile
             }"
             v-for="task of tasks"
             :key="task.id"
@@ -82,7 +82,10 @@ export default {
   name: "task-list",
   props: {
     tasks: Array,
-    isMobile: Boolean
+    isMobile: {
+      type: Boolean,
+      default: false
+    }
   },
   components: {
     MenuSide,

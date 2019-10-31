@@ -43,10 +43,7 @@
               <label class="label">Tipo de atividade</label>
             </div>
             <div class="field">
-              <b-checkbox v-model="filters.plugged.yes">Plugada</b-checkbox>
-            </div>
-            <div class="field">
-              <b-checkbox v-model="filters.plugged.no">Desplugada</b-checkbox>
+              <b-checkbox v-model="filters.plugged.no">Não precisa de computador</b-checkbox>
             </div>
           </div>
           <!-- <br />
