@@ -86,7 +86,7 @@
               Faça parte e contribua incluindo uma atividade relacionada com esse Objeto de
               Aprendizado.
               <br />
-              <router-link to="/dash/atividades/" class="button is-primary">Contribuir</router-link>
+              <router-link to="/dash/atividades/criar" class="button is-primary">Contribuir</router-link>
             </div>
           </div>
         </div>
