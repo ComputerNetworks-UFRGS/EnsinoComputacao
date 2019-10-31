@@ -45,6 +45,20 @@
             <div class="field">
               <b-checkbox v-model="filters.plugged.no">Não precisa de computador</b-checkbox>
             </div>
+            <div class="field">
+              <label class="label">Com uma das TAGs</label>
+
+              <b-taginput
+                v-model="filters.tags"
+                :data="filteredTags"
+                :allow-new="false"
+                autocomplete
+                :open-on-focus="false"
+                field="value"
+                placeholder="Atividades relacionadas com..."
+                @typing="getFilteredTags"
+              ></b-taginput>
+            </div>
           </div>
           <!-- <br />
           <div class="field">
@@ -77,7 +91,9 @@
 
 <script>
 import Tasks from "@/services/task";
+import Tags from "@/services/tags";
 import TaskList from "@/components/TaskList";
+import _ from "lodash";
 
 export default {
   components: {
@@ -92,7 +108,8 @@ export default {
           yes: false,
           no: false
         },
-        age: "todos"
+        age: "todos",
+        tags: []
       },
       age_groups: {
         todos: [],
@@ -100,11 +117,14 @@ export default {
         finais: ["06", "07", "08", "09"],
         medio: ["EM"]
       },
+      tags: [],
+      filteredTags: [],
       tree: {},
       isFiltersOpen: false
     };
   },
   mounted() {
+    this.fetch();
     this.fetchTasks();
     // Skills.tree()
     //   .then(res => res.data)
@@ -119,6 +139,13 @@ export default {
     //   })
   },
   methods: {
+    fetch() {
+      Tags.list()
+        .then(res => res.data)
+        .then(tags => {
+          this.tags = tags;
+        });
+    },
     fetchTasks() {
       this.isLoading = true;
       // this.isFiltersOpen = false;
@@ -143,6 +170,10 @@ export default {
         params["objects"] = objects;
       }
 
+      if (this.filters.tags.length > 0) {
+        params["tags"] = _.map(this.filters.tags, tag => tag.id);
+      }
+
       Tasks.list(params)
         .then(res => res.data)
         .then(tasks => (this.tasks = tasks))
@@ -153,6 +184,17 @@ export default {
     toggleObject(object) {
       object.active = !object.active;
       this.fetchTasks();
+    },
+    getFilteredTags(text) {
+      let notIncluded = _.differenceBy(this.tags, this.filters.tags, "id");
+      this.filteredTags = _.filter(notIncluded, tag => {
+        return (
+          tag.value
+            .toString()
+            .toLowerCase()
+            .indexOf(text.toLowerCase()) >= 0
+        );
+      });
     }
   },
   watch: {
