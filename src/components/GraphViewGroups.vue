@@ -102,9 +102,9 @@ export default {
               Container: "graph" + cmp.graphId,
               // Connector: ["Flowchart"],
               // Connector: ["Straight"],
-              Connector: ["Bezier", { curviness: 30 }],
+              Connector: ["Bezier", { curviness: 20 }],
               Endpoint: ["Blank", { radius: 3 }],
-              Overlays: [["Arrow", { location: 1, width: 8, length: 8 }]],
+              Overlays: [["Arrow", { location: 1, width: 10, length: 10 }]],
               Anchors: ["Bottom", "Top"]
             });
 
@@ -234,8 +234,10 @@ export default {
 
     .group {
       position: absolute;
-      background: rgba(1, 1, 1, 0.2);
+      background: rgba(1, 1, 1, 0.05);
       z-index: 1;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
 
     .node {

@@ -10,9 +10,12 @@
 
       <div class="navbar-menu is-active">
         <div class="navbar-start">
-          <router-link to="/atividades" class="navbar-item">Atividades</router-link>
-          <router-link to="/classificacao" class="navbar-item">Objetos de aprendizado</router-link>
-          <router-link to="/planos-de-ensino" class="navbar-item">Planos de ensino</router-link>
+          <router-link to="/atividades" class="navbar-item">
+            Atividades de ensino
+          </router-link>
+          <router-link to="/classificacao" class="navbar-item">
+            Sobre diretrizes da SBC
+          </router-link>
         </div>
         <app-header-buttons class="is-hidden-mobile is-hidden-tablet-only"></app-header-buttons>
       </div>

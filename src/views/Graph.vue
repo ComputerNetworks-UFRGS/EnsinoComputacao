@@ -62,7 +62,7 @@ export default {
       graph: {},
       viewModes: [
         { key: "steps", label: "Pré-requisitos" },
-        { key: "gojs", label: "Hierarquia" },
+        // { key: "gojs", label: "Hierarquia" },
         // { key: "years", label: "Por ano" }
       ],
       currentMode: "steps"

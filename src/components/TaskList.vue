@@ -85,6 +85,10 @@ export default {
     isMobile: {
       type: Boolean,
       default: false
+    },
+    customTaskView: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -98,7 +102,11 @@ export default {
   },
   methods: {
     selectTask(task) {
-      this.selectedTask = task.id;
+      if (this.customTaskView) {
+        this.$emit("taskSelected", task);
+      } else {
+        this.selectedTask = task.id;
+      }
     }
   }
 };

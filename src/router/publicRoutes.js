@@ -5,8 +5,6 @@ import Home from "./../views/Home.vue"
 import Tasks from "./../views/Tasks.vue"
 import Task from "./../views/Task.vue"
 import ClassificationAxis from './../views/ClassificationAxis.vue'
-import Graphs from "./../views/Graphs.vue"
-import Graph from "./../views/Graph.vue"
 import About from "./../views/About.vue"
 import Contact from "./../views/Contact.vue"
 import Login from "./../views/auth/Login.vue"
@@ -57,24 +55,6 @@ export default [
             default: ClassificationAxis,
             footer: AppFooter
         },
-    },
-    {
-        path: "/planos-de-ensino",
-        name: "graph",
-        components: {
-            header: AppHeader,
-            default: Graphs,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/planos-de-ensino/:id",
-        name: "graph-view",
-        components: {
-            header: AppHeader,
-            default: Graph,
-            footer: AppFooter
-        }
     },
     {
         path: "/atividades/:id",

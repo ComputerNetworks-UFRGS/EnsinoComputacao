@@ -75,7 +75,13 @@
         <b-loading :is-full-page="false" :active="isLoading" :can-cancel="false"></b-loading>
       </div>
       <div v-else>
-        <task-list v-if="tasks.length > 0" :tasks="tasks" :is-mobile="true"></task-list>
+        <task-list
+          v-if="tasks.length > 0"
+          :tasks="tasks"
+          :is-mobile="true"
+          :custom-task-view="true"
+          @taskSelected="$emit('taskSelected', $event)"
+        ></task-list>
         <div v-else>
           <h5
             class="title is-5"
@@ -120,7 +126,7 @@ export default {
         unplugged: false,
         tags: []
       },
-      isLoading: false
+      isLoading: false,
     };
   },
   mounted() {
@@ -166,7 +172,7 @@ export default {
             .indexOf(text.toLowerCase()) >= 0
         );
       });
-    }
+    },
   },
   watch: {
     node(val) {
@@ -199,7 +205,6 @@ export default {
 }
 
 .box-node-detail {
-  border: 1px solid red;
   height: 100%;
 }
 </style>
