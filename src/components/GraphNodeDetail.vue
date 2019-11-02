@@ -1,7 +1,7 @@
 <template>
   <div class="box-node-detail">
     <div v-if="node && node.learnig_object">
-      <h4 class="title is-4 has-text-centered">{{ node.learnig_object.name }}</h4>
+      <h4 class="title is-4 has-text-centered is-family-secondary">{{ node.learnig_object.name }}</h4>
       <hr />
       <!-- <div>
                         <b>Habilidades trabalhadas</b>
@@ -126,7 +126,7 @@ export default {
         unplugged: false,
         tags: []
       },
-      isLoading: false,
+      isLoading: false
     };
   },
   mounted() {
@@ -172,7 +172,7 @@ export default {
             .indexOf(text.toLowerCase()) >= 0
         );
       });
-    },
+    }
   },
   watch: {
     node(val) {

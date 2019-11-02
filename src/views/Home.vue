@@ -21,7 +21,7 @@
         class="columns is-marginless is-mobile box-main-content"
         :style="{
           'background-color': a.color,
-          'height': a.id == activeAxis.id ? '100%' : '0px',
+          'height': a.id == activeAxis.id ? '98%' : '0px',
           'overflow': a.id == activeAxis.id ? 'visible' : 'hidden'
         }"
       >
@@ -33,7 +33,7 @@
             @clickNode="clickNode"
           ></graph-view-groups>
         </div>
-        <div class="column">
+        <div class="column is-hidden-mobile">
           <div class="box node-detail">
             <graph-node-detail v-if="activeAxis" :node="a.activeNode" @taskSelected="taskSelected"></graph-node-detail>
             <div v-else>Selecione um nodo do grafo</div>
@@ -182,7 +182,7 @@ export default {
 }
 .box-main-content {
   background: white;
-  height: 100%;
+  height: 98%;
   .node-detail {
     height: calc(100vh - 24px);
     position: sticky;
@@ -192,6 +192,10 @@ export default {
 </style>
 <style lang="scss">
 .classificacao-home {
+  .container {
+    height: 2200px;
+    background: transparent;
+  }
   .card-content {
     padding: 16px;
   }
@@ -249,13 +253,6 @@ export default {
         }
       }
     }
-  }
-}
-
-.classificacao {
-  .container {
-    height: 2200px;
-    background: rgba(0, 0, 0, 0.4) !important;
   }
 }
 .graph {

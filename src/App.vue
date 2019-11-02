@@ -2,7 +2,7 @@
   <div id="app">
     <router-view name="header"></router-view>
     <main>
-      <router-view/>
+      <router-view />
     </main>
     <router-view name="footer"></router-view>
   </div>
@@ -17,7 +17,7 @@ export default {
   // },
   created() {
     UserService.detail().then(res => {
-      console.log('set_user: App.vue')
+      console.log("set_user: App.vue");
       this.$store.commit("set_user", res.data);
     });
   }
@@ -28,12 +28,16 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: #eeeeee;
 }
 #app main {
   flex-grow: 1;
-  padding-bottom: 30px;
   .pd {
     padding: 12px;
   }
 }
+// Bulma customization
+@import "@/assets/custom.scss";
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
 </style>

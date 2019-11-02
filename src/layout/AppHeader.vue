@@ -32,11 +32,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+@import "@/assets/custom.scss";
+
 .navbar {
   background: #fafafa !important;
 }
 .navbar .navbar-start .is-active {
-  background: #7957d5 !important;
+  background: $primary !important;
   color: white !important;
 }
 @media (max-width: 1023px) {

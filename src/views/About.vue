@@ -27,7 +27,7 @@
       <div class="columns is-centered">
         <div class="column is-8">
           <h4
-            class="title is-4 has-text-centered"
+            class="title is-4 has-text-centered is-family-secondary"
           >Conhece as Diretrizes para ensino de Computação na Educação Básica?</h4>
           <br>
           <p>

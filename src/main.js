@@ -4,10 +4,11 @@ import router from "./router/app";
 import store from "./store";
 import "./registerServiceWorker";
 import Buefy from "buefy";
-import "buefy/dist/buefy.css";
 import AuthDirective from "@/directives/auth";
 
-Vue.use(Buefy);
+Vue.use(Buefy, {
+  defaultIconPack: 'fas',
+});
 Vue.config.productionTip = false;
 Vue.directive("auth", AuthDirective);
 

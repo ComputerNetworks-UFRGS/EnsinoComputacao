@@ -11,9 +11,7 @@
           Por eixo
           <span class="is-hidden-mobile">&nbsp;de ensino</span>
         </router-link>
-        <router-link to="/classificacao/eixos" class="button is-white">
-          Eixo por ano
-        </router-link>
+        <router-link to="/classificacao/eixos" class="button is-white">Eixo por ano</router-link>
       </div>
       <router-view></router-view>
     </div>
@@ -25,13 +23,15 @@ export default {};
 </script>
 
 <style lang="scss">
+@import "@/assets/custom.scss";
+
 .classificacao {
   .has-addons {
     .button {
       background: transparent !important;
     }
     .router-link-exact-active {
-      background: #7957d5 !important;
+      background: $primary !important;
       color: white !important;
     }
   }
