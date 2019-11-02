@@ -18,7 +18,7 @@
       <div
         v-for="a of axis"
         :key="'content' + a.id"
-        class="columns is-marginless is-mobile"
+        class="columns is-marginless is-mobile box-main-content"
         v-show="a.id == activeAxis.id"
       >
         <div class="column is-narrow" style="padding: 0px; width: 600px;">
@@ -30,7 +30,7 @@
           ></graph-view-groups>
         </div>
         <div class="column">
-          <graph-node-detail v-if="activeAxis" :node="a.activeNode"></graph-node-detail>
+          <graph-node-detail v-if="activeAxis" :node="a.activeNode" class="node-detail"></graph-node-detail>
           <div v-else>Selecione um nodo do grafo</div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default {
           years: ["EM"]
         }
       ],
-      activeAxis: false,
+      activeAxis: false
     };
   },
   mounted() {
@@ -88,8 +88,8 @@ export default {
       Axis.list()
         .then(res => res.data)
         .then(axis => {
-          for(let a of axis) {
-            a['activeNode'] = {}
+          for (let a of axis) {
+            a["activeNode"] = {};
           }
           this.activeAxis = _.head(axis);
           this.axis = axis;
@@ -102,7 +102,7 @@ export default {
       Graphs.nodeDetail(this.activeAxis.graph_id, node.id.replace("node", ""))
         .then(res => res.data)
         .then(nodeDetail => {
-          this.activeAxis['activeNode'] = nodeDetail;
+          this.activeAxis["activeNode"] = nodeDetail;
         });
     }
   }
@@ -131,12 +131,20 @@ export default {
   background: rgba(0, 0, 0, 0.4) !important;
   color: white;
 }
+.box-main-content {
+  background: #aaccaa;
+  height: 100%;
+  .node-detail {
+    height: calc(100vh - 24px);
+    position: sticky;
+    top: 12px;
+  }
+}
 </style>
 <style lang="scss">
 .classificacao {
   .container {
     height: 2200px;
-    // border: 1px solid red;
     background: rgba(0, 0, 0, 0.4) !important;
   }
 }

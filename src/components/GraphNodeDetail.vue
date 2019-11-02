@@ -1,26 +1,26 @@
 <template>
-  <div>
+  <div class="box-node-detail">
     <div v-if="node && node.learnig_object">
       <h4 class="title is-4 has-text-centered">{{ node.learnig_object.name }}</h4>
       <hr />
       <!-- <div>
-                    <b>Habilidades trabalhadas</b>
-                    <ul>
-                        <li class="list" v-for="skill of node.learnig_object.skills" :key="skill.id">{{ skill.name }}</li>
-                    </ul>
-                </div>
-                <div>
-                    <b>Pré-requisitos</b>
-                    <ul>
-                        <li class="list" v-for="dependency of node.dependencies" :key="dependency.id">{{ dependency.title }}</li>
-                    </ul>
-                </div>
-                <div>
-                    <b>Libera</b>
-                    <ul>
-                        <li class="list" v-for="dependent of node.dependents" :key="dependent.id">{{ dependent.title }}</li>
-                    </ul>
-                </div>
+                        <b>Habilidades trabalhadas</b>
+                        <ul>
+                            <li class="list" v-for="skill of node.learnig_object.skills" :key="skill.id">{{ skill.name }}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <b>Pré-requisitos</b>
+                        <ul>
+                            <li class="list" v-for="dependency of node.dependencies" :key="dependency.id">{{ dependency.title }}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <b>Libera</b>
+                        <ul>
+                            <li class="list" v-for="dependent of node.dependents" :key="dependent.id">{{ dependent.title }}</li>
+                        </ul>
+                    </div>
       <hr />-->
 
       <h5 class="title is-5">
@@ -38,9 +38,9 @@
             <i
               class="fas"
               :class="{
-            'fa-angle-down': isFiltersOpen,
-            'fa-angle-right': !isFiltersOpen,
-          }"
+                'fa-angle-down': isFiltersOpen,
+                'fa-angle-right': !isFiltersOpen,
+              }"
             ></i>
           </span>
         </button>
@@ -83,8 +83,7 @@
 
           <div class="card">
             <div class="card-content">
-              Faça parte e contribua incluindo uma atividade relacionada com esse Objeto de
-              Aprendizado.
+              Faça parte e contribua incluindo uma atividade relacionada com esse Objeto de Aprendizado.
               <br />
               <router-link to="/dash/atividades/criar" class="button is-primary">Contribuir</router-link>
             </div>
@@ -191,10 +190,16 @@ export default {
   margin-top: 9px;
   margin-bottom: 12px;
 }
+
 .loading {
   position: relative;
   min-height: 200px;
   border-radius: 12px;
   overflow: hidden;
+}
+
+.box-node-detail {
+  border: 1px solid red;
+  height: 100%;
 }
 </style>
