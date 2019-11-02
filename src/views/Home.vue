@@ -19,9 +19,10 @@
         v-for="a of axis"
         :key="'content' + a.id"
         class="columns is-marginless is-mobile box-main-content"
-        v-show="a.id == activeAxis.id"
         :style="{
-          'background-color': a.color
+          'background-color': a.color,
+          'height': a.id == activeAxis.id ? '100%' : '0px',
+          'overflow': a.id == activeAxis.id ? 'visible' : 'hidden'
         }"
       >
         <div class="column is-narrow" style="padding: 0px; width: 600px;">
