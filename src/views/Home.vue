@@ -1,5 +1,5 @@
 <template>
-  <section class="classificacao pd">
+  <section class="classificacao classificacao-home pd">
     <div class="container is-widescreen">
       <div class="columns is-marginless is-mobile">
         <div
@@ -191,7 +191,7 @@ export default {
 }
 </style>
 <style lang="scss">
-.classificacao {
+.classificacao-home {
   .card-content {
     padding: 16px;
   }
@@ -226,7 +226,7 @@ export default {
   }
 }
 @media (max-width: 768px) {
-  .classificacao {
+  .classificacao-home {
     .component-sidenav {
       width: 100vw !important;
     }

@@ -3,6 +3,7 @@
     <div class="columns">
       <div class="column" v-if="tasks.length > 0">
         <div class="columns is-multiline">
+
           <div
             class="column list-of-tasks"
             :class="{
@@ -45,6 +46,15 @@
             </div>
           </div>
         </div>
+        <b-pagination
+          v-if="paginated && pagination.total > pagination.per_page"
+          :total="pagination.total"
+          :current.sync="pagination.current_page"
+          :order="'is-centered'"
+          :simple="false"
+          :per-page="pagination.per_page"
+          @change="$emit('changePage', $event)"
+        ></b-pagination>
       </div>
       <div class="column" v-else>
         <h5 class="title is-5">Nenhuma atividade encontrada.</h5>
@@ -89,6 +99,14 @@ export default {
     customTaskView: {
       type: Boolean,
       default: false
+    },
+    paginated: {
+      type: Boolean,
+      default: false
+    },
+    pagination: {
+      type: undefined,
+      default: {}
     }
   },
   components: {

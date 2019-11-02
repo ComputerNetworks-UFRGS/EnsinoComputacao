@@ -81,7 +81,7 @@
           </ul>-->
         </div>
         <div class="column">
-          <task-list :tasks="tasks"></task-list>
+          <task-list :tasks="tasks" :paginated="true" :pagination="pagination" @changePage="changePage"></task-list>
         </div>
       </div>
     </div>
@@ -120,7 +120,8 @@ export default {
       tags: [],
       filteredTags: [],
       tree: {},
-      isFiltersOpen: false
+      isFiltersOpen: false,
+      pagination: {},
     };
   },
   mounted() {
@@ -146,7 +147,7 @@ export default {
           this.tags = tags;
         });
     },
-    fetchTasks() {
+    fetchTasks(page = 1) {
       this.isLoading = true;
       // this.isFiltersOpen = false;
       let params = {};
@@ -174,8 +175,15 @@ export default {
         params["tags"] = _.map(this.filters.tags, tag => tag.id);
       }
 
+      params["paginated"] = true;
+      params["page"] = page;
+
       Tasks.list(params)
         .then(res => res.data)
+        .then(pagination => {
+          this.pagination = pagination;
+          return pagination.data;
+        })
         .then(tasks => (this.tasks = tasks))
         .finally(() => {
           this.isLoading = false;
@@ -195,6 +203,9 @@ export default {
             .indexOf(text.toLowerCase()) >= 0
         );
       });
+    },
+    changePage(page) {
+      this.fetchTasks(page)
     }
   },
   watch: {
