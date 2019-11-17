@@ -2,6 +2,7 @@ import AppHeader from "./../layout/AppHeader"
 import AppFooter from "./../layout/AppFooter"
 
 import Home from "./../views/Home.vue"
+import Axis from './../views/Axis.vue'
 import Tasks from "./../views/Tasks.vue"
 import Task from "./../views/Task.vue"
 import ClassificationAxis from './../views/ClassificationAxis.vue'
@@ -11,85 +12,27 @@ import Login from "./../views/auth/Login.vue"
 import Register from "./../views/auth/Register.vue"
 import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
 
-export default [
-    {
-        path: "/",
-        name: "home",
-        components: {
-            header: AppHeader,
-            default: Home,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/login",
-        name: "login",
-        components: {
-            header: AppHeader,
-            default: Login,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/cadastro",
-        name: "register",
-        components: {
-            header: AppHeader,
-            default: Register,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/atividades",
-        name: "tasks",
-        components: {
-            header: AppHeader,
-            default: Tasks,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/classificacao",
-        components: {
-            header: AppHeader,
-            default: ClassificationAxis,
-            footer: AppFooter
-        },
-    },
-    {
-        path: "/atividades/:id",
-        name: "task",
-        components: {
-            header: AppHeader,
-            default: Task,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/sobre",
-        name: "about",
-        components: {
-            header: AppHeader,
-            default: About,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/contato",
-        name: "contact",
-        components: {
-            header: AppHeader,
-            default: Contact,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/recuperar-senha",
-        name: "password-recovery",
-        components: {
-            header: AppHeader,
-            default: PasswordRecovery,
-            footer: AppFooter
-        }
-    },
+let routes = [
+    ['home', '/', Home],
+    ['axis', '/eixos-de-ensino', Axis],
+    ['login', '/login', Login],
+    ['register', '/cadastro', Register],
+    ['tasks', '/atividades', Tasks],
+    ['classification', '/classificacao', ClassificationAxis],
+    ['task', '/atividades/:id', Task],
+    ['about', '/sobre', About],
+    ['contact', '/contato', Contact],
+    ['password-recovery', '/recuperar-senha', PasswordRecovery]
 ]
+
+export default routes.map(i => {
+    return {
+        name: i[0],
+        path: i[1],
+        components: {
+            header: AppHeader,
+            default: i[2],
+            footer: AppFooter
+        }
+    }
+})

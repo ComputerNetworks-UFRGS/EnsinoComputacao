@@ -1,285 +1,366 @@
 <template>
-  <section class="classificacao classificacao-home pd">
-    <div class="container is-widescreen">
-      <div class="columns is-marginless is-mobile">
-        <div
-          class="column is-4 axis center-vertical-text"
-          v-for="a of axis"
-          :key="'header' + a.id"
-          :style="{
-            'background-color': a.color,
-          }"
-          :class="{
-            'active-axis':a.id == activeAxis.id
-          }"
-          @click="setActiveAxis(a)"
-        >{{ a.name }}</div>
-      </div>
-      <div
-        v-for="a of axis"
-        :key="'content' + a.id"
-        class="columns is-marginless is-mobile box-main-content"
-        :style="{
-          'background-color': a.color,
-          'height': a.id == activeAxis.id ? '98%' : '0px',
-          'overflow': a.id == activeAxis.id ? 'visible' : 'hidden'
-        }"
-      >
-        <div class="column is-narrow" style="padding: 0px; width: 600px;">
-          <graph-view-groups
-            v-if="activeAxis"
-            :graph-id="a.graph_id"
-            class="graph"
-            @clickNode="clickNode"
-          ></graph-view-groups>
-        </div>
-        <div class="column is-hidden-mobile">
-          <div class="box node-detail">
-            <graph-node-detail v-if="activeAxis" :node="a.activeNode" @taskSelected="taskSelected"></graph-node-detail>
-            <div v-else>Selecione um nodo do grafo</div>
+  <div>
+    <!-- <div id="preloader">
+      <div id="status"></div>
+    </div>-->
+
+    <section class="hero is-fullheight is-default is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-vcentered">
+            <div class="column is-5 is-offset-1 landing-caption">
+              <h1 class="title is-1 is-bold is-spaced">Manage, Deploy.</h1>
+              <h2 class="subtitle is-5 is-muted">
+                Lorem ipsum sit dolor amet is a dummy text used by typography
+                industry
+              </h2>
+              <p>
+                <router-link to="/eixos-de-ensino" class="button cta rounded primary-btn raised">Get Started</router-link>
+              </p>
+            </div>
+            <div class="column is-5 is-offset-1">
+              <figure class="image is-4by3">
+                <img src="img/fresh/images/illustrations/worker.svg" alt="Description" />
+              </figure>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <menu-side :isOpen="selectedTask > 0" :is-right="true" @close="selectedTask = false">
-      <div v-if="selectedTask" class="task-detail-box">
-        <task-detail :task-id="selectedTask" class="task-detail-content"></task-detail>
-        <div class="task-detail-footer card-footer">
-          <a class="card-footer-item" href="#!" @click.prevent="selectedTask = false">
-            <span class="icon">
-              <i class="fas fa-times"></i>
-            </span>
-            <span>Voltar</span>
-          </a>
-          <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">
-            <span>Ver atividade</span>
-            <span class="icon">
-              <i class="fas fa-angle-right"></i>
-            </span>
-          </router-link>
+
+      <div class="hero-foot mb-20">
+        <div class="container">
+          <div class="tabs is-centered">
+            <ul>
+              <li>
+                <a>
+                  <img class="partner-logo" src="img/fresh/images/logos/clients/systek.svg" />
+                </a>
+              </li>
+              <li>
+                <a>
+                  <img class="partner-logo" src="img/fresh/images/logos/clients/tribe.svg" />
+                </a>
+              </li>
+              <li>
+                <a>
+                  <img class="partner-logo" src="img/fresh/images/logos/clients/kromo.svg" />
+                </a>
+              </li>
+              <li>
+                <a>
+                  <img class="partner-logo" src="img/fresh/images/logos/clients/infinite.svg" />
+                </a>
+              </li>
+              <li>
+                <a>
+                  <img class="partner-logo" src="img/fresh/images/logos/clients/gutwork.svg" />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </menu-side>
-  </section>
+    </section>
+
+    <section class="section section-feature-grey is-medium">
+      <div class="container">
+        <div class="title-wrapper has-text-centered">
+          <h2 class="title is-2">Great Power Comes</h2>
+          <h3 class="subtitle is-5 is-muted">With great Responsability</h3>
+          <div class="divider is-centered"></div>
+        </div>
+
+        <div class="content-wrapper">
+          <div class="columns">
+            <div class="column is-one-third">
+              <div
+                class="feature-card is-bordered has-text-centered revealOnScroll delay-1"
+                data-animation="fadeInLeft"
+              >
+                <div class="card-title">
+                  <h4>App builder</h4>
+                </div>
+                <div class="card-icon">
+                  <img src="img/fresh/images/illustrations/icons/mouse-globe.svg" />
+                </div>
+                <div class="card-text">
+                  <p>This is some explanatory text that is on two rows</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="button btn-align-md accent-btn raised">Free Trial</a>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div
+                class="feature-card is-bordered has-text-centered revealOnScroll delay-2"
+                data-animation="fadeInLeft"
+              >
+                <div class="card-title">
+                  <h4>Cloud integration</h4>
+                </div>
+                <div class="card-icon">
+                  <img src="img/fresh/images/illustrations/icons/laptop-cloud.svg" />
+                </div>
+                <div class="card-text">
+                  <p>This is some explanatory text that is on two rows</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="button btn-align-md secondary-btn raised">Get Started</a>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div
+                class="feature-card is-bordered has-text-centered revealOnScroll delay-3"
+                data-animation="fadeInLeft"
+              >
+                <div class="card-title">
+                  <h4>Addons & Plugins</h4>
+                </div>
+                <div class="card-icon">
+                  <img src="img/fresh/images/illustrations/icons/plug-cloud.svg" />
+                </div>
+                <div class="card-text">
+                  <p>This is some explanatory text that is on two rows</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="button btn-align-md primary-btn raised">Get Started</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-medium">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-centered-tablet-portrait">
+            <h1 class="title section-title">You're here because you want the best</h1>
+            <h3 class="subtitle is-4 is-muted">And we Know it</h3>
+            <div class="divider"></div>
+          </div>
+          <div class="column is-8 mt-60">
+            <!-- icon block -->
+            <article class="media icon-box">
+              <figure class="media-left">
+                <p class="image">
+                  <img src="img/fresh/images/illustrations/icons/laptop-globe.svg" />
+                </p>
+              </figure>
+              <div class="media-content mt-50">
+                <div class="content">
+                  <p>
+                    <span class="icon-box-title">Powerful and unified interface</span>
+                    <span class="icon-box-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Proin ornare magna eros, eu pellentesque tortor.
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </article>
+            <!-- /icon block -->
+
+            <!-- icon block -->
+            <article class="media icon-box">
+              <figure class="media-left">
+                <p class="image">
+                  <img src="img/fresh/images/illustrations/icons/doc-sync.svg" />
+                </p>
+              </figure>
+              <div class="media-content mt-50">
+                <div class="content">
+                  <p>
+                    <span class="icon-box-title">Cross device Synchronisation</span>
+                    <span class="icon-box-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Proin ornare magna eros, eu pellentesque tortor.
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </article>
+            <!-- /icon block -->
+
+            <!-- icon block -->
+            <article class="media icon-box">
+              <figure class="media-left">
+                <p class="image">
+                  <img src="img/fresh/images/illustrations/icons/mobile-feed.svg" />
+                </p>
+              </figure>
+              <div class="media-content mt-50">
+                <div class="content">
+                  <p>
+                    <span class="icon-box-title">Nomad System</span>
+                    <span class="icon-box-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Proin ornare magna eros, eu pellentesque tortor.
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </article>
+            <!-- /icon block -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-feature-grey is-medium">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-10 is-offset-1">
+            <div class="has-text-centered">
+              <img class="pushed-image" src="img/fresh/images/illustrations/mockups/app-mockup.png" />
+            </div>
+          </div>
+        </div>
+
+        <div class="title-wrapper has-text-centered">
+          <h2 class="title is-2">One Platform</h2>
+          <h3 class="subtitle is-5 is-muted">To rule them All</h3>
+        </div>
+
+        <p class="has-text-centered mt-20">
+          <a class="button cta is-large rounded secondary-btn raised">Get Started</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section is-medium section-secondary">
+      <div class="container">
+        <div class="title-wrapper has-text-centered">
+          <h2 class="title is-2 light-text is-spaced">Our Clients love us !</h2>
+          <h3
+            class="subtitle is-5 light-text"
+          >Lorem ipsum sit dolor amet is a dummy text used by typography industry</h3>
+        </div>
+
+        <div class="content-wrapper">
+          <div class="columns is-vcentered">
+            <div class="column is-4">
+              <figure class="testimonial">
+                <blockquote>
+                  Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea
+                  case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
+                </blockquote>
+                <div class="author">
+                  <img src="img/fresh/images/illustrations/faces/1.png" alt />
+                  <h5>Irma Walters</h5>
+                  <span>Accountant</span>
+                </div>
+              </figure>
+            </div>
+            <div class="column is-4">
+              <figure class="testimonial">
+                <blockquote>
+                  Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea
+                  case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
+                </blockquote>
+                <div class="author">
+                  <img src="img/fresh/images/illustrations/faces/2.png" alt />
+                  <h5>John Bradley</h5>
+                  <span>Financial Analyst</span>
+                </div>
+              </figure>
+            </div>
+            <div class="column is-4">
+              <figure class="testimonial">
+                <blockquote>
+                  Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea
+                  case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
+                </blockquote>
+                <div class="author">
+                  <img src="img/fresh/images/illustrations/faces/3.png" alt />
+                  <h5>Gary Blackman</h5>
+                  <span>HR Manager</span>
+                </div>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light-grey is-medium">
+      <div class="container">
+        <div class="title-wrapper has-text-centered">
+          <h2 class="title is-2 is-spaced">Drop us a line or two</h2>
+          <h3 class="subtitle is-5 is-muted">We'd love to hear from You</h3>
+          <div class="divider is-centered"></div>
+        </div>
+
+        <div class="content-wrapper">
+          <div class="columns">
+            <div class="column is-6 is-offset-3">
+              <form>
+                <div class="columns is-multiline">
+                  <div class="column is-6">
+                    <input class="input is-medium" type="text" placeholder="Enter your Name" />
+                  </div>
+                  <div class="column is-6">
+                    <input class="input is-medium" type="email" placeholder="Enter your Email" />
+                  </div>
+                  <div class="column is-12">
+                    <textarea class="textarea" rows="10" placeholder="Write someting ..."></textarea>
+                  </div>
+                  <div class="form-footer has-text-centered mt-10">
+                    <button class="button cta is-large primary-btn raised is-clear">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="auth-modal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="flex-card auth-card">
+          <div class="tabs-wrapper">
+            <div class="tabs">
+              <ul>
+                <li class="is-active" data-tab="login-tab">
+                  <a>Login</a>
+                </li>
+                <li data-tab="register-tab">
+                  <a>Register</a>
+                </li>
+              </ul>
+            </div>
+            <div id="login-tab" class="tab-content is-active">
+              <div class="field">
+                <label>Username</label>
+                <div class="control">
+                  <input type="text" class="input is-medium" placeholder="Enter username" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <div class="control">
+                  <input type="password" class="input is-medium" placeholder="Enter password" />
+                </div>
+              </div>
+
+              <a class="button is-fullwidth secondary-btn is-rounded raised">Log in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <div id="backtotop">
+      <a href="#"></a>
+    </div>
+  </div>
 </template>
-
 <script>
-import _ from "lodash";
-import Axis from "@/services/axis";
-import AgeGroups from "@/services/age-group";
-import GraphNodeDetail from "@/components/GraphNodeDetail";
-import GraphViewGroups from "@/components/GraphViewGroups";
-import Graphs from "@/services/graph";
-import Skills from "@/services/skill";
-import TaskList from "@/components/TaskList";
-import MenuSide from "@/components/MenuSide";
-import TaskDetail from "@/components/TaskDetail";
-
-export default {
-  components: {
-    GraphNodeDetail,
-    GraphViewGroups,
-    TaskList,
-    MenuSide,
-    TaskDetail
-  },
-  data() {
-    return {
-      years: [],
-      axis: [],
-      selectedSkill: false,
-      ageGroups: [
-        {
-          key: "AI",
-          label: "Anos Iniciais",
-          years: ["01", "02", "03", "04", "05"]
-        },
-        {
-          key: "AF",
-          label: "Anos Finais",
-          years: ["06", "07", "08", "09"]
-        },
-        {
-          key: "EM",
-          label: "Ensino Médio",
-          years: ["EM"]
-        }
-      ],
-      activeAxis: false,
-      selectedTask: false
-    };
-  },
-  mounted() {
-    this.fetch();
-  },
-  methods: {
-    fetch() {
-      Axis.list()
-        .then(res => res.data)
-        .then(axis => {
-          for (let a of axis) {
-            a["activeNode"] = {};
-          }
-          this.activeAxis = _.head(axis);
-          this.axis = axis;
-        });
-    },
-    setActiveAxis(axis) {
-      this.activeAxis = axis;
-    },
-    clickNode(node) {
-      Graphs.nodeDetail(this.activeAxis.graph_id, node.id.replace("node", ""))
-        .then(res => res.data)
-        .then(nodeDetail => {
-          this.activeAxis["activeNode"] = nodeDetail;
-        });
-    },
-    taskSelected(task) {
-      this.selectedTask = task.id;
-    }
-  }
-};
+export default {};
 </script>
-
-<style lang="scss" scoped>
-.axis {
-  text-align: center;
-  cursor: pointer;
-  border: 2px solid transparent;
-
-  $borderColor: #aaaaaa;
-
-  &.active-axis {
-    border-top-color: $borderColor;
-    border-left-color: $borderColor;
-    border-right-color: $borderColor;
-
-    &:first-child {
-      border-left: transparent;
-    }
-
-    &:last-child {
-      border-right: transparent;
-    }
-  }
-  &:not(.active-axis) {
-    border-bottom-color: $borderColor;
-  }
-}
-
-.year {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  .text {
-    writing-mode: sideways-lr;
-    text-orientation: mixed;
-    text-align: center;
-  }
-}
-.year-block {
-  height: 214px;
-}
-.box-main-content {
-  background: white;
-  height: 98%;
-  .node-detail {
-    height: calc(100vh - 24px);
-    position: sticky;
-    top: 12px;
-  }
-}
-</style>
-<style lang="scss">
-.classificacao-home {
-  .container {
-    height: 2200px;
-    background: transparent;
-  }
-  .card-content {
-    padding: 16px;
-  }
-  .card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    .card-content {
-      display: flex;
-      flex-grow: 1;
-      padding: 1rem;
-    }
-  }
-  .component-sidenav {
-    padding: 12px 12px 0px 12px;
-    background: white;
-    border-left: 4px solid #dddddd;
-    width: 70vw !important;
-  }
-  .task-detail-box {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    .task-detail-content {
-      display: flex;
-      flex-grow: 1;
-      background: white;
-      overflow: hidden;
-      overflow-y: auto;
-    }
-  }
-}
-@media (max-width: 768px) {
-  .classificacao-home {
-    .component-sidenav {
-      width: 100vw !important;
-    }
-    .list-of-tasks {
-      padding: 0px;
-      .card-content {
-        .content {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-          .content-text {
-            width: 100%;
-          }
-          .content-footer {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-          }
-        }
-      }
-    }
-  }
-}
-.graph {
-  .group {
-    display: flex;
-
-    .group-title {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      writing-mode: sideways-lr;
-      text-orientation: mixed;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-    }
-  }
-
-  .node {
-    background: white !important;
-    border-radius: 4px !important;
-    max-width: 200px !important;
-  }
-
-  // .group-nodes, .group-title {
-  // background: red!important;
-  // }
-}
-</style>
