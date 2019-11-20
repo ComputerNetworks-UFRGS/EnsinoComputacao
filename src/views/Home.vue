@@ -15,7 +15,10 @@
                 industry
               </h2>
               <p>
-                <router-link to="/eixos-de-ensino" class="button cta rounded primary-btn raised">Get Started</router-link>
+                <router-link
+                  to="/eixos-de-ensino"
+                  class="button cta rounded primary-btn raised"
+                >Get Started</router-link>
               </p>
             </div>
             <div class="column is-5 is-offset-1">
@@ -72,32 +75,35 @@
 
         <div class="content-wrapper">
           <div class="columns">
-            <div class="column is-one-third">
-              <div
-                class="feature-card is-bordered has-text-centered revealOnScroll delay-1"
-                data-animation="fadeInLeft"
-              >
-                <div class="card-title">
-                  <h4>App builder</h4>
-                </div>
-                <div class="card-icon">
-                  <img src="img/fresh/images/illustrations/icons/mouse-globe.svg" />
-                </div>
-                <div class="card-text">
-                  <p>This is some explanatory text that is on two rows</p>
-                </div>
-                <div class="card-action">
-                  <a href="#" class="button btn-align-md accent-btn raised">Free Trial</a>
-                </div>
-              </div>
-            </div>
             <div class="column">
               <div
                 class="feature-card is-bordered has-text-centered revealOnScroll delay-2"
                 data-animation="fadeInLeft"
               >
                 <div class="card-title">
-                  <h4>Cloud integration</h4>
+                  <h4>Cultura digital</h4>
+                </div>
+                <div class="card-icon">
+                  <img src="img/fresh/images/illustrations/icons/plug-cloud.svg" />
+                </div>
+                <div class="card-text">
+                  <p>This is some explanatory text that is on two rows</p>
+                </div>
+                <div class="card-action">
+                  <router-link
+                    to="/eixos-de-ensino/cultura-digital"
+                    class="button btn-align-md secondary-btn raised"
+                  >Conheça</router-link>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-third">
+              <div
+                class="feature-card is-bordered has-text-centered revealOnScroll delay-1"
+                data-animation="fadeInLeft"
+              >
+                <div class="card-title">
+                  <h4>Pensamento Computacional</h4>
                 </div>
                 <div class="card-icon">
                   <img src="img/fresh/images/illustrations/icons/laptop-cloud.svg" />
@@ -106,7 +112,10 @@
                   <p>This is some explanatory text that is on two rows</p>
                 </div>
                 <div class="card-action">
-                  <a href="#" class="button btn-align-md secondary-btn raised">Get Started</a>
+                  <router-link
+                    to="/eixos-de-ensino/pensamento-computacional"
+                    class="button btn-align-md accent-btn raised"
+                  >Conheça</router-link>
                 </div>
               </div>
             </div>
@@ -116,16 +125,19 @@
                 data-animation="fadeInLeft"
               >
                 <div class="card-title">
-                  <h4>Addons & Plugins</h4>
+                  <h4>Mundo Digital</h4>
                 </div>
                 <div class="card-icon">
-                  <img src="img/fresh/images/illustrations/icons/plug-cloud.svg" />
+                  <img src="img/fresh/images/illustrations/icons/mouse-globe.svg" />
                 </div>
                 <div class="card-text">
                   <p>This is some explanatory text that is on two rows</p>
                 </div>
                 <div class="card-action">
-                  <a href="#" class="button btn-align-md primary-btn raised">Get Started</a>
+                  <router-link
+                    to="/eixos-de-ensino/mundo-digital"
+                    class="button btn-align-md primary-btn raised"
+                  >Conheça</router-link>
                 </div>
               </div>
             </div>
@@ -153,7 +165,7 @@
               <div class="media-content mt-50">
                 <div class="content">
                   <p>
-                    <span class="icon-box-title">Powerful and unified interface</span>
+                    <span class="icon-box-title">Crie e organize uma atividade</span>
                     <span class="icon-box-text">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Proin ornare magna eros, eu pellentesque tortor.
@@ -174,7 +186,7 @@
               <div class="media-content mt-50">
                 <div class="content">
                   <p>
-                    <span class="icon-box-title">Cross device Synchronisation</span>
+                    <span class="icon-box-title">Tenha o material revisado e aprovado</span>
                     <span class="icon-box-text">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Proin ornare magna eros, eu pellentesque tortor.
@@ -195,7 +207,7 @@
               <div class="media-content mt-50">
                 <div class="content">
                   <p>
-                    <span class="icon-box-title">Nomad System</span>
+                    <span class="icon-box-title">Compartilhe como quiser</span>
                     <span class="icon-box-text">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Proin ornare magna eros, eu pellentesque tortor.

@@ -1,5 +1,8 @@
 <template>
   <section class="classificacao classificacao-home pd">
+    {{ teste ? 'sim' : 'nao' }}
+    {{ $route.params }}
+    {{ $route.query }}
     <div class="container is-widescreen">
       <div class="columns is-marginless is-mobile">
         <div
@@ -76,6 +79,11 @@ import MenuSide from "@/components/MenuSide";
 import TaskDetail from "@/components/TaskDetail";
 
 export default {
+  props: {
+    startAxis: {
+      default: 1
+    }
+  },
   components: {
     GraphNodeDetail,
     GraphViewGroups,
@@ -120,7 +128,7 @@ export default {
           for (let a of axis) {
             a["activeNode"] = {};
           }
-          this.activeAxis = _.head(axis);
+          this.activeAxis = _.find(axis, a => a.id == this.startAxis);
           this.axis = axis;
         });
     },

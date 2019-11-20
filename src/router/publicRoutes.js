@@ -15,6 +15,15 @@ import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
 let routes = [
     ['home', '/', Home],
     ['axis', '/eixos-de-ensino', Axis],
+    ['axis', '/eixos-de-ensino/pensamento-computacional', Axis, {
+        default: { startAxis: 1 }
+    }],
+    ['axis', '/eixos-de-ensino/mundo-digital', Axis, {
+        default: { startAxis: 2 }
+    }],
+    ['axis', '/eixos-de-ensino/cultura-digital', Axis, {
+        default: { startAxis: 3 }
+    }],
     ['login', '/login', Login],
     ['register', '/cadastro', Register],
     ['tasks', '/atividades', Tasks],
@@ -33,6 +42,7 @@ export default routes.map(i => {
             header: AppHeader,
             default: i[2],
             footer: AppFooter
-        }
+        },
+        props: i[3] || {}
     }
 })
