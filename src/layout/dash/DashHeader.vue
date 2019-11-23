@@ -5,7 +5,7 @@
 
       <div class="navbar-brand">
         <router-link class="navbar-item" to="/">
-          <img src="img/brand/color.png" alt="compeduba" />
+          <img src="img/fresh/images/logos/logo.png" alt="CompEduBa!" />
         </router-link>
       </div>
 
@@ -27,5 +27,8 @@ export default {
 <style scoped>
 .navbar {
   background: #fafafa !important;
+}
+.navbar-item img {
+  max-height: 36px;
 }
 </style>

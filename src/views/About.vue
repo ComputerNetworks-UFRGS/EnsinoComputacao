@@ -74,13 +74,8 @@
               <p class="card-header-title">{{ object.name }}</p>
               <a href="#!" class="card-header-icon">
                 <span class="icon">
-                  <i
-                    class="fas"
-                    :class="{
-                        'fa-angle-down': object.isOpen,
-                        'fa-angle-right': !object.isOpen,
-                    }"
-                  ></i>
+                  <font-awesome-icon v-if="object.isOpen" icon="angle-down" />
+                  <font-awesome-icon v-if="!object.isOpen" icon="angle-right" />
                 </span>
               </a>
             </header>
@@ -121,7 +116,7 @@
           <footer class="card-footer">
             <a href="#!" class="card-footer-item" @click.prevent="closeListTasks">
               <span class="icon">
-                <i class="fas fa-times"></i>
+                <font-awesome-icon icon="times" />
               </span>
               <span>Voltar</span>
             </a>

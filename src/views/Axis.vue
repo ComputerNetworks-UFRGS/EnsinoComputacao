@@ -47,14 +47,14 @@
         <div class="task-detail-footer card-footer">
           <a class="card-footer-item" href="#!" @click.prevent="selectedTask = false">
             <span class="icon">
-              <i class="fas fa-times"></i>
+              <font-awesome-icon icon="times" />
             </span>
             <span>Voltar</span>
           </a>
           <router-link :to="'/atividades/' + selectedTask" class="card-footer-item">
             <span>Ver atividade</span>
             <span class="icon">
-              <i class="fas fa-angle-right"></i>
+              <font-awesome-icon icon="angle-right" />
             </span>
           </router-link>
         </div>

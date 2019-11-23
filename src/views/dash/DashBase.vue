@@ -1,21 +1,17 @@
 <template>
   <div class="container pd">
-    <button @click="isMenuOpen = !isMenuOpen" class="is-hidden-tablet button button is-light" :class="{'is-menu-open': isMenuOpen}">
+    <button
+      @click="isMenuOpen = !isMenuOpen"
+      class="is-hidden-tablet button button is-light"
+      :class="{'is-menu-open': isMenuOpen}"
+    >
       <span class="icon">
-        <i
-          class="fas"
-          :class="'fa-bars'"
-        ></i>
+        <i class="fas" :class="'fa-bars'"></i>
       </span>
       <span>Menu</span>
       <span class="icon">
-        <i
-          class="fas"
-          :class="{
-            'fa-angle-down': isMenuOpen,
-            'fa-angle-right': !isMenuOpen,
-          }"
-        ></i>
+        <font-awesome-icon v-if="isMenuOpen" icon="angle-down" />
+        <font-awesome-icon v-if="!isMenuOpen" icon="angle-right" />
       </span>
     </button>
 
@@ -81,8 +77,8 @@ export default {
   },
   methods: {
     goTo(path) {
-      this.$router.push(path)
-      this.isMenuOpen = false
+      this.$router.push(path);
+      this.isMenuOpen = false;
     }
   }
 };

@@ -2,9 +2,9 @@
   <div class="task-detail card">
     <header class="card-header">
       <p class="card-header-title">{{ task.title }}</p>
-      <a href="#!" @click="print" class="card-header-icon" aria-label="more options">
+      <a v-if="showPrint" href.prevent="#!" @click="print" class="card-header-icon" aria-label="more options">
         <span class="icon">
-          <i class="fas fa-print" aria-hidden="true"></i>
+          <font-awesome-icon icon="print" />
         </span>
         Imprimir
       </a>
@@ -28,18 +28,15 @@
 
           <div v-if="task.skills && task.skills.length > 0">
             <br />
-            <div><b>Habilidade(s) trabalhada(s)</b></div>
+            <div>
+              <b>Habilidade(s) trabalhada(s)</b>
+            </div>
 
             <span v-for="skill of task.skills" :key="skill.id">
               <span class="tag cursor" @click="skill.showDescription = !skill.showDescription">
                 <span class="icon">
-                  <i
-                    class="fas"
-                    :class="{
-                            'fa-angle-down': skill.showDescription,
-                            'fa-angle-right': !skill.showDescription,
-                          }"
-                  ></i>
+                  <font-awesome-icon v-if="skill.showDescription" icon="angle-down" />
+                  <font-awesome-icon v-if="!skill.showDescription" icon="angle-right" />
                 </span>
                 {{ skill.habilidade_codigo }}
               </span>
@@ -81,6 +78,10 @@ export default {
   props: {
     taskId: {
       type: Number
+    },
+    showPrint: {
+      type: Boolean,
+      default: false,
     }
   },
   data() {

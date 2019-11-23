@@ -27,7 +27,9 @@ let routes = [
     ['contact', '/contato', Contact],
     ['home', '/', Home],
     ['tasks', '/atividades', Tasks],
-    ['task', '/atividades/:id', Task],
+    ['task', '/atividades/:id', Task, {
+        default: { showPrint: true }
+    }],
 
     // auth
     ['login', '/entrar', Login],

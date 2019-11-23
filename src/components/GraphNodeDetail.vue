@@ -31,17 +31,12 @@
           :class="{'is-menu-open': isFiltersOpen}"
         >
           <span class="icon">
-            <i class="fas" :class="'fa-sliders-h'"></i>
+            <font-awesome-icon icon="filter" />
           </span>
           <span>Filtros</span>
           <span class="icon">
-            <i
-              class="fas"
-              :class="{
-                'fa-angle-down': isFiltersOpen,
-                'fa-angle-right': !isFiltersOpen,
-              }"
-            ></i>
+            <font-awesome-icon v-if="isFiltersOpen" icon="angle-down" />
+            <font-awesome-icon v-if="!isFiltersOpen" icon="angle-right" />
           </span>
         </button>
       </h5>

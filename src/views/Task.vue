@@ -4,7 +4,7 @@
       <div class="hero-body">
         <div class="container">
           <h1 class="title cursor" @click="$router.push('/atividades')">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <font-awesome-icon icon="arrow-left" />
             {{ task.title }}
           </h1>
           <!-- <h2 class="subtitle" v-if="task.user">Criado por: {{ task.user.name }}</h2> -->
@@ -13,8 +13,10 @@
     </section>
     <br />
     <div class="container">
-      <task-detail :task-id="parseInt($route.params.id)"></task-detail>
+      <task-detail :task-id="parseInt($route.params.id)" :show-print="showPrint"></task-detail>
     </div>
+    <br />
+    <br />
   </section>
 </template>
 <script>
@@ -24,6 +26,12 @@ import Tasks from "@/services/task";
 export default {
   components: {
     TaskDetail
+  },
+  props: {
+    showPrint: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -36,10 +44,8 @@ export default {
       .then(task => {
         this.task = task;
       });
-  },
-}
-
-
+  }
+};
 </script>
 
 <style lang="scss">

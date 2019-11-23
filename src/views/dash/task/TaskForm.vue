@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card">
     <br>
     <router-link to="/dash/atividades/" class="button is-white is-pulled-right">Cancelar</router-link>
     <h4 class="title is-4" v-if="taskId">Editar: {{ form.title }}</h4>
@@ -260,5 +260,8 @@ export default {
 }
 .cursor {
   cursor: pointer;
+}
+.card {
+   padding: 24px;
 }
 </style>

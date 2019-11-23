@@ -1,6 +1,7 @@
 <template>
   <section class="login pd">
     <div class="container">
+      
       <br />
       <div class="title-wrapper has-text-centered">
         <h2 class="title is-2 is-spaced">Acessar conta</h2>
