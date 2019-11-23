@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand">
         <router-link class="navbar-item" to="/">
-          <img src="img/fresh/images/logos/fresh-alt.svg" alt width="112" height="28" />
+          <img src="img/fresh/images/logos/logo.png" alt="CompEduBa!" height="45" />
         </router-link>
       </div>
 

@@ -7,15 +7,15 @@ Cards and Card content styles
 // Feature Card
 .feature-card {
     width: 300px;
-    height: 320px;
+    height: 520px;
     background-color: #fff;
     border-radius: 3px;
     margin: 0 auto;
 
     .card-title h4 {
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Poppins', sans-serif;
         padding-top: 25px;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 600;
         color: $blue-grey;
     }
@@ -26,11 +26,12 @@ Cards and Card content styles
     }
 
     .card-text {
-        padding: 0 40px;
+        padding: 0 20px;
 
         p {
             color: $muted-grey;
         }
+
     }
 
     .card-action {

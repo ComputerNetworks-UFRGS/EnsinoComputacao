@@ -1,6 +1,19 @@
 <template>
   <section class="classificacao pd">
     <div class="container">
+      <iframe
+        style="width: 560px; height: 315px"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/HOx6cpnsbpw"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+
+      <br />
+      <br />
+      <br />
       <br />
 
       <div class="columns year-wrapper is-hidden-mobile">

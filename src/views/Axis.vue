@@ -1,8 +1,5 @@
 <template>
   <section class="classificacao classificacao-home pd">
-    {{ teste ? 'sim' : 'nao' }}
-    {{ $route.params }}
-    {{ $route.query }}
     <div class="container is-widescreen">
       <div class="columns is-marginless is-mobile">
         <div

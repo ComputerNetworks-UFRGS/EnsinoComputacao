@@ -9,16 +9,16 @@
         <div class="container">
           <div class="columns is-vcentered">
             <div class="column is-5 is-offset-1 landing-caption">
-              <h1 class="title is-1 is-bold is-spaced">Manage, Deploy.</h1>
+              <h1 class="title is-1 is-bold is-spaced">Computação para o Ensino Básico</h1>
               <h2 class="subtitle is-5 is-muted">
-                Lorem ipsum sit dolor amet is a dummy text used by typography
-                industry
+                Atividades de ensino de Computação para os anos do Ensino Básica, organizadas de
+                acordo com a diretrizes de Ensino de Computação da SBC.
               </h2>
               <p>
                 <router-link
                   to="/eixos-de-ensino"
                   class="button cta rounded primary-btn raised"
-                >Get Started</router-link>
+                >Conheça</router-link>
               </p>
             </div>
             <div class="column is-5 is-offset-1">
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="hero-foot mb-20">
+      <!-- <div class="hero-foot mb-20">
         <div class="container">
           <div class="tabs is-centered">
             <ul>
@@ -62,14 +62,16 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <section class="section section-feature-grey is-medium">
       <div class="container">
         <div class="title-wrapper has-text-centered">
-          <h2 class="title is-2">Great Power Comes</h2>
-          <h3 class="subtitle is-5 is-muted">With great Responsability</h3>
+          <h2 class="title is-2">Eixos de Ensino</h2>
+          <h3 class="subtitle is-5 is-muted">
+            Áreas de conhecimento de Computação
+          </h3>
           <div class="divider is-centered"></div>
         </div>
 
@@ -87,7 +89,13 @@
                   <img src="img/fresh/images/illustrations/icons/plug-cloud.svg" />
                 </div>
                 <div class="card-text">
-                  <p>This is some explanatory text that is on two rows</p>
+                  <p>
+                    Aborda o <b>letramento em tecnologias digitais</b> e analisa os novos
+                    padrões de comportamento e <b>questionamentos</b> morais e éticos na 
+                    <b>sociedade digitalizada</b>. Busca promover a <b>fluência</b> no uso 
+                    do <b>conhecimento computacional</b> para expressão de soluções e 
+                    manifestações culturais de forma contextualizada e crítica.
+                  </p>
                 </div>
                 <div class="card-action">
                   <router-link
@@ -109,7 +117,12 @@
                   <img src="img/fresh/images/illustrations/icons/laptop-cloud.svg" />
                 </div>
                 <div class="card-text">
-                  <p>This is some explanatory text that is on two rows</p>
+                  <p>
+                    Se refere à <b>capacidade de compreender, definir, modelar, solucionar, 
+                    automatizar e analisar problemas de forma metódica e sistemática</b> 
+                    através de algoritmos. Envolveabstrações e técnicas necessárias 
+                    para a descrição e análise de informações e processos, bem como para a automação de soluções. 
+                  </p>
                 </div>
                 <div class="card-action">
                   <router-link
@@ -131,7 +144,11 @@
                   <img src="img/fresh/images/illustrations/icons/mouse-globe.svg" />
                 </div>
                 <div class="card-text">
-                  <p>This is some explanatory text that is on two rows</p>
+                  <p>
+                    Visa fornecer ao estudante a <b>compreensão dos processos que ocorrem no mundo</b>, 
+                    podendo compreender e criticar tendências, sendo ativo neste cenário.
+                    Para compreender de forma estruturada e não apenas efemera identificam-se 3 pilares principais, chamados: <b>codificação, processamento e distribuição</b>.
+                  </p>
                 </div>
                 <div class="card-action">
                   <router-link

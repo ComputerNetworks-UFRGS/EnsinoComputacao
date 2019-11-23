@@ -11,27 +11,30 @@ import Contact from "./../views/Contact.vue"
 import Login from "./../views/auth/Login.vue"
 import Register from "./../views/auth/Register.vue"
 import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
+import Teste from "./../views/teste.vue"
 
 let routes = [
     ['home', '/', Home],
     ['axis', '/eixos-de-ensino', Axis],
-    ['axis', '/eixos-de-ensino/pensamento-computacional', Axis, {
+    ['axis-pc', '/eixos-de-ensino/pensamento-computacional', Axis, {
         default: { startAxis: 1 }
     }],
-    ['axis', '/eixos-de-ensino/mundo-digital', Axis, {
+    ['axis-md', '/eixos-de-ensino/mundo-digital', Axis, {
         default: { startAxis: 2 }
     }],
-    ['axis', '/eixos-de-ensino/cultura-digital', Axis, {
+    ['axis-cd', '/eixos-de-ensino/cultura-digital', Axis, {
         default: { startAxis: 3 }
     }],
     ['login', '/login', Login],
     ['register', '/cadastro', Register],
+    ['password-recovery', '/recuperar-senha', PasswordRecovery],
+
     ['tasks', '/atividades', Tasks],
     ['classification', '/classificacao', ClassificationAxis],
     ['task', '/atividades/:id', Task],
     ['about', '/sobre', About],
     ['contact', '/contato', Contact],
-    ['password-recovery', '/recuperar-senha', PasswordRecovery]
+    ['teste', '/teste', Teste]
 ]
 
 export default routes.map(i => {
