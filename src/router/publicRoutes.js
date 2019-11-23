@@ -30,9 +30,9 @@ let routes = [
     ['task', '/atividades/:id', Task],
 
     // auth
-    ['login', '/login', Login],
+    ['login', '/entrar', Login],
     ['password-recovery', '/recuperar-senha', PasswordRecovery],
-    ['register', '/cadastro', Register],
+    ['register', '/criar-conta', Register],
 ]
 
 export default routes.map(i => {

@@ -18,8 +18,8 @@
       </div>
       <div v-else id="navbar-menu" class="navbar-menu is-static">
         <div class="navbar-end">
-          <router-link to="/login" class="navbar-item is-secondary">Entrar</router-link>
-          <router-link to="/cadastro" class="navbar-item">
+          <router-link to="/entrar" class="navbar-item is-secondary">Entrar</router-link>
+          <router-link to="/criar-conta" class="navbar-item">
             <span class="button signup-button rounded secondary-btn raised">Criar conta</span>
           </router-link>
         </div>
