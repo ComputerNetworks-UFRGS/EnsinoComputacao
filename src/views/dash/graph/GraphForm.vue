@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <router-link to="/dash/curriculos" class="button is-white is-pulled-right">Cancelar</router-link>
     <h4 class="title is-4" v-if="graphId">Editar currículo</h4>
     <h4 class="title is-4" v-else>Novo currículo</h4>
@@ -19,18 +19,18 @@
         <div class="field">
           <label class="label">Nome</label>
           <div class="control">
-            <input v-model="form.title" class="input" placeholder="Nome">
+            <input v-model="form.title" class="input" placeholder="Nome" />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Descrição</label>
           <div class="control">
-            <input v-model="form.description" class="input" placeholder="Descrição curta">
+            <input v-model="form.description" class="input" placeholder="Descrição curta" />
           </div>
         </div>
 
-        <br>
+        <br />
 
         <div class="field">
           <!-- <label class="label">Largura dos grupos</label> -->
@@ -50,7 +50,7 @@
             <div class="field" v-if="form.group_by_year">
               <label class="label">Largura do grupo</label>
               <div class="control">
-                <input v-model="form.width" class="input" placeholder="Largura">
+                <input v-model="form.width" class="input" placeholder="Largura" />
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
             <div class="field" v-if="form.group_by_year">
               <label class="label">Altura do grupo</label>
               <div class="control">
-                <input v-model="form.height" class="input" placeholder="Altura">
+                <input v-model="form.height" class="input" placeholder="Altura" />
               </div>
             </div>
           </div>
@@ -87,26 +87,24 @@ export default {
         description: "",
         group_by_year: 0,
         width: 300,
-        height: 150,
+        height: 150
       },
       errors: {
         title: [],
         description: [],
         group_by_year: [],
         width: [],
-        height: [],
+        height: []
       }
     };
   },
   created() {
     this.graphId = this.$route.params.id;
-    console.log('graphId', this.graphId)
-    
+
     if (this.graphId) {
       Graphs.detail(this.graphId)
         .then(res => res.data)
         .then(graph => {
-          console.log('graph', graph)
           this.form = graph;
         });
     }
@@ -151,7 +149,7 @@ export default {
           });
         }
       });
-    },
+    }
   }
 };
 </script>

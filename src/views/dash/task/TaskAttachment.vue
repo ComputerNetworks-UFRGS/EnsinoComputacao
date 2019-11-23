@@ -79,7 +79,6 @@ export default {
         .then(res => res.data)
         .then(attachments => {
           this.attachments = attachments;
-          console.log("atta", attachments);
         });
     },
     addAttachment(attachment) {

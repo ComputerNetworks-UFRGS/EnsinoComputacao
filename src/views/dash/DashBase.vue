@@ -62,6 +62,8 @@
       <div class="column">
         <div class="container">
           <router-view></router-view>
+          <br>
+          <br>
         </div>
       </div>
     </div>

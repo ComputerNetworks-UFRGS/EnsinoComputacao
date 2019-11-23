@@ -10,7 +10,7 @@
           <button class="button is-light">
             <span>{{ ($store.state.user ? $store.state.user.name : 'Meus dados') }}</span>
             <span class="icon is-small">
-              <font-awesome-icon v-if="skill.showDescription" icon="angle-down" />
+              <font-awesome-icon icon="angle-down" />
             </span>
           </button>
         </div>
