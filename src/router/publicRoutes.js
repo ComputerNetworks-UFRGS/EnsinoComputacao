@@ -1,18 +1,19 @@
 import AppHeader from "./../layout/AppHeader"
 import AppFooter from "./../layout/AppFooter"
 
-import Home from "./../views/Home.vue"
-import Axis from './../views/Axis.vue'
-import Tasks from "./../views/Tasks.vue"
-import Task from "./../views/Task.vue"
 import About from './../views/About.vue'
+import Axis from './../views/Axis.vue'
 import Contact from "./../views/Contact.vue"
+import Home from "./../views/Home.vue"
+import Task from "./../views/Task.vue"
+import Tasks from "./../views/Tasks.vue"
+
 import Login from "./../views/auth/Login.vue"
-import Register from "./../views/auth/Register.vue"
 import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
+import Register from "./../views/auth/Register.vue"
 
 let routes = [
-    ['home', '/', Home],
+    ['about', '/diretrizes-para-ensino-de-computacao-na-educacao-basica', About],
     ['axis', '/eixos-de-ensino', Axis],
     ['axis-pc', '/eixos-de-ensino/pensamento-computacional', Axis, {
         default: { startAxis: 1 }
@@ -23,14 +24,15 @@ let routes = [
     ['axis-cd', '/eixos-de-ensino/cultura-digital', Axis, {
         default: { startAxis: 3 }
     }],
-    ['login', '/login', Login],
-    ['register', '/cadastro', Register],
-    ['password-recovery', '/recuperar-senha', PasswordRecovery],
-
-    ['tasks', '/atividades', Tasks],
-    ['about', '/diretrizes-para-ensino-de-computacao-na-educacao-basica', About],
-    ['task', '/atividades/:id', Task],
     ['contact', '/contato', Contact],
+    ['home', '/', Home],
+    ['tasks', '/atividades', Tasks],
+    ['task', '/atividades/:id', Task],
+
+    // auth
+    ['login', '/login', Login],
+    ['password-recovery', '/recuperar-senha', PasswordRecovery],
+    ['register', '/cadastro', Register],
 ]
 
 export default routes.map(i => {

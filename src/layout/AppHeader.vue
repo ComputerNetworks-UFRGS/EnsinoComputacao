@@ -51,31 +51,4 @@ export default {
     background: transparent;
   }
 }
-// @import "@/assets/custom.scss";
-// .navbar .navbar-start .is-active {
-//   background: $primary !important;
-//   color: white !important;
-// }
-// @media (max-width: 1023px) {
-//   .navbar-menu {
-//     padding: 0px;
-//     box-shadow: unset;
-//     .navbar-start {
-//       background: #fafafa;
-//       display: flex;
-//       justify-content: center;
-//       .navbar-item {
-//         flex-shrink: unset;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         text-align: center;
-//         line-height: 1rem;
-//         font-size: 0.9rem;
-//         padding: 12px 8px;
-//         width: 100%;
-//       }
-//     }
-//   }
-// }
 </style>
