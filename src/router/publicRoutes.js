@@ -5,13 +5,11 @@ import Home from "./../views/Home.vue"
 import Axis from './../views/Axis.vue'
 import Tasks from "./../views/Tasks.vue"
 import Task from "./../views/Task.vue"
-import ClassificationAxis from './../views/ClassificationAxis.vue'
-import About from "./../views/About.vue"
+import About from './../views/About.vue'
 import Contact from "./../views/Contact.vue"
 import Login from "./../views/auth/Login.vue"
 import Register from "./../views/auth/Register.vue"
 import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
-import Teste from "./../views/teste.vue"
 
 let routes = [
     ['home', '/', Home],
@@ -30,11 +28,9 @@ let routes = [
     ['password-recovery', '/recuperar-senha', PasswordRecovery],
 
     ['tasks', '/atividades', Tasks],
-    ['classification', '/classificacao', ClassificationAxis],
+    ['about', '/diretrizes-para-ensino-de-computacao-na-educacao-basica', About],
     ['task', '/atividades/:id', Task],
-    ['about', '/sobre', About],
     ['contact', '/contato', Contact],
-    ['teste', '/teste', Teste]
 ]
 
 export default routes.map(i => {

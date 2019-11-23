@@ -47,6 +47,9 @@ export default {
 <style scoped lang="scss">
 .navbar {
   background: transparent;
+  a {
+    background: transparent;
+  }
 }
 // @import "@/assets/custom.scss";
 // .navbar .navbar-start .is-active {

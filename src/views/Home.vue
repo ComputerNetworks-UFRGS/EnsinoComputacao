@@ -11,14 +11,14 @@
             <div class="column is-5 is-offset-1 landing-caption">
               <h1 class="title is-1 is-bold is-spaced">Computação para o Ensino Básico</h1>
               <h2 class="subtitle is-5 is-muted">
-                Atividades de ensino de Computação para os anos do Ensino Básica, organizadas de
+                Atividades de ensino de Computação para os anos do Ensino Básico, organizadas de
                 acordo com a diretrizes de Ensino de Computação da SBC.
               </h2>
               <p>
                 <router-link
                   to="/eixos-de-ensino"
                   class="button cta rounded primary-btn raised"
-                >Conheça</router-link>
+                >Veja as atividades</router-link>
               </p>
             </div>
             <div class="column is-5 is-offset-1">
@@ -62,16 +62,14 @@
             </ul>
           </div>
         </div>
-      </div> -->
+      </div>-->
     </section>
 
     <section class="section section-feature-grey is-medium">
       <div class="container">
         <div class="title-wrapper has-text-centered">
           <h2 class="title is-2">Eixos de Ensino</h2>
-          <h3 class="subtitle is-5 is-muted">
-            Áreas de conhecimento de Computação
-          </h3>
+          <h3 class="subtitle is-5 is-muted">Áreas de conhecimento de Computação</h3>
           <div class="divider is-centered"></div>
         </div>
 
@@ -90,10 +88,14 @@
                 </div>
                 <div class="card-text">
                   <p>
-                    Aborda o <b>letramento em tecnologias digitais</b> e analisa os novos
-                    padrões de comportamento e <b>questionamentos</b> morais e éticos na 
-                    <b>sociedade digitalizada</b>. Busca promover a <b>fluência</b> no uso 
-                    do <b>conhecimento computacional</b> para expressão de soluções e 
+                    Aborda o
+                    <b>letramento em tecnologias digitais</b> e analisa os novos
+                    padrões de comportamento e
+                    <b>questionamentos</b> morais e éticos na
+                    <b>sociedade digitalizada</b>. Busca promover a
+                    <b>fluência</b> no uso
+                    do
+                    <b>conhecimento computacional</b> para expressão de soluções e
                     manifestações culturais de forma contextualizada e crítica.
                   </p>
                 </div>
@@ -118,10 +120,13 @@
                 </div>
                 <div class="card-text">
                   <p>
-                    Se refere à <b>capacidade de compreender, definir, modelar, solucionar, 
-                    automatizar e analisar problemas de forma metódica e sistemática</b> 
-                    através de algoritmos. Envolveabstrações e técnicas necessárias 
-                    para a descrição e análise de informações e processos, bem como para a automação de soluções. 
+                    Se refere à
+                    <b>
+                      capacidade de compreender, definir, modelar, solucionar,
+                      automatizar e analisar problemas de forma metódica e sistemática
+                    </b>
+                    através de algoritmos. Envolveabstrações e técnicas necessárias
+                    para a descrição e análise de informações e processos, bem como para a automação de soluções.
                   </p>
                 </div>
                 <div class="card-action">
@@ -145,9 +150,11 @@
                 </div>
                 <div class="card-text">
                   <p>
-                    Visa fornecer ao estudante a <b>compreensão dos processos que ocorrem no mundo</b>, 
+                    Visa fornecer ao estudante a
+                    <b>compreensão dos processos que ocorrem no mundo</b>,
                     podendo compreender e criticar tendências, sendo ativo neste cenário.
-                    Para compreender de forma estruturada e não apenas efemera identificam-se 3 pilares principais, chamados: <b>codificação, processamento e distribuição</b>.
+                    Para compreender de forma estruturada e não apenas efemera identificam-se 3 pilares principais, chamados:
+                    <b>codificação, processamento e distribuição</b>.
                   </p>
                 </div>
                 <div class="card-action">
@@ -167,8 +174,8 @@
       <div class="container">
         <div class="columns">
           <div class="column is-centered-tablet-portrait">
-            <h1 class="title section-title">You're here because you want the best</h1>
-            <h3 class="subtitle is-4 is-muted">And we Know it</h3>
+            <h1 class="title section-title">Contribua com o Ensino de Computação no Brasil</h1>
+            <h3 class="subtitle is-4 is-muted">Cria e compartilhe atividades de ensino de Computação</h3>
             <div class="divider"></div>
           </div>
           <div class="column is-8 mt-60">
@@ -184,8 +191,9 @@
                   <p>
                     <span class="icon-box-title">Crie e organize uma atividade</span>
                     <span class="icon-box-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Proin ornare magna eros, eu pellentesque tortor.
+                      Crie em poucos minutos uma atividade, selecione as habiliades que
+                      ela estimula no estudante e assim ela já estará inserida no contexto
+                      de ensino das diretrizes.
                     </span>
                   </p>
                 </div>
@@ -205,8 +213,8 @@
                   <p>
                     <span class="icon-box-title">Tenha o material revisado e aprovado</span>
                     <span class="icon-box-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Proin ornare magna eros, eu pellentesque tortor.
+                      Todas as atividades criadas são revisadas e devem ter sua publicação
+                      aprovada pela comunidade CompEduBa! antes de ficarem disponíveis publicamente.
                     </span>
                   </p>
                 </div>
@@ -226,8 +234,8 @@
                   <p>
                     <span class="icon-box-title">Compartilhe como quiser</span>
                     <span class="icon-box-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Proin ornare magna eros, eu pellentesque tortor.
+                      Após aprovada, a atividade ficará disponível no CompEduBa!
+                      dentro do contexto das diretrizes e com link direto que pode ser compartilhado como desejar.
                     </span>
                   </p>
                 </div>
@@ -238,6 +246,9 @@
         </div>
       </div>
     </section>
+
+    <br />
+    <br />
 
     <section class="section section-feature-grey is-medium">
       <div class="container">
@@ -250,12 +261,15 @@
         </div>
 
         <div class="title-wrapper has-text-centered">
-          <h2 class="title is-2">One Platform</h2>
-          <h3 class="subtitle is-5 is-muted">To rule them All</h3>
+          <h2 class="title is-2">Comece a contribuir</h2>
+          <h3 class="subtitle is-5 is-muted">Acesse sua conta e crie uma atividade.</h3>
         </div>
 
         <p class="has-text-centered mt-20">
-          <a class="button cta is-large rounded secondary-btn raised">Get Started</a>
+          <router-link
+            to="/dash/atividades/criar"
+            class="button cta is-large rounded secondary-btn raised"
+          >Criar atividade</router-link>
         </p>
       </div>
     </section>
@@ -263,89 +277,57 @@
     <section class="section is-medium section-secondary">
       <div class="container">
         <div class="title-wrapper has-text-centered">
-          <h2 class="title is-2 light-text is-spaced">Our Clients love us !</h2>
+          <h2 class="title is-2 light-text is-spaced">Sobre as diretrizes</h2>
           <h3
             class="subtitle is-5 light-text"
-          >Lorem ipsum sit dolor amet is a dummy text used by typography industry</h3>
+          >Saiba mais sobre as Diretrizes para ensino de Computação na Educação Básica</h3>
         </div>
 
         <div class="content-wrapper">
           <div class="columns is-vcentered">
             <div class="column is-4">
               <figure class="testimonial">
-                <blockquote>
-                  Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea
-                  case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
-                </blockquote>
+                <blockquote>É fundamental e estratégico para o Brasil que conteúdos de Computação sejam ministrados na Educação Básica.</blockquote>
                 <div class="author">
-                  <img src="img/fresh/images/illustrations/faces/1.png" alt />
-                  <h5>Irma Walters</h5>
-                  <span>Accountant</span>
+                  <!-- <img src="img/fresh/images/illustrations/faces/1.png" alt /> -->
+                  <!-- <h5>Irma Walters</h5>
+                  <span>Accountant</span>-->
                 </div>
               </figure>
             </div>
             <div class="column is-4">
               <figure class="testimonial">
-                <blockquote>
-                  Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea
-                  case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
-                </blockquote>
+                <blockquote>Comissão designada pela Diretoria de Educação elaborou um documento que trata dos referenciais de formação em Computação para a Educação Básica.</blockquote>
                 <div class="author">
-                  <img src="img/fresh/images/illustrations/faces/2.png" alt />
-                  <h5>John Bradley</h5>
-                  <span>Financial Analyst</span>
+                  <!-- <img src="img/fresh/images/illustrations/faces/2.png" alt /> -->
+                  <!-- <h5>John Bradley</h5> -->
+                  <!-- <span>Financial Analyst</span> -->
                 </div>
               </figure>
             </div>
             <div class="column is-4">
               <figure class="testimonial">
-                <blockquote>
-                  Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu, hinc minim appetere te usu, ea
-                  case duis scribentur has. Duo te consequat elaboraret, has quando suavitate at.
-                </blockquote>
+                <blockquote>O documento trata das competências e habilidades que compõem a Computação na Educação Básica, da Educação Infantil até o Ensino Médio.</blockquote>
                 <div class="author">
-                  <img src="img/fresh/images/illustrations/faces/3.png" alt />
+                  <!-- <img src="img/fresh/images/illustrations/faces/3.png" alt />
                   <h5>Gary Blackman</h5>
-                  <span>HR Manager</span>
+                  <span>HR Manager</span>-->
                 </div>
               </figure>
             </div>
           </div>
         </div>
       </div>
+      <p class="has-text-centered mt-20">
+        <router-link
+          to="/diretrizes-para-ensino-de-computacao-na-educacao-basica"
+          class="button cta is-large rounded raised"
+        >Conheça as diretrizes</router-link>
+      </p>
     </section>
 
     <section class="section section-light-grey is-medium">
-      <div class="container">
-        <div class="title-wrapper has-text-centered">
-          <h2 class="title is-2 is-spaced">Drop us a line or two</h2>
-          <h3 class="subtitle is-5 is-muted">We'd love to hear from You</h3>
-          <div class="divider is-centered"></div>
-        </div>
-
-        <div class="content-wrapper">
-          <div class="columns">
-            <div class="column is-6 is-offset-3">
-              <form>
-                <div class="columns is-multiline">
-                  <div class="column is-6">
-                    <input class="input is-medium" type="text" placeholder="Enter your Name" />
-                  </div>
-                  <div class="column is-6">
-                    <input class="input is-medium" type="email" placeholder="Enter your Email" />
-                  </div>
-                  <div class="column is-12">
-                    <textarea class="textarea" rows="10" placeholder="Write someting ..."></textarea>
-                  </div>
-                  <div class="form-footer has-text-centered mt-10">
-                    <button class="button cta is-large primary-btn raised is-clear">Send Message</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+      <contact-form></contact-form>
     </section>
 
     <div id="auth-modal" class="modal">
@@ -391,5 +373,10 @@
   </div>
 </template>
 <script>
-export default {};
+import ContactForm from "@/components/ContactForm";
+export default {
+  components: {
+    ContactForm
+  }
+};
 </script>

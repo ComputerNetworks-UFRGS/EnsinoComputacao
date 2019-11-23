@@ -2,9 +2,9 @@
   <footer class="footer footer-dark">
     <div class="container">
       <div class="columns">
-        <div class="column is-2">
+        <div class="column is-4">
           <div class="footer-logo">
-            <img src="img/fresh/images/logos/fresh-white-alt.svg" />
+            <img src="img/fresh/images/logos/logo-white.png" />
           </div>
         </div>
         <div class="column">
@@ -35,10 +35,7 @@
             </div>
             <ul class="link-list">
               <li>
-                <router-link to="/classificacao">Sobre as diretrizes</router-link>
-              </li>
-              <li>
-                <router-link to="/sobre">Sobre a plataforma</router-link>
+                <router-link to="/diretrizes-para-ensino-de-computacao-na-educacao-basica">Sobre as diretrizes</router-link>
               </li>
               <li>
                 <a href="http://sbc.org.br/institucional-3">Sobre a SBC</a>
