@@ -10,14 +10,12 @@
           <button class="button is-light">
             <span>{{ ($store.state.user ? $store.state.user.name : 'Meus dados') }}</span>
             <span class="icon is-small">
-              <i class="fas fa-angle-down"></i>
+              <font-awesome-icon icon="angle-down" />
             </span>
           </button>
         </div>
         <div class="dropdown-menu">
           <div class="dropdown-content">
-            <router-link class="dropdown-item" to="/">Voltar para o site</router-link>
-            <hr class="dropdown-divider" />
             <a class="dropdown-item" href="#/" @click="logout">Sair</a>
           </div>
         </div>

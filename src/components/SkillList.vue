@@ -8,13 +8,8 @@
             <p class="card-header-title">{{ object }}</p>
             <a href="#!" class="card-header-icon">
               <span class="icon">
-                <i
-                  class="fas"
-                  :class="{
-                    'fa-angle-down': skills.isOpen,
-                    'fa-angle-right': !skills.isOpen,
-                  }"
-                ></i>
+                <font-awesome-icon v-if="skills.isOpen" icon="angle-down" />
+                <font-awesome-icon v-if="!skills.isOpen" icon="angle-right" />
               </span>
             </a>
           </header>

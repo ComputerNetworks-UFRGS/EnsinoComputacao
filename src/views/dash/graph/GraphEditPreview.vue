@@ -43,7 +43,6 @@ export default {
                 .then(res => res.data)
                 .then(graph => {
                     this.graph = graph;
-                    console.log('graph', graph)
                 });
         } else {
             this.$router.push('/dash/curriculos')

@@ -1,6 +1,7 @@
-import AppFooter from "./../layout/AppFooter"
-import DashHeader from "./../layout/dash/DashHeader"
 import DashBase from "./../views/dash/DashBase"
+import DashHeader from "./../layout/dash/DashHeader"
+import DashFooter from "./../layout/dash/DashFooter"
+
 import DashWelcome from "./../views/dash/DashWelcome"
 import DashTasks from "./../views/dash/task/TaskHome"
 import TaskForm from "./../views/dash/task/TaskForm"
@@ -28,7 +29,7 @@ export default {
     components: {
         header: DashHeader,
         default: DashBase,
-        footer: AppFooter
+        footer: DashFooter
     },
     props: {
         footer: { isBasic: true, }

@@ -1,95 +1,51 @@
 import AppHeader from "./../layout/AppHeader"
 import AppFooter from "./../layout/AppFooter"
 
-import Home from "./../views/Home.vue"
-import Tasks from "./../views/Tasks.vue"
-import Task from "./../views/Task.vue"
-import ClassificationAxis from './../views/ClassificationAxis.vue'
-import About from "./../views/About.vue"
+import About from './../views/About.vue'
+import Axis from './../views/Axis.vue'
 import Contact from "./../views/Contact.vue"
-import Login from "./../views/auth/Login.vue"
-import Register from "./../views/auth/Register.vue"
-import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
+import Home from "./../views/Home.vue"
+import Task from "./../views/Task.vue"
+import Tasks from "./../views/Tasks.vue"
 
-export default [
-    {
-        path: "/",
-        name: "home",
+import Login from "./../views/auth/Login.vue"
+import PasswordRecovery from "./../views/auth/PasswordRecovery.vue"
+import Register from "./../views/auth/Register.vue"
+
+let routes = [
+    ['about', '/diretrizes-para-ensino-de-computacao-na-educacao-basica', About],
+    ['axis', '/eixos-de-ensino', Axis],
+    ['axis-pc', '/eixos-de-ensino/pensamento-computacional', Axis, {
+        default: { startAxis: 1 }
+    }],
+    ['axis-md', '/eixos-de-ensino/mundo-digital', Axis, {
+        default: { startAxis: 2 }
+    }],
+    ['axis-cd', '/eixos-de-ensino/cultura-digital', Axis, {
+        default: { startAxis: 3 }
+    }],
+    ['contact', '/contato', Contact],
+    ['home', '/', Home],
+    ['tasks', '/atividades', Tasks],
+    ['task', '/atividades/:id', Task, {
+        default: { showPrint: true }
+    }],
+
+    // auth
+    ['login', '/entrar', Login],
+    ['password-recovery', '/recuperar-senha', PasswordRecovery],
+    ['register', '/criar-conta', Register],
+]
+
+export default routes.map(i => {
+    return {
+        name: i[0],
+        path: i[1],
         components: {
             header: AppHeader,
-            default: Home,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/login",
-        name: "login",
-        components: {
-            header: AppHeader,
-            default: Login,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/cadastro",
-        name: "register",
-        components: {
-            header: AppHeader,
-            default: Register,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/atividades",
-        name: "tasks",
-        components: {
-            header: AppHeader,
-            default: Tasks,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/classificacao",
-        components: {
-            header: AppHeader,
-            default: ClassificationAxis,
+            default: i[2],
             footer: AppFooter
         },
-    },
-    {
-        path: "/atividades/:id",
-        name: "task",
-        components: {
-            header: AppHeader,
-            default: Task,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/sobre",
-        name: "about",
-        components: {
-            header: AppHeader,
-            default: About,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/contato",
-        name: "contact",
-        components: {
-            header: AppHeader,
-            default: Contact,
-            footer: AppFooter
-        }
-    },
-    {
-        path: "/recuperar-senha",
-        name: "password-recovery",
-        components: {
-            header: AppHeader,
-            default: PasswordRecovery,
-            footer: AppFooter
-        }
-    },
-]
+        props: i[3] || {}
+    }
+})

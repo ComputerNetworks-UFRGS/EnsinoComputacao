@@ -1,67 +1,85 @@
 <template>
   <section class="register pd">
     <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-5">
-          <div class="field">
-            <label class="label">Nome</label>
-            <div class="control">
-              <input v-model="user.name" alternative class="input" placeholder="Nome">
-            </div>
-            <div class="help is-danger" v-if="errors.name.length > 0">
-              <div v-for="error in errors.name" :key="error">{{ error }}</div>
-            </div>
-          </div>
+      <br />
+      <div class="title-wrapper has-text-centered">
+        <h2 class="title is-2 is-spaced">Criar conta</h2>
+        <h3 class="subtitle is-5 is-muted">
+          Já tem uma conta?
+          <router-link to="/entrar">Faça login</router-link>
+        </h3>
+        <div class="divider is-centered"></div>
+      </div>
 
-          <div class="field">
-            <label class="label">E-mail</label>
-            <div class="control">
-              <input v-model="user.email" alternative class="input" placeholder="E-mail">
+      <div class="content-wrapper">
+        <div class="columns is-centered">
+          <div class="column is-5">
+            <div class="field">
+              <label class="label">Nome</label>
+              <div class="control">
+                <input v-model="user.name" alternative class="input tall" placeholder="Nome" />
+              </div>
+              <div class="help is-danger" v-if="errors.name.length > 0">
+                <div v-for="error in errors.name" :key="error">{{ error }}</div>
+              </div>
             </div>
-            <div class="help is-danger" v-if="errors.email.length > 0">
-              <div v-for="error in errors.email" :key="error">{{ error }}</div>
-            </div>
-          </div>
 
-          <div class="field">
-            <label class="label">Senha</label>
-            <div class="control">
-              <input
-                v-model="user.password"
-                alternative
-                type="password"
-                class="input"
-                placeholder="Senha"
-              >
+            <div class="field">
+              <label class="label">E-mail</label>
+              <div class="control">
+                <input v-model="user.email" alternative class="input tall" placeholder="E-mail" />
+              </div>
+              <div class="help is-danger" v-if="errors.email.length > 0">
+                <div v-for="error in errors.email" :key="error">{{ error }}</div>
+              </div>
             </div>
-            <div class="help is-danger" v-if="errors.password.length > 0">
-              <div v-for="error in errors.password" :key="error">{{ error }}</div>
-            </div>
-          </div>
 
-          <div class="field">
-            <div class="control">
-              <label class="checkbox">
-                <input type="checkbox" v-model="policyChecked">
-                Estou de acordo com a política de privacidade
-                <a
-                  href="#/cadastro"
-                  @click="policyOpen=true; return false"
-                >Política de privacidade</a>
-              </label>
+            <div class="field">
+              <label class="label">Senha</label>
+              <div class="control">
+                <input
+                  v-model="user.password"
+                  alternative
+                  type="password"
+                  class="input tall"
+                  placeholder="Senha"
+                />
+              </div>
+              <div class="help is-danger" v-if="errors.password.length > 0">
+                <div v-for="error in errors.password" :key="error">{{ error }}</div>
+              </div>
             </div>
-            <div class="help is-danger" v-if="errors.policy.length > 0">
-              <div v-for="error in errors.policy" :key="error">{{ error }}</div>
-            </div>
-          </div>
 
-          <div class="field">
-            <div class="control">
-              <button class="button is-primary" @click="register">Criar conta</button>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" v-model="policyChecked" />
+                  Estou de acordo com a política de privacidade
+                  <a
+                    href.stop="#!"
+                    @click="policyOpen=true; return false"
+                  >Política de privacidade</a>
+                </label>
+              </div>
+              <div class="help is-danger" v-if="errors.policy.length > 0">
+                <div v-for="error in errors.policy" :key="error">{{ error }}</div>
+              </div>
             </div>
-          </div>
 
-          <br>
+            <br />
+            <div class="field">
+              <div class="control">
+                <div class="form-footer has-text-centered mt-10">
+                  <button
+                    class="button cta is-large primary-btn raised is-clear"
+                    @click="register"
+                  >Criar conta</button>
+                </div>
+              </div>
+            </div>
+
+            <br />
+          </div>
         </div>
       </div>
     </div>
@@ -89,11 +107,11 @@
         </div>
         <footer class="card-footer">
           <a
-            href="#!"
+            href.prevent="#!"
             class="card-footer-item"
             @click="policyChecked=true;policyOpen=false"
           >Estou de acordo</a>
-          <a href="#!" class="card-footer-item" @click="policyOpen=false">Fechar</a>
+          <a href.prevent="#!" class="card-footer-item" @click="policyOpen=false">Fechar</a>
         </footer>
       </div>
     </b-modal>
@@ -158,5 +176,9 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.tall {
+  height: 60px;
+  font-size: 24px;
+}
 </style>

@@ -88,8 +88,6 @@ export default {
       Roles.update(this.role.id, ids).then(res => {
         if (res.status == 200) {
           this.$router.push("/dash/papeis");
-        } else {
-          console.log("atualizado?", res);
         }
       });
     }

@@ -26,7 +26,7 @@
               <b-upload v-model="file">
                 <a class="button is-primary">
                   <span class="icon">
-                    <i class="fa fa-upload"></i>
+                    <font-awesome-icon icon="upload" />
                   </span>
                   <span v-if="file && file.name">Alterar arquivo</span>
                   <span v-else>Clique para adicionar</span>

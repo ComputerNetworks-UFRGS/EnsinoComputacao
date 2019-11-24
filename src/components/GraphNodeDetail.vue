@@ -1,7 +1,7 @@
 <template>
   <div class="box-node-detail">
     <div v-if="node && node.learnig_object">
-      <h4 class="title is-4 has-text-centered is-family-secondary">{{ node.learnig_object.name }}</h4>
+      <h5 class="title is-5 has-text-centered is-family-secondary">{{ node.learnig_object.name }}</h5>
       <hr />
       <!-- <div>
                         <b>Habilidades trabalhadas</b>
@@ -23,30 +23,25 @@
                     </div>
       <hr />-->
 
-      <h5 class="title is-5">
-        Atividades relacionadas
+      <div>
         <button
+          v-show="tasks.length > 0"
           @click="isFiltersOpen = !isFiltersOpen"
-          class="button button is-light is-pulled-right"
+          class="button button is-light"
           :class="{'is-menu-open': isFiltersOpen}"
         >
           <span class="icon">
-            <i class="fas" :class="'fa-sliders-h'"></i>
+            <font-awesome-icon icon="filter" />
           </span>
-          <span>Filtros</span>
+          <span>Filtrar</span>
           <span class="icon">
-            <i
-              class="fas"
-              :class="{
-                'fa-angle-down': isFiltersOpen,
-                'fa-angle-right': !isFiltersOpen,
-              }"
-            ></i>
+            <font-awesome-icon v-if="isFiltersOpen" icon="angle-down" />
+            <font-awesome-icon v-if="!isFiltersOpen" icon="angle-right" />
           </span>
         </button>
-      </h5>
+      </div>
 
-      <div class="filters" :class="{'is-hidden': !isFiltersOpen}">
+      <div class="filters" :class="{'is-hidden': !isFiltersOpen || tasks.length <= 0}">
         <div class="field">
           <label class="label">Tipo de atividade</label>
         </div>
@@ -83,15 +78,18 @@
           @taskSelected="$emit('taskSelected', $event)"
         ></task-list>
         <div v-else>
-          <h5
-            class="title is-5"
-          >Nenhuma atividade encontrada para o objeto de ensino {{ node.learnig_object.name }}.</h5>
+          <p class="info-message">
+            Nenhuma atividade encontrada para o Objeto de Aprendizado
+            <b>{{ node.learnig_object.name }}</b>.
+          </p>
 
-          <div class="card">
+          <div class="card card-empty">
             <div class="card-content">
-              Faça parte e contribua incluindo uma atividade relacionada com esse Objeto de Aprendizado.
-              <br />
-              <router-link to="/dash/atividades/criar" class="button is-primary">Contribuir</router-link>
+              <div>
+                Contribua incluindo uma atividade relacionada ao Objeto de Aprendizado
+                <b>{{ node.learnig_object.name }}</b>.
+              </div>
+              <router-link to="/dash/atividades/criar" class="button is-primary">Criar atividade</router-link>
             </div>
           </div>
         </div>
@@ -206,5 +204,26 @@ export default {
 
 .box-node-detail {
   height: 100%;
+}
+.title {
+  color: #4a4a4a;
+}
+.info-message {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  padding: 20px;
+  line-height: 30px;
+  margin-bottom: 40px;
+}
+.card-empty {
+  .card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .button {
+      margin-left: 12px;
+    }
+  }
 }
 </style>

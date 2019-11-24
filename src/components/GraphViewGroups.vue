@@ -147,8 +147,8 @@ export default {
       this.pb.select({ 
         source: 'graph' + this.graphId + '-' + node.id
       }).setPaintStyle({
-        stroke: "black",
-        strokeWidth: 3
+        stroke: "#f39200",
+        strokeWidth: 2
       });
 
       node.isSelected = true;
@@ -158,7 +158,7 @@ export default {
     },
     clearHighlight() {
       this.pb.select().setPaintStyle({
-        stroke: "#aaaaaa",
+        stroke: "transparent",
         strokeWidth: 1
       });
       for (let group of this.groups) {
@@ -192,8 +192,8 @@ export default {
             target: 'graph' + this.graphId + '-' + node.id
           })
           .setPaintStyle({
-            stroke: "black",
-            strokeWidth: 3
+            stroke: "#344357",
+            strokeWidth: 2
           });
         this.highlightNodeUp(dep_node);
       }
@@ -241,20 +241,23 @@ export default {
     }
 
     .node {
+      cursor: pointer;
       z-index: 2;
       position: absolute;
       border: 1px solid #ddd;
-      cursor: pointer;
       border-radius: 20px;
       width: 140px;
       font-size: 12px;
       background: #888;
 
+      
       &.node-highlight {
-        background: #fffebe!important;
+        background: #344357!important;
+        color: white;
       }
       &.node-dependent {
-        background: #80ecff!important;
+        background: #f39200!important;
+        color: white;
       }
       &.node-current {
         background: #6ee974!important;
