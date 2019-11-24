@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <router-link to="/dash/revisao" class="button is-white is-pulled-right">Cancelar</router-link>
     <h4 class="title is-4">Avaliação de atividade</h4>
 
@@ -8,17 +8,17 @@
       <div class="card-content">
         <b>Título:</b>
         {{ task.title }}
-        <br>
+        <br />
 
         <b>Criada por:</b>
         {{ task.id }}
-        <br>
+        <br />
 
         <b>Requer uso de computador?</b>
         {{ task.is_plugged ? 'Sim' : 'Não' }}
-        <br>
+        <br />
 
-        <b>Habilidades cadastradas:</b> 
+        <b>Habilidades cadastradas:</b>
         <span v-if="task.skills && task.skills.length <= 0">
           <small> nenhuma</small>
         </span>
@@ -35,27 +35,40 @@
           </table>
         </span>
 
-        <br>
-        <b>Descrição da atividade:</b>
-        <div class="card">
-          <div class="card-content">
-            <div class="content ql-editor" v-html="task.description"></div>
+        <!-- Tipo atividade criada -->
+        <div v-if="task.type == 1">
+          <br />
+          <b>Descrição da atividade:</b>
+          <div class="card">
+            <div class="card-content">
+              <div class="content ql-editor" v-html="task.description"></div>
+            </div>
           </div>
+        </div>
+
+        <!-- Tipo atividade referência externa -->
+        <div v-if="task.type == 2">
+          <b>Fonte:</b>
+          {{ task.source }}
+        </div>
+        <div v-if="task.type == 2">
+          <b>Link:</b>
+          <a :href="task.link">{{ task.link }}</a>
         </div>
 
         <review-list :title="'Comentários'" :reviews="task.reviews"></review-list>
 
-        <hr>
+        <hr />
 
         <div class="field has-addons" v-auth="'review.evaluate'">
           <div class="control">
-              <button @click="createReview('approved')" class="button is-success">Aprovar publicação</button>
+            <button @click="createReview('approved')" class="button is-success">Aprovar publicação</button>
           </div>
           <div class="control">
-              <button @click="createReview('need_fix')" class="button is-warning">Solicitar ajustes</button>
+            <button @click="createReview('need_fix')" class="button is-warning">Solicitar ajustes</button>
           </div>
           <div class="control">
-              <button @click="createReview('denied')" class="button is-danger">Negar publicação</button>
+            <button @click="createReview('denied')" class="button is-danger">Negar publicação</button>
           </div>
         </div>
       </div>

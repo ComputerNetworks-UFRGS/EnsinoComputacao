@@ -5,8 +5,11 @@ export default {
     return API.get('tasks', {
       params: params,
     })
-  },  
+  },
   detail(task_id) {
     return API.get('tasks/' + task_id)
   },
+  getTypes() {
+    return API.get('/tasks/types')
+  }
 }

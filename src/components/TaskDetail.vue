@@ -2,7 +2,13 @@
   <div class="task-detail card">
     <header class="card-header">
       <p class="card-header-title">{{ task.title }}</p>
-      <a v-if="showPrint" href.prevent="#!" @click="print" class="card-header-icon" aria-label="more options">
+      <a
+        v-if="showPrint"
+        href.prevent="#!"
+        @click="print"
+        class="card-header-icon"
+        aria-label="more options"
+      >
         <span class="icon">
           <font-awesome-icon icon="print" />
         </span>
@@ -12,8 +18,16 @@
     <div class="card-content">
       <div class="columns">
         <div class="column is-8">
-          <div class="content ql-editor">
+          <div v-if="task.type == 1" class="content ql-editor">
             <span v-html="task.description"></span>
+          </div>
+          <div v-else-if="task.type == 2">
+            <b>Fonte</b>
+            : {{ task.source }}
+            <br />
+            <b>Link</b>:
+            <a :href="task.link">{{ task.link }}</a>
+            <br />
           </div>
         </div>
         <div class="column is-4 right-menu">
@@ -81,7 +95,7 @@ export default {
     },
     showPrint: {
       type: Boolean,
-      default: false,
+      default: false
     }
   },
   data() {
