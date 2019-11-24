@@ -26,7 +26,7 @@
             : {{ task.source }}
             <br />
             <b>Link</b>:
-            <a :href="task.link">{{ task.link }}</a>
+            <a target="_blank" :href="task.link">{{ task.link }}</a>
             <br />
           </div>
         </div>

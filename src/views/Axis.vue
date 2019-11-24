@@ -103,23 +103,6 @@ export default {
       years: [],
       axis: [],
       selectedSkill: false,
-      ageGroups: [
-        {
-          key: "AI",
-          label: "Anos Iniciais",
-          years: ["01", "02", "03", "04", "05"]
-        },
-        {
-          key: "AF",
-          label: "Anos Finais",
-          years: ["06", "07", "08", "09"]
-        },
-        {
-          key: "EM",
-          label: "Ensino Médio",
-          years: ["EM"]
-        }
-      ],
       activeAxis: false,
       selectedTask: false
     };
@@ -309,13 +292,13 @@ export default {
       justify-content: center;
       align-items: center;
       width: 40px;
-      writing-mode: sideways-lr;
-      text-orientation: mixed;
       text-align: center;
       background: #344357;
       color: white;
       font-weight: bold;
       font-family: "Roboto", sans-serif;
+      writing-mode: sideways-lr;
+      text-orientation: mixed;
     }
   }
 
@@ -325,7 +308,7 @@ export default {
     font-size: 16px !important;
     line-height: 18px !important;
     width: 200px !important;
-    padding: 16px !important;
+    padding: 4px !important;
   }
 }
 </style>

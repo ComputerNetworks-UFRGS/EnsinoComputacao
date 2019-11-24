@@ -195,8 +195,8 @@ export default {
         skills: [],
         tags: [],
         type: 1,
-        source: [],
-        link: []
+        source: '',
+        link: ''
       },
       errors: {
         title: [],
