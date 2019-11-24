@@ -8,7 +8,7 @@
             class="column list-of-tasks"
             :class="{
               'is-12-mobile is-6-tablet is-4-desktop is-4-widescreen': !isMobile,
-              'is-6': isMobile
+              'is-12-mobile is-12-tablet is-6-desktop is-6-widescreen': isMobile
             }"
             v-for="task of tasks"
             :key="task.id"
@@ -47,7 +47,7 @@
           </div>
         </div>
         <b-pagination
-          v-if="paginated && pagination.total > pagination.per_page"
+          v-if="pagination && paginated && pagination.total > pagination.per_page"
           :total="pagination.total"
           :current.sync="pagination.current_page"
           :order="'is-centered'"
@@ -106,7 +106,6 @@ export default {
     },
     pagination: {
       type: undefined,
-      default: {}
     }
   },
   components: {

@@ -23,11 +23,11 @@
                     </div>
       <hr />-->
 
-      <h5 class="title is-5">
+      <div>
         <button
           v-show="tasks.length > 0"
           @click="isFiltersOpen = !isFiltersOpen"
-          class="button button is-warning is-pulled-right"
+          class="button button is-light"
           :class="{'is-menu-open': isFiltersOpen}"
         >
           <span class="icon">
@@ -39,7 +39,7 @@
             <font-awesome-icon v-if="!isFiltersOpen" icon="angle-right" />
           </span>
         </button>
-      </h5>
+      </div>
 
       <div class="filters" :class="{'is-hidden': !isFiltersOpen || tasks.length <= 0}">
         <div class="field">

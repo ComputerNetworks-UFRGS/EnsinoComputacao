@@ -36,12 +36,16 @@
         <div class="column is-hidden-mobile">
           <div class="box node-detail">
             <h3 class="title is-3">Eixo {{ activeAxis.name }}</h3>
-            <graph-node-detail v-if="a.activeNode.id" :node="a.activeNode" @taskSelected="taskSelected"></graph-node-detail>
+            <graph-node-detail
+              v-if="a.activeNode.id"
+              :node="a.activeNode"
+              @taskSelected="taskSelected"
+            ></graph-node-detail>
             <div v-else>
-                <div class="info-message">
-                  Clique em algum dos Objetos de Aprendizado ao lado para visualizar as 
-                  atividades relacionadas.
-                </div>
+              <div class="info-message">
+                Clique em algum dos Objetos de Aprendizado ao lado para visualizar as
+                atividades relacionadas.
+              </div>
             </div>
           </div>
         </div>
@@ -139,11 +143,20 @@ export default {
       this.activeAxis = axis;
     },
     clickNode(node) {
-      Graphs.nodeDetail(this.activeAxis.graph_id, node.id.replace("node", ""))
-        .then(res => res.data)
-        .then(nodeDetail => {
-          this.activeAxis["activeNode"] = nodeDetail;
-        });
+      let id = parseInt(node.id.replace("node", ""));
+
+      if (
+        this.activeAxis["activeNode"] &&
+        this.activeAxis["activeNode"].id == id
+      ) {
+        this.activeAxis["activeNode"] = {};
+      } else {
+        Graphs.nodeDetail(this.activeAxis.graph_id, node.id.replace("node", ""))
+          .then(res => res.data)
+          .then(nodeDetail => {
+            this.activeAxis["activeNode"] = nodeDetail;
+          });
+      }
     },
     taskSelected(task) {
       this.selectedTask = task.id;
@@ -157,13 +170,20 @@ export default {
   text-align: center;
   cursor: pointer;
   border: 2px solid transparent;
-
-  $borderColor: #aaaaaa;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  line-height: 20px;
+  $borderColor: #344357;
 
   &.active-axis {
     border-top-color: $borderColor;
     border-left-color: $borderColor;
     border-right-color: $borderColor;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
 
     &:first-child {
       border-left: transparent;
@@ -212,14 +232,13 @@ export default {
     text-align: center;
     padding: 20px;
     line-height: 26px;
-
   }
 }
 </style>
 <style lang="scss">
 .classificacao-home {
   .container {
-    height: 2200px;
+    height: 4200px;
     background: transparent;
   }
   .card-content {
@@ -293,19 +312,20 @@ export default {
       writing-mode: sideways-lr;
       text-orientation: mixed;
       text-align: center;
-      background: rgba(0, 0, 0, 0.5);
+      background: #344357;
       color: white;
+      font-weight: bold;
+      font-family: "Roboto", sans-serif;
     }
   }
 
   .node {
     background: white !important;
-    border-radius: 4px !important;
-    max-width: 200px !important;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+    line-height: 18px !important;
+    width: 200px !important;
+    padding: 16px !important;
   }
-
-  // .group-nodes, .group-title {
-  // background: red!important;
-  // }
 }
 </style>
