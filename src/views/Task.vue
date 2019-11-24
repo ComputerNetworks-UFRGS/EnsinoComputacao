@@ -72,4 +72,11 @@ export default {
   }
 }
 </style>
-
+<style lang="scss" scoped>
+.hero {
+  background: #344356;
+  .hero-body {
+    padding: 2rem;
+  }
+}
+</style>

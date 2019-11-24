@@ -35,7 +35,7 @@
         </div>
         <div class="column is-hidden-mobile">
           <div class="box node-detail">
-            <h3 class="title is-3">Eixo {{ activeAxis.name }}</h3>
+            <h3 class="title is-4">Eixo {{ activeAxis.name }}</h3>
             <graph-node-detail
               v-if="a.activeNode.id"
               :node="a.activeNode"
@@ -221,7 +221,7 @@ export default {
 <style lang="scss">
 .classificacao-home {
   .container {
-    height: 4200px;
+    height: 3200px;
     background: transparent;
   }
   .card-content {
@@ -281,34 +281,6 @@ export default {
         }
       }
     }
-  }
-}
-.graph {
-  .group {
-    display: flex;
-
-    .group-title {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      text-align: center;
-      background: #344357;
-      color: white;
-      font-weight: bold;
-      font-family: "Roboto", sans-serif;
-      writing-mode: sideways-lr;
-      text-orientation: mixed;
-    }
-  }
-
-  .node {
-    background: white !important;
-    border-radius: 10px !important;
-    font-size: 16px !important;
-    line-height: 18px !important;
-    width: 200px !important;
-    padding: 4px !important;
   }
 }
 </style>

@@ -4,14 +4,6 @@ const HTTP = axios.create({
   baseURL: process.env.VUE_APP_API,
 })
 
-// TODO: 401 redirect to login or refresh token
-// HTTP.interceptors.response.use(function (response) {
-//   console.log('response', response)  
-//   return response;
-// }, function (error) {
-//   return Promise.reject(error);
-// });
-
 export default {
   login(credentials) {
     return HTTP.post('auth/login', credentials)

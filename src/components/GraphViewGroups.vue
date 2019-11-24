@@ -123,7 +123,6 @@ export default {
 
               for (let group of cmp.groups) {
                 for (let node of group.nodes) {
-
                   cmp.pb.draggable("graph" + cmp.graphId + "-" + node.id);
                   cmp.pb.addToGroup(group.id, cmp.$refs[node.id][0]);
                 }
@@ -144,17 +143,19 @@ export default {
   methods: {
     nodeClick(node) {
       this.clearHighlight();
-      this.pb.select({ 
-        source: 'graph' + this.graphId + '-' + node.id
-      }).setPaintStyle({
-        stroke: "#f39200",
-        strokeWidth: 2
-      });
+      this.pb
+        .select({
+          source: "graph" + this.graphId + "-" + node.id
+        })
+        .setPaintStyle({
+          stroke: "#f39200",
+          strokeWidth: 2
+        });
 
       node.isSelected = true;
       this.highlightNodeUp(node);
       this.highlightNodeDown(node);
-      this.$emit('clickNode', node)
+      this.$emit("clickNode", node);
     },
     clearHighlight() {
       this.pb.select().setPaintStyle({
@@ -170,7 +171,7 @@ export default {
       }
     },
     getNode(id) {
-      id = 'node' + id
+      id = "node" + id;
       for (let group of this.groups) {
         for (let node of group.nodes) {
           if (node.id == id) {
@@ -183,13 +184,13 @@ export default {
     highlightNodeUp(node) {
       for (let dependency of node.dependencies) {
         let dep_node = this.getNode(dependency);
-        if(dep_node) {
+        if (dep_node) {
           dep_node.highlight = true;
         }
         this.pb
           .select({
-            source: 'graph' + this.graphId + '-' + dep_node.id,
-            target: 'graph' + this.graphId + '-' + node.id
+            source: "graph" + this.graphId + "-" + dep_node.id,
+            target: "graph" + this.graphId + "-" + node.id
           })
           .setPaintStyle({
             stroke: "#344357",
@@ -238,6 +239,22 @@ export default {
       z-index: 1;
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
+
+      display: flex;
+
+      .group-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        text-align: center;
+        background: #344357;
+        color: white;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+        writing-mode: sideways-lr;
+        text-orientation: mixed;
+      }
     }
 
     .node {
@@ -245,22 +262,23 @@ export default {
       z-index: 2;
       position: absolute;
       border: 1px solid #ddd;
-      border-radius: 20px;
-      width: 140px;
-      font-size: 12px;
-      background: #888;
+      background: white;
+      border-radius: 10px;
+      font-size: 16px;
+      line-height: 18px;
+      width: 170px;
+      padding: 4px;
 
-      
       &.node-highlight {
-        background: #344357!important;
+        background: #344357 !important;
         color: white;
       }
       &.node-dependent {
-        background: #f39200!important;
+        background: #f39200 !important;
         color: white;
       }
       &.node-current {
-        background: #6ee974!important;
+        background: #6ee974 !important;
       }
 
       .node-content {

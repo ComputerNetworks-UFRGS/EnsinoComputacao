@@ -76,7 +76,7 @@
                 {{ attachment.description }}
                 <br />
               </small>
-              <a :href="getPublicUrl(attachment)">Baixar arquivo</a>
+              <a target="_blank" :href="getPublicUrl(attachment)">Baixar arquivo</a>
             </div>
           </div>
         </div>

@@ -15,10 +15,9 @@
           >
             <div class="card">
               <div class="card-image is-hidden-mobile">
-                <figure class="image is-2by1">
+                <figure v-if="task.cover" class="image is-2by1">
                   <img
-                    src="https://bulma.io/images/placeholders/640x320.png"
-                    alt="Placeholder image"
+                    :src="task.cover"
                   />
                 </figure>
               </div>

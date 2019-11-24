@@ -39,8 +39,8 @@
       </div>
 
       <footer class="card-footer">
-        <a href="#!" class="card-footer-item" @click="add">Salvar anexo</a>
-        <a href="#!" class="card-footer-item" @click="$emit('close')">Cancelar</a>
+        <a href.prevent="#!" class="card-footer-item" @click="add">Salvar anexo</a>
+        <a href.prevent="#!" class="card-footer-item" @click="$emit('close')">Cancelar</a>
       </footer>
     </div>
   </b-modal>

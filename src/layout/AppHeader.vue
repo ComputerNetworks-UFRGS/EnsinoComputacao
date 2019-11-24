@@ -39,7 +39,7 @@ export default {
     };
   },
   created() {
-    this.isAuth = AuthService.loggedIn();
+    this.isAuth = this.$store.state.user !== false
   }
 };
 </script>

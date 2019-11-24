@@ -7,6 +7,7 @@ import privateRoutes from './privateRoutes'
 Vue.use(Router);
 
 let router = new Router({
+  // mode: 'history',
   linkActiveClass: "is-active",
   routes: [
     ...publicRoutes,
@@ -28,7 +29,6 @@ router.beforeEach((to, from, next) => {
     } else {
       next({
         path: '/entrar',
-        // query: { redirect: to.fullPath }
       })
     }
   } else {
