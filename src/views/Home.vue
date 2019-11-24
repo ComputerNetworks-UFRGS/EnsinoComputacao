@@ -380,3 +380,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.pushed-image {
+  border: 6px solid #dddddd;
+}
+</style>
