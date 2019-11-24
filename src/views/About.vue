@@ -1,13 +1,11 @@
 <template>
-  <section class="classificacao pd">
-    <div class="container pd">
-      <br />
-      <br />
+  <section class="pd">
+    <div class="container intro">
       <div class="columns is-centered">
-        <div class="column is-8">
+        <div class="column is-7">
           <h4
             class="title is-4 has-text-centered is-family-secondary"
-          >Conhece as Diretrizes para ensino de Computação na Educação Básica?</h4>
+          >Diretrizes para ensino de Computação na Educação Básica</h4>
           <br />
           <p>
             A
@@ -20,48 +18,41 @@
             pela Diretoria de Educação trabalhou na elaboração de um documento que trata dos
             referenciais de formação em Computação para a Educação Básica.
           </p>
+
+          <p>A Computação é uma área consolidada e independente. A Computação investiga processos de informação, desenvolvendo linguagens e técnicas para descrever processos existentes e também e métodos de resolução e análise de problemas, gerando novos processos. Além disso, foram criadas máquinas para armazenar a informação e automatizar a execução de processos. O aprimoramento e disseminação dessas máquinas (computadores) ao longo dos últimos 50 anos afetou profundamente o mundo sob vários aspectos: econômico, científico, tecnológico, social e cultural. Portanto, tanto para resolver de problemas em todas as áreas quanto para ter uma compreensão do mundo em que vivemos, todo cidadão do século XXI deve dominar os fundamentos da Computação.</p>
+          <p>O pilar fundamental da solução de problemas é a abstração. Dado um problema a ser resolvido, é necessário que se construa um modelo abstrato da realidade, incluindo apenas aspectos estritamente relevantes ao problema. Este modelo nos ajuda a entender o problema e suas condições de contorno, permitindo que tenhamos a clareza necessária para solucioná-lo. Porém, para que se consiga construir um modelo abstrato que possa ser compreendido e analisado, este precisa estar descrito em uma linguagem precisa. A Matemática provê uma linguagem formal e universal, que pode ser usada para construir os mais diferentes tipos de modelos, bem como várias técnicas para analisar modelos com precisão. A Computação, como outras ciências, usa a Matemática para a construção de modelos computacionais, modelos de processos. Esses modelos são chamados de algoritmos, e podem estar descritos em vários níveis de abstração diferentes.</p>
+          <p>A Computação provê técnicas e abstrações para auxiliar no processo de construção e análise de soluções, bem como linguagens para descrever algoritmos. Portanto, Computação provê habilidades distintas das outras áreas de conhecimento. A habilidade de sistematizar a atividade de resolução de problemas, representar e analisar as soluções através de algoritmos é chamada Pensamento Computacional, e esta exige domínio de objetos abstratos que são necessários para descrever tanto a informação quanto os processos que a manipulam. Os objetos computacionais, como os matemáticos, não são acessíveis diretamente. Eles são entes abstratos, que não podem ser tocados, mas não deixam de ser tão reais quanto os elementos físicos. São onipresentes e essenciais, mas somente podem ser acessados por meio de suas representações. Objetos computacionais são descrições de processos de informação, ou seja, algoritmos envolvendo tanto uma representação abstrata da informação (dados) quando do processo em si (instruções). Para automatizar a execução de processos é necessário formalizar essas abstrações (de dados e instruções) usando linguagens extremamente precisas (linguagens de programação).</p>
+          <p>Vive-se hoje na Era da Informação, uma era na qual o homem percebeu que a informação é um bem precioso. Um Mundo Digital foi criado para armazenar, processar e distribuir informação. É inegável que a Revolução Digital gerou um grande impacto na sociedade. Para desenvolver plenamente suas habilidades e conseguir utilizar a tecnologia digital de forma adequada, é necessário que cada pessoa compreenda o funcionamento do “mundo digital” da mesma forma que se tem entendimento do “mundo real” através das ciências da natureza e das ciências humanas. É importante que se compreenda o que é informação, qual a sua importância, porque se quer armazená-la, como se pode fazer isso, porque se deve proteger a informação, bem como as formas de transmitir e distribuir a informação, compreendendo também as questões éticas e impactos sociais e econômicos relacionados ao tratamento da informação. O Mundo Digital é na realidade um ecossistema composto por elementos físicos (máquinas) e também virtuais (dados e programas). Os componentes virtuais não podem ser vistos e nem tocados. Porém, são onipresentes e Diretrizes para ensino de Computação na Educação Básica essenciais para a humanidade hoje. Um exemplo de entidade do mundo virtual é a internet. A interface com este mundo é realizada através de processadores de informação (máquinas), que podem estar presentes em computadores, celulares, sensores, lâmpadas, eletrodomésticos, entre outros.</p>
+          <p>O domínio do Pensamento Computacional e a compreensão do Mundo Digital vêm fortalecer a dinâmica da comunicação e informação, dando poder de opinião, que antes era apenas dos livros e seus autores, a todo membro da sociedade digital. Atualmente, existem ferramentas cada vez mais aperfeiçoadas para processar e distribuir informações, tornando esta dinâmica parte intrínseca das relações humanas. Mas não basta ser receptivo. A simples recepção não caracteriza a apropriação. Esta aquisição de culturas é política, social e econômica. A Computação impacta o ser humano em sua totalidade, tanto internamente, em seu sistema nervoso e cognitivo, como no ambiente externo, no seu trabalho e lazer. A tecnologia digital traz consigo uma nova gama de questões envolvendo, por exemplo, direitos autorais de material online, noções de público e privado, cyberbullying, segurança digital, pegadas digitais, redes sociais, ética digital, compras online, dentre outras.</p>
+          <p>Os conhecimentos da área de Computação podem, portanto, ser organizados em 3 eixos:</p>
         </div>
       </div>
-
-      <img src="img/graph_diretrizes.png" />
-      <div class="has-text-centered">
-        <a
-          target="_blank"
-          href="http://sbc.org.br/documentos-da-sbc/send/203-educacao-basica/1220-bncc-em-itinerario-informativo-computacao-2"
-          class="button is-primary is-medium"
-        >Baixar documento</a>
-      </div>
-      <br />
-      <br />
     </div>
-    <div class="container">
-      <iframe
-        style="width: 560px; height: 315px"
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/HOx6cpnsbpw"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
 
-      <br />
-      <br />
-      <br />
-      <br />
+    <div class="white-section">
+      <img src="img/graph_diretrizes.png" />
+    </div>
 
-      <div class="columns year-wrapper is-hidden-mobile">
-        <div class="column is-2 year center-vertical-text"></div>
-        <div
-          class="column is-3 year center-vertical-text"
-          v-for="a of axis"
-          :key="'header' + a.id"
-          :style="{'background-color': a.color}"
-        >{{ a.name }}</div>
+    <div class="container intro">
+      <div class="columns is-centered">
+        <div class="column is-7">
+          <p>
+            <b class="text-pc">Pensamento Computacional:</b> O Pensamento Computacional se refere à capacidade de compreender, definir, modelar, comparar, solucionar, automatizar e analisar problemas (e soluções) de forma metódica e sistemática, através da construção de algoritmos. Apesar de ser um termo recente, vem sendo considerado como um dos pilares fundamentais do intelecto humano, junto com a leitura, a escrita e a aritmética pois, como estas, serve para descrever, explicar e modelar o universo e seus processos complexos. O Pensamento Computacional envolve abstrações e técnicas necessárias para a descrição e análise de informações (dados) e processos, bem como para a automação de soluções. O conceito de algoritmo está presente em todas as áreas e está intrinsecamente ligado à resolução de problemas, pois um algoritmo é uma descrição de um processo (que resolve um determinado problema).
+          </p>
+          <p>
+            <b class="text-md">Mundo Digital:</b> A compreensão do mundo digital é importante para que o estudante possa se apropriar dos processos que ocorrem no mundo, tanto digital quanto real, podendo compreender e criticar tendências, sendo ativo neste cenário. Para uma compreensão estruturada do mundo digital, e não apenas efêmera e permeada de tecnologias, identificam-se 3 pilares principais, chamados codificação, processamento e distribuição. A codificação diz respeito à representação, no mundo digital, dos mais diferentes tipos de informação que possam nos interessar. A capacidade de processamento dos dados codificados no mundo digital confere extrema agilidade para desempenhar vários processos assim como habilita vários outros a acontecerem. De forma indissociável neste contexto está a capacidade de distribuição de informação no mundo digital. Esta capacidade é fator fundamental para tamanho impacto do mundo digital. Aqui deve-se prestar atenção que, além de uma facilidade de aceleração do processo de transmissão da informação, testemunhamos dia a dia os impactos de uma mudança singular de paradigma: todos indivíduos são geradores de informação para o consumo de todos os demais. As fontes tradicionais de informação, outrora acreditadas até certo ponto, dão lugar a um ambiente fragmentado, com incontáveis fontes muitas vezes desconhecidas. A compreensão do potencial e riscos desta nova lógica passa pela compreensão do funcionamento da Internet e do mundo digital. Ainda, cabe a compreensão de novos paradigmas permitidos pelo mundo digital onde a computação está imersa de forma transparente no nosso dia a dia.
+          </p>
+          <p>
+            <b class="text-cd">Cultura Digital:</b> Para conseguir estabelecer comunicação e expressão através do Mundo Digital, é necessário um letramento em tecnologias digitais, que neste documento denominou-se de Cultura Digital. Também faz parte da Cultura Digital uma análise dos novos padrões de comportamento e novos questionamentos morais e éticos na sociedade que surgiram em decorrência do Mundo Digital. A Cultura Digital compreende as relações interdisciplinares da Computação com outras áreas do conhecimento, buscando promover a fluência no uso do conhecimento computacional para expressão de soluções e manifestações culturais de forma contextualizada e crítica.
+          </p>
+          <p>As atividades trabalhas em cada um dos eixos de ensino em cada ano são:</p>
+        </div>
       </div>
+    </div>
 
+    <div class="container">
       <div class="columns year-wrapper" v-for="year of years" :key="year.ageGroup.id">
-        <div class="column is-2 year center-vertical-text">{{ year.ageGroup.name }}</div>
+        <div class="column is-3 year center-vertical-text">{{ year.ageGroup.name }}</div>
         <div
           class="column is-3"
           v-for="a of year.axis"
@@ -86,17 +77,13 @@
                   <br />
                   <b>Habilidades</b>
                 </div>
-                <div
-                  class="column is-12 is-12-widescreen"
-                  v-for="skill of object.skills"
-                  :key="'skill'+skill.id"
-                  @click="listTasks(skill)"
-                >
-                  {{ skill.name }}
-                  <button
-                    class="button is-info is-small is-fullwidth"
-                  >Ver atividades relacionadas</button>
-                </div>
+                <ol>
+                  <li v-for="skill of object.skills" :key="'skill'+skill.id">
+                    {{ skill.name }}
+                    <br>
+                    <a href.prevent="#!" @click="listTasks(skill)">Ver atividades relacionadas</a>
+                  </li>
+                </ol>
               </div>
             </div>
           </div>
@@ -140,7 +127,6 @@ export default {
   data() {
     return {
       years: [],
-      axis: [],
       tasks: [],
       selectedSkill: false
     };
@@ -150,11 +136,6 @@ export default {
   },
   methods: {
     fetch() {
-      Axis.list()
-        .then(res => res.data)
-        .then(axis => {
-          this.axis = axis;
-        });
       Skills.axis()
         .then(res => res.data)
         .then(years => {
@@ -185,6 +166,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.intro {
+  margin-top: 60px;
+  margin-bottom: 40px;
+
+  p {
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 24px;
+    text-align: justify;
+    text-indent: 50px;
+  }
+}
 .skill {
   text-align: justify;
   border-bottom: 1px solid #ddd;
@@ -205,6 +198,15 @@ export default {
 .skill-MD {
   background: #8c9dd71a;
 }
+.text-pc {
+  color: #94f35b;
+}
+.text-md {
+  color: #8c9dd7;
+}
+.text-cd {
+  color: #fdbb43;
+}
 
 .center-vertical-text {
   display: flex;
@@ -222,14 +224,41 @@ export default {
 }
 
 .year-wrapper {
+  margin-top: 40px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-}
+  border: 1px solid #a2adbd;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  overflow: hidden;
 
-.year {
-  background: #f2f2f2;
-  justify-content: center;
-  font-size: 20px;
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-header {
+    cursor: pointer;
+    a {
+      color: #f39200;
+    }
+  }
+
+  .year {
+    justify-content: center;
+    font-size: 20px;
+    background: #344357;
+    color: white;
+    font-size: 32px;
+  }
+
+  ol {
+    padding: 24px;
+    li {
+      margin-bottom: 12px;
+    }
+  }
+
 }
 
 .objects .skill:hover {
@@ -248,5 +277,14 @@ export default {
     display: flex;
     flex-grow: 1;
   }
+}
+
+.white-section {
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
 }
 </style>
