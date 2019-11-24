@@ -35,8 +35,14 @@
         </div>
         <div class="column is-hidden-mobile">
           <div class="box node-detail">
-            <graph-node-detail v-if="activeAxis" :node="a.activeNode" @taskSelected="taskSelected"></graph-node-detail>
-            <div v-else>Selecione um nodo do grafo</div>
+            <h3 class="title is-3">Eixo {{ activeAxis.name }}</h3>
+            <graph-node-detail v-if="a.activeNode.id" :node="a.activeNode" @taskSelected="taskSelected"></graph-node-detail>
+            <div v-else>
+                <div class="info-message">
+                  Clique em algum dos Objetos de Aprendizado ao lado para visualizar as 
+                  atividades relacionadas.
+                </div>
+            </div>
           </div>
         </div>
       </div>
@@ -192,6 +198,21 @@ export default {
     height: calc(100vh - 24px);
     position: sticky;
     top: 12px;
+  }
+}
+.box {
+  .title {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: #344357;
+  }
+  .info-message {
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    padding: 20px;
+    line-height: 26px;
+
   }
 }
 </style>
