@@ -25,7 +25,6 @@
 
       <div>
         <button
-          v-show="tasks.length > 0"
           @click="isFiltersOpen = !isFiltersOpen"
           class="button button is-light"
           :class="{'is-menu-open': isFiltersOpen}"
