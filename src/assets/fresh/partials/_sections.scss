@@ -60,8 +60,10 @@ Section Styles
 
 
 //Pulled image
-img.pushed-image {
-    margin-top: -29vh;
+@media (min-width: 1024px) {
+    img.pushed-image {
+        margin-top: -200px;
+    }
 }
 
 //Icon box
