@@ -40,7 +40,7 @@
         </button>
       </div>
 
-      <div class="filters" :class="{'is-hidden': !isFiltersOpen || tasks.length <= 0}">
+      <div class="filters" :class="{'is-hidden': !isFiltersOpen}">
         <div class="field">
           <label class="label">Tipo de atividade</label>
         </div>
