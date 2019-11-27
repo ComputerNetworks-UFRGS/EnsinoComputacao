@@ -1,17 +1,30 @@
 <template>
   <div class="classificacao-years">
-    <div class="columns year-wrapper" v-for="(age, year) of years" :key="year">
-      <div class="column is-2 year center-vertical-text">{{ age.idade.idade_nome }}</div>
-      <div class="column is-10">
+    <ul>
+      <li v-for="(age, year) of years" :key="year">
+        {{ age.idade.idade_nome }}
+        <ul>
+          <li v-for="(skills, object) of age.objects" :key="object">
+            {{ object }}
+            <ul>
+              <li v-for="skill of skills" :key="skill.habilidade_id" @click="$emit('click', skill)">
+                {{ skill.habilidade_nome }}
+                <button class="button is-link is-small">
+                  <span v-if="edit">Ver atividades</span>
+                  <span v-else>Selecionar atividade</span>
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="columns year-wrapper">
+      <div class="column is-2 year center-vertical-text"></div>
+      <!-- <div class="column is-10">
         <div v-for="(skills, object) of age.objects" :key="object" class="card">
           <header class="card-header" @click.prevent="skills.isOpen = !skills.isOpen">
             <p class="card-header-title">{{ object }}</p>
-            <a href="#!" class="card-header-icon">
-              <span class="icon">
-                <font-awesome-icon v-if="skills.isOpen" icon="angle-down" />
-                <font-awesome-icon v-if="!skills.isOpen" icon="angle-right" />
-              </span>
-            </a>
           </header>
 
           <div class="card-content" :class="{'is-hidden': !skills.isOpen}">
@@ -35,7 +48,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -48,16 +61,6 @@ export default {
     edit: {
       type: Boolean,
       default: false
-    }
-  },
-  mounted() {
-    for (let i in this.years) {
-      for (let j in this.years[i].objects) {
-        this.$set(this.years[i].objects, j, {
-          isOpen: false,
-          skills: this.years[i].objects[j]
-        });
-      }
     }
   }
 };

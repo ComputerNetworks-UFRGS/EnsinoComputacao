@@ -108,10 +108,10 @@
           </div>
         </span>
 
-        <button class="button is-white is-small" @click="openSkillSelector = true">
-          <span v-if="form.skill">Alterar habilidade</span>
-          <span v-else>Selecionar habilidades</span>
-        </button>
+        <button
+          class="button is-white is-small"
+          @click="openSkillSelector = true"
+        >Selecionar habilidades</button>
 
         <br />
         <br />
@@ -195,8 +195,8 @@ export default {
         skills: [],
         tags: [],
         type: 1,
-        source: '',
-        link: ''
+        source: "",
+        link: ""
       },
       errors: {
         title: [],
