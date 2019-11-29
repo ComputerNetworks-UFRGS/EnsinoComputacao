@@ -22,6 +22,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 Vue.use(Buefy, {
+  defaultIconComponent: 'vue-fontawesome',
   defaultIconPack: 'fas',
 });
 Vue.config.productionTip = false;

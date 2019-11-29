@@ -3,7 +3,6 @@
     <div class="columns">
       <div class="column" v-if="tasks.length > 0">
         <div class="columns is-multiline">
-
           <div
             class="column list-of-tasks"
             :class="{
@@ -16,9 +15,7 @@
             <div class="card">
               <div class="card-image is-hidden-mobile">
                 <figure v-if="task.cover" class="image is-2by1">
-                  <img
-                    :src="task.cover"
-                  />
+                  <img :src="task.cover" />
                 </figure>
               </div>
               <div class="card-content">
@@ -53,7 +50,14 @@
           :simple="false"
           :per-page="pagination.per_page"
           @change="$emit('changePage', $event)"
-        ></b-pagination>
+        >
+          <div
+            slot="next"
+            slot-scope="props"
+            :page="props.page"
+          >Previous</div>
+          
+        </b-pagination>
       </div>
       <div class="column" v-else>
         <h5 class="title is-5">Nenhuma atividade encontrada.</h5>
@@ -104,7 +108,7 @@ export default {
       default: false
     },
     pagination: {
-      type: undefined,
+      type: undefined
     }
   },
   components: {
