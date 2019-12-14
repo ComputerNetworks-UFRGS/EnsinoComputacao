@@ -47,14 +47,7 @@
             </div>
 
             <span v-for="skill of task.skills" :key="skill.id">
-              <span class="tag cursor" @click="skill.showDescription = !skill.showDescription">
-                <span class="icon">
-                  <font-awesome-icon v-if="skill.showDescription" icon="angle-down" />
-                  <font-awesome-icon v-if="!skill.showDescription" icon="angle-right" />
-                </span>
-                {{ skill.habilidade_codigo }}
-              </span>
-              <div v-show="skill.showDescription">
+              <div class="border-bottom">
                 <small>
                   {{ skill.habilidade_nome }}
                   <b-tooltip label="Etapa de ensino recomendada" position="is-bottom">
@@ -66,8 +59,7 @@
             <hr />
           </div>
 
-          <div v-if="task.attachments">
-            <br />
+          <div v-if="task.attachments && task.attachments.length > 0">
             <b>Material de apoio</b>
             <div v-for="attachment of task.attachments" :key="attachment.id" class="attachment">
               <b style="font-size: 0.9rem">{{ attachment.title }}</b>
@@ -78,6 +70,12 @@
               </small>
               <a target="_blank" :href="getPublicUrl(attachment)">Baixar arquivo</a>
             </div>
+          </div>
+
+          <div v-if="task.tags && task.tags.length > 0">
+            <b>TAGs relacionadas</b>
+            <br>
+            <b-tag v-for="tag of task.tags" :key="tag.id">{{ tag.value }}</b-tag>
           </div>
         </div>
       </div>
@@ -107,11 +105,6 @@ export default {
     Tasks.detail(this.taskId)
       .then(res => res.data)
       .then(task => {
-        if (task.skills && task.skills.length > 0) {
-          for (let skill of task.skills) {
-            skill.showDescription = false;
-          }
-        }
         this.task = task;
       });
   },
@@ -161,5 +154,9 @@ export default {
       width: 100%;
     }
   }
+}
+.border-bottom {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 4px;
 }
 </style>

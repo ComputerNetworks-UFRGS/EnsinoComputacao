@@ -29,6 +29,11 @@
         </div>
       </div>
 
+      <div v-if="form && form.reviews && form.reviews.length > 0">
+        <review-list :reviews="form.reviews"></review-list>
+        <hr>
+      </div>
+
       <div class="field">
         <label class="label">Título</label>
         <div class="control">
@@ -94,8 +99,6 @@
         <span v-if="form.skills && form.skills.length > 0">
           <br />
           <div v-for="(skill, index) of form.skills" :key="skill.id">
-            <span class="tag is-rounded is-info">{{ skill.habilidade_codigo }}</span>
-            <button class="button is-small is-light" @click="removeSkill(index)">remover</button>
             <small>
               <br />
               {{ skill.habilidade_nome }}
@@ -104,7 +107,8 @@
               {{ skill.age_group.name }}
             </small>
             <br />
-            <br />
+            <button class="button is-small is-light" @click="removeSkill(index)">remover</button>
+            <br /><br />
           </div>
         </span>
 
@@ -146,8 +150,6 @@
       </div>
       <button v-else class="button is-primary is-success" disabled>Publicação negada</button>
     </div>
-
-    <review-list :reviews="form.reviews"></review-list>
 
     <b-modal :active="openSkillSelector !== false" @close="openSkillSelector = false">
       <div class="card">

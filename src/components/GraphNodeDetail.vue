@@ -3,26 +3,6 @@
     <div v-if="node && node.learnig_object">
       <h5 class="title is-5 has-text-centered is-family-secondary">{{ node.learnig_object.name }}</h5>
       <hr />
-      <!-- <div>
-                        <b>Habilidades trabalhadas</b>
-                        <ul>
-                            <li class="list" v-for="skill of node.learnig_object.skills" :key="skill.id">{{ skill.name }}</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <b>Pré-requisitos</b>
-                        <ul>
-                            <li class="list" v-for="dependency of node.dependencies" :key="dependency.id">{{ dependency.title }}</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <b>Libera</b>
-                        <ul>
-                            <li class="list" v-for="dependent of node.dependents" :key="dependent.id">{{ dependent.title }}</li>
-                        </ul>
-                    </div>
-      <hr />-->
-
       <div>
         <button
           @click="isFiltersOpen = !isFiltersOpen"
@@ -135,6 +115,7 @@ export default {
         .then(res => res.data)
         .then(tags => {
           this.tags = tags;
+          this.fetchTasks()
         });
     },
     fetchTasks() {

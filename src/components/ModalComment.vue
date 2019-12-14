@@ -1,10 +1,8 @@
 <template>
-  <b-modal :active="isOpen" @close="$emit('update:show', false)">
+  <b-modal :active="isOpen" @close="$emit('update:show', false)" class="modal-review">
     <div class="card">
       <header class="card-header">
-        <div class="card-header-title">
-          {{ title }}
-        </div>
+        <div class="card-header-title">{{ title }}</div>
       </header>
       <div class="card-content">
         <div class="content">
@@ -14,8 +12,8 @@
               class="form-control form-control-alternative"
               name="name"
               rows="12"
-              cols="80"
-              placeholder="..."
+              cols="20"
+              placeholder="Escreva aqui seu comentário..."
             ></textarea>
           </div>
         </div>
@@ -58,5 +56,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.modal-review {
+  .animation-content  {
+    max-width: 400px!important;
+  }
+  textarea {
+    width: 100%;
+  }
+  
+}
 </style>

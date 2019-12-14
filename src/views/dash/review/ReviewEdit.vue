@@ -6,12 +6,23 @@
 
     <div class="card">
       <div class="card-content">
+        <div class="field has-addons" v-auth="'review.evaluate'">
+          <div class="control">
+            <button @click="createReview('approved')" class="button is-success">Aprovar publicação</button>
+          </div>
+          <div class="control">
+            <button @click="createReview('need_fix')" class="button is-warning">Solicitar ajustes</button>
+          </div>
+          <div class="control">
+            <button @click="createReview('denied')" class="button is-danger">Negar publicação</button>
+          </div>
+        </div>
+
+        <hr />
+        <review-list :title="'Comentários'" :reviews="task.reviews"></review-list>
+
         <b>Título:</b>
         {{ task.title }}
-        <br />
-
-        <b>Criada por:</b>
-        {{ task.id }}
         <br />
 
         <b>Requer uso de computador?</b>
@@ -20,16 +31,11 @@
 
         <b>Habilidades cadastradas:</b>
         <span v-if="task.skills && task.skills.length <= 0">
-          <small> nenhuma</small>
+          <small>nenhuma</small>
         </span>
         <span v-else>
           <table class="table table-sm">
-            <tr>
-              <th>Código</th>
-              <th>Descrição</th>
-            </tr>
             <tr v-for="skill of task.skills" :key="skill.habilidade_id">
-              <td>{{ skill.habilidade_codigo }}</td>
               <td>{{ skill.habilidade_nome }}</td>
             </tr>
           </table>
@@ -54,22 +60,6 @@
         <div v-if="task.type == 2">
           <b>Link:</b>
           <a :href="task.link">{{ task.link }}</a>
-        </div>
-
-        <review-list :title="'Comentários'" :reviews="task.reviews"></review-list>
-
-        <hr />
-
-        <div class="field has-addons" v-auth="'review.evaluate'">
-          <div class="control">
-            <button @click="createReview('approved')" class="button is-success">Aprovar publicação</button>
-          </div>
-          <div class="control">
-            <button @click="createReview('need_fix')" class="button is-warning">Solicitar ajustes</button>
-          </div>
-          <div class="control">
-            <button @click="createReview('denied')" class="button is-danger">Negar publicação</button>
-          </div>
         </div>
       </div>
     </div>

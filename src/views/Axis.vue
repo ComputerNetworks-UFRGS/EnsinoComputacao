@@ -198,6 +198,8 @@ export default {
   background: white;
   height: 98%;
   .node-detail {
+    overflow: hidden;
+    overflow-y: auto;
     height: calc(100vh - 24px);
     position: sticky;
     top: 12px;

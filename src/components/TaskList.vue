@@ -7,7 +7,7 @@
             class="column list-of-tasks"
             :class="{
               'is-12-mobile is-6-tablet is-4-desktop is-4-widescreen': !isMobile,
-              'is-12-mobile is-12-tablet is-6-desktop is-6-widescreen': isMobile
+              'is-12-mobile is-12-tablet is-12-desktop is-6-widescreen': isMobile
             }"
             v-for="task of tasks"
             :key="task.id"
@@ -50,18 +50,10 @@
           :simple="false"
           :per-page="pagination.per_page"
           @change="$emit('changePage', $event)"
-        >
-          <div
-            slot="next"
-            slot-scope="props"
-            :page="props.page"
-          >Previous</div>
-          
-        </b-pagination>
+        ></b-pagination>
       </div>
       <div class="column" v-else>
         <h5 class="title is-5">Nenhuma atividade encontrada.</h5>
-        <!-- <h6 class="subtitle is-6">Tente utilizar outros filtros.</h6> -->
       </div>
     </div>
 

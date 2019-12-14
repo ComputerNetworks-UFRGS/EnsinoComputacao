@@ -20,6 +20,12 @@
 
           <div class="filters" :class="{'is-hidden-mobile': !isFiltersOpen}">
             <div class="field">
+              <label class="label">Buscar</label>
+            </div>
+            <div class="field">
+              <b-input v-model="filters.search" placeholder="Buscar pelo título..."></b-input>
+            </div>
+            <div class="field">
               <label class="label">Ano recomendado</label>
             </div>
             <div class="field">
@@ -55,25 +61,6 @@
               ></b-taginput>
             </div>
           </div>
-          <!-- <br />
-          <div class="field">
-            <label class="label">Objeto de conhecimento</label>
-          </div>
-          <ul class="list-group">
-            <div v-for="axis of tree" :key="axis.id">
-              <div @click="axis.active = !axis.active" class="cursor">
-                <small>
-                  <i class="ni" :class="axis.active ? 'ni-bold-down' : 'ni-bold-right'"></i>
-                  <b>{{ axis.name }}</b>
-                </small>
-              </div>
-              <div v-for="object of axis.objects" :key="object.id" v-show="axis.active">
-                <b-checkbox v-model="object.active">
-                  <small>{{ object.name }}</small>
-                </b-checkbox>
-              </div>
-            </div>
-          </ul>-->
         </div>
         <div class="column">
           <task-list
@@ -109,7 +96,8 @@ export default {
           no: false
         },
         age: "todos",
-        tags: []
+        tags: [],
+        search: ""
       },
       age_groups: {
         todos: [],
@@ -173,6 +161,10 @@ export default {
 
       if (this.filters.tags.length > 0) {
         params["tags"] = _.map(this.filters.tags, tag => tag.id);
+      }
+
+      if (this.filters.search && this.filters.search.length > 0) {
+        params['search'] = this.filters.search
       }
 
       params["paginated"] = true;
