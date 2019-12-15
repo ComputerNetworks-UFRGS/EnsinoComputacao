@@ -10,23 +10,28 @@
           <br />
         </div>
         <div v-else>
-          <div class="columns task-list" v-for="task of tasks" :key="task.id">
-            <div class="column is-8 nowrap-text">
-              <b>{{ task.title }}</b>&nbsp;
-              <br />
-              <span
-                class="tag"
-                :class="getColorLabel(task.status)"
-              >{{ getStatusLabel(task.status) }}</span>
+          <div v-if="pendingReview.length > 0">
+            <div class="columns task-list" v-for="task of pendingReview" :key="task.id">
+              <div class="column is-8 nowrap-text">
+                <b>{{ task.title }}</b>&nbsp;
+                <br />
+                <span
+                  class="tag"
+                  :class="getColorLabel(task.status)"
+                >{{ getStatusLabel(task.status) }}</span>
+              </div>
+              <div class="column has-text-right">
+                <router-link
+                  v-auth="'review.detail'"
+                  v-if="task.status == 1"
+                  :to="'/dash/revisao/' + task.id"
+                  class="button is-small is-light is-primary"
+                >Avaliar</router-link>
+              </div>
             </div>
-            <div class="column has-text-right">
-              <router-link
-                v-auth="'review.detail'"
-                v-if="task.status == 1"
-                :to="'/dash/revisao/' + task.id"
-                class="button is-small is-light is-primary"
-              >Avaliar</router-link>
-            </div>
+          </div>
+          <div v-else>
+            Nenhuma atividade pendente de avaliação.
           </div>
         </div>
         <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
@@ -69,6 +74,13 @@ export default {
     },
     getColorLabel(task_status) {
       return UserTasks.getColorLabel(task_status);
+    }
+  },
+  computed: {
+    pendingReview() {
+      return this.tasks.filter(t => {
+        return t.status == 1 || t.status == 3 || t.status == 5
+      })
     }
   }
 };
